@@ -1,4 +1,5 @@
-Threaded Binary Search Tree  
+Threaded Binary Search Tree
+===========================  
 
 Since a binary search tree with N nodes has N + 1 NULL pointers, half the space allocated in a binary search tree for pointer information is wasted. Suppose that if a node has a NULL left child, we make its left child pointer link to its inorder predecessor, and if a node has a NULL right child, we make its right child pointer link to its inorder successor. This is known as a threaded tree and the extra links are called threads.
 
