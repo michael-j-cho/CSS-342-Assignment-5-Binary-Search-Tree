@@ -14,10 +14,6 @@
 using namespace std;
 
 void test1() {
-    ThreadedBST tree;
-    tree.add(1);
-    tree.add(2);
-    tree.display();
     ThreadedBST tree2(20);
     cout << endl;
      ThreadedBST tree3(21);

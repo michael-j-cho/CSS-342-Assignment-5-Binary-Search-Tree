@@ -14,9 +14,18 @@ using namespace std;
 ThreadedBST::ThreadedBST() : root{nullptr}, count{0} {}
 
 ThreadedBST::ThreadedBST(int n) : root{nullptr}, count{0} {
-    
-
-
+    int mid = n / 2;
+    add(mid);
+    for(int i = 1; i <= n/2; i++) {
+        add(++mid);
+        cout << mid << ", ";
+        add(i);
+        cout << i << ", ";
+    }
+    if(n % 2 == 1) {
+        add(++mid);
+        cout << mid << ", ";
+    }
 }
 
 ThreadedBST::~ThreadedBST(){}
