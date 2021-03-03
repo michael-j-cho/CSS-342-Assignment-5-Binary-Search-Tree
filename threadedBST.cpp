@@ -13,6 +13,12 @@ using namespace std;
 
 ThreadedBST::ThreadedBST() : root{nullptr}, count{0} {}
 
+ThreadedBST::ThreadedBST(int n) : root{nullptr}, count{0} {
+    
+
+
+}
+
 ThreadedBST::~ThreadedBST(){}
 
 void ThreadedBST::insert(TreeNode *node, TreeNode *newNode) {
@@ -57,7 +63,8 @@ bool ThreadedBST::contains(const TreeNode &node) {
 return true;
 }
 
-void ThreadedBST::display() const {
+void ThreadedBST::inorder() const {
+
 }
 
 bool ThreadedBST::isEmpty() const {
@@ -69,5 +76,5 @@ return 0;
 }
 
 int ThreadedBST::getCount() const {
-return 0;
+return count;
 }

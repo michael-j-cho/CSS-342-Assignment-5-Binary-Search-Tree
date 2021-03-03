@@ -27,7 +27,7 @@ private:
 
 public:
     ThreadedBST();
-    explicit ThreadedBST(int data);
+    explicit ThreadedBST(int n);
     ~ThreadedBST();
 
     void insert(TreeNode *node, TreeNode *newNode);
@@ -36,7 +36,7 @@ public:
     bool retrieve(const TreeNode &node1, TreeNode node2);
     void clear();
     bool contains(const TreeNode &node);
-    void display() const;
+    void inorder() const;
     bool isEmpty() const;
     int height() const;
     int getCount() const;
