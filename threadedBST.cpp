@@ -15,14 +15,19 @@ ThreadedBST::ThreadedBST(){}
 
 ThreadedBST::~ThreadedBST(){}
 
-void ThreadedBST::insert(TreeNode *newNode) {
-    if(newNode->data < root->data) {
-        root->left = newNode;
+void ThreadedBST::insert(TreeNode *node, TreeNode *newNode) {
+    if(newNode->data < node->data && node->left != nullptr) {
+        insert(node->left, newNode);
     }
-    // if(root->right == nullptr && newNode->data > root->data) {
-    //     root->right = newNode;
-    // }
-    // if
+    if(newNode->data > node->data && node->right != nullptr) {
+        insert(node->right, newNode);
+    }
+    if(newNode->data < node->data && node->left == nullptr) {
+        node->left = newNode;
+    }
+    if(newNode->data > node->data && node->right == nullptr) {
+        node->right = newNode;
+    }
 }
 
 bool ThreadedBST::add(int data) {
@@ -30,7 +35,7 @@ bool ThreadedBST::add(int data) {
         root = new TreeNode(data);
     } else {
         TreeNode *newNode = new TreeNode(data);
-        insert(newNode);
+        insert(root, newNode);
     }
     return true;
 }

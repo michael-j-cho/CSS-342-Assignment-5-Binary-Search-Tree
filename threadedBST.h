@@ -29,7 +29,7 @@ public:
     explicit ThreadedBST(int data);
     ~ThreadedBST();
 
-    void insert(TreeNode *newNode);
+    void insert(TreeNode *node, TreeNode *newNode);
     bool add(int data);
     bool remove(const TreeNode *nodeToRemove);
     bool retrieve(const TreeNode &node1, TreeNode node2);
