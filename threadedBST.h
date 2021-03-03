@@ -23,6 +23,7 @@ private:
         int data;
     };
     TreeNode *root;
+    int count;
 
 public:
     ThreadedBST();

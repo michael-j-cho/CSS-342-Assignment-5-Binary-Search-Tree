@@ -11,7 +11,7 @@
 
 using namespace std;
 
-ThreadedBST::ThreadedBST(){}
+ThreadedBST::ThreadedBST() : root{nullptr}, count{0} {}
 
 ThreadedBST::~ThreadedBST(){}
 
@@ -37,6 +37,7 @@ bool ThreadedBST::add(int data) {
         TreeNode *newNode = new TreeNode(data);
         insert(root, newNode);
     }
+    count++;
     return true;
 }
 
@@ -57,11 +58,10 @@ return true;
 }
 
 void ThreadedBST::display() const {
-
 }
 
 bool ThreadedBST::isEmpty() const {
-return true;
+return count == 0;
 }
 
 int ThreadedBST::height() const {

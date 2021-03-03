@@ -17,6 +17,7 @@ void test1() {
     ThreadedBST tree;
     tree.add(1);
     tree.add(2);
+    tree.display();
 
 }
 
