@@ -57,8 +57,23 @@ bool ThreadedBST::add(int data) {
     return true;
 }
 
-bool ThreadedBST::remove(const TreeNode *nodeToRemove) {
-return true;
+bool ThreadedBST::remove(int data) {
+    // if(!contains(data)) {
+    //     return false;
+    // }
+    TreeNode *node = root;
+    while(data != node->data) {
+        if(data < node->data) {
+            node = node->left;
+        } else if (data > node->data) {
+            node = node->right;
+        }
+    }
+    cout << "Found " << node->data;
+    delete node;
+    node = nullptr;
+    cout << endl << "Deleted.";
+    return true;
 }
 
 bool ThreadedBST::retrieve(const TreeNode &node1, TreeNode node2) {

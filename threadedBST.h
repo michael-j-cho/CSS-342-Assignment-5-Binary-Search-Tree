@@ -34,7 +34,7 @@ public:
 
     void insert(TreeNode *node, TreeNode *newNode);
     bool add(int data);
-    bool remove(const TreeNode *nodeToRemove);
+    bool remove(int data);
     bool retrieve(const TreeNode &node1, TreeNode node2);
     void clear();
     bool contains(const TreeNode &node);
