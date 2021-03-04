@@ -15,14 +15,14 @@ using namespace std;
 
 void test1() {
     ThreadedBST tree2(20);
-    cout << endl;
+    // cout << endl;
      ThreadedBST tree3(21);
-    tree2.remove(1);
+    // tree2.remove(1);
 
 }
 
 int main() {
   test1();
-  cout << "Done." << endl;
+  cout << endl << "Done." << endl;
   return 0;
 }
