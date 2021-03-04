@@ -14,17 +14,14 @@ using namespace std;
 ThreadedBST::ThreadedBST() : root{nullptr}, count{0} {}
 
 ThreadedBST::ThreadedBST(int n) : root{nullptr}, count{0} {
+    int front = 1;
     int mid = n / 2;
+    int nodesToAdd = n;
     add(mid);
-    for(int i = 1; i <= n/2; i++) {
-        add(++mid);
-        cout << mid << ", ";
-        add(i);
-        cout << i << ", ";
-    }
-    if(n % 2 == 1) {
-        add(++mid);
-        cout << mid << ", ";
+    while(nodesToAdd != 0) {
+        add(--mid);
+        add(front++);
+        nodesToAdd--;
     }
 }
 
@@ -46,6 +43,9 @@ void ThreadedBST::insert(TreeNode *node, TreeNode *newNode) {
 }
 
 bool ThreadedBST::add(int data) {
+    // if(contains(data)) {
+    //     return false;
+    // }
     if(root == nullptr) { 
         root = new TreeNode(data);
     } else {
@@ -53,6 +53,7 @@ bool ThreadedBST::add(int data) {
         insert(root, newNode);
     }
     count++;
+    cout << data << ", ";
     return true;
 }
 

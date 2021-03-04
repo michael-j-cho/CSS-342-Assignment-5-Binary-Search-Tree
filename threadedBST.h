@@ -21,6 +21,8 @@ private:
         TreeNode *left;
         TreeNode *right;
         int data;
+        TreeNode *leftThread;
+        TreeNode *rightThread;
     };
     TreeNode *root;
     int count;
@@ -40,7 +42,6 @@ public:
     bool isEmpty() const;
     int height() const;
     int getCount() const;
-
 };
 
 #endif
