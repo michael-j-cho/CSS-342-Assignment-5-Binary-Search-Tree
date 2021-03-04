@@ -103,18 +103,19 @@ bool ThreadedBST::retrieve(const TreeNode &node1, TreeNode node2) {
 return true;
 }
 
-void ThreadedBST::clear() {
+void ThreadedBST::clear() 
+{
 
 }
 
 bool ThreadedBST::contains(const TreeNode* Node, int target)
 {
 
+    if (Node == nullptr || (Node->left == nullptr && Node->right == nullptr))
+        return false;
+
     if (Node->data == target)
         return true;
-
-    if (Node->left == nullptr && Node->right == nullptr)
-        return false;
 
     if (Node->data < target)
         contains(Node->right, target);
