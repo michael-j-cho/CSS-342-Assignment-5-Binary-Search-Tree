@@ -43,9 +43,9 @@ void ThreadedBST::insert(TreeNode *node, TreeNode *newNode) {
 }
 
 bool ThreadedBST::add(int data) {
-    // if(contains(data)) {
-    //     return false;
-    // }
+     if(contains(data)) {
+         return false;
+     }
     if(root == nullptr) { 
         root = new TreeNode(data);
     } else {
@@ -58,9 +58,9 @@ bool ThreadedBST::add(int data) {
 }
 
 bool ThreadedBST::remove(int data) {
-    // if(!contains(data)) {
-    //     return false;
-    // }
+     if(!contains(data)) {
+         return false;
+     }
     TreeNode *node = root;
     while(data != node->data) {
         if(data < node->data) {
