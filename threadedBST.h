@@ -1,7 +1,7 @@
 /**
  * Michael Cho
  * Tim D
- * 
+ *
  * CSS342
  *
  * */
@@ -14,18 +14,18 @@
 
 using namespace std;
 
-class ThreadedBST{
+class ThreadedBST {
 
 private:
     struct TreeNode {
         explicit TreeNode(int data) : left(nullptr), right(nullptr), data(data) {};
-        TreeNode *left;
-        TreeNode *right;
+        TreeNode* left;
+        TreeNode* right;
         int data;
-        TreeNode *leftThread;
-        TreeNode *rightThread;
+        TreeNode* leftThread;
+        TreeNode* rightThread;
     };
-    TreeNode *root;
+    TreeNode* root;
     int count;
 
 public:
@@ -33,13 +33,13 @@ public:
     explicit ThreadedBST(int n);
     ~ThreadedBST();
 
-    void insert(TreeNode *node, TreeNode *newNode);
+    void insert(TreeNode* node, TreeNode* newNode);
     bool add(int data);
     void balancedAdd(vector<int> vect);
     bool remove(int data);
-    bool retrieve(const TreeNode &node1, TreeNode node2);
+    bool retrieve(const TreeNode& node1, TreeNode node2);
     void clear();
-    bool ThreadedBST::contains(const TreeNode* Node, int target);
+    bool contains(int target);
     void inorder() const;
     bool isEmpty() const;
     int height() const;
