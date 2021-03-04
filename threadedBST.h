@@ -39,7 +39,7 @@ public:
     bool remove(int data);
     bool retrieve(const TreeNode &node1, TreeNode node2);
     void clear();
-    bool contains(const TreeNode &node);
+    bool ThreadedBST::contains(const TreeNode* Node, int target);
     void inorder() const;
     bool isEmpty() const;
     int height() const;

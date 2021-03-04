@@ -107,8 +107,21 @@ void ThreadedBST::clear() {
 
 }
 
-bool ThreadedBST::contains(const TreeNode &node) {
-return true;
+bool ThreadedBST::contains(const TreeNode* Node, int target)
+{
+
+    if (Node->data == target)
+        return true;
+
+    if (Node->left == nullptr && Node->right == nullptr)
+        return false;
+
+    if (Node->data < target)
+        contains(Node->right, target);
+
+    if (Node->data > target)
+        contains(Node->left, target);
+
 }
 
 void ThreadedBST::inorder() const {
