@@ -7,6 +7,7 @@
  * */
 
 #include <iostream>
+#include <vector>
 #include "threadedBST.h"
 
 using namespace std;
@@ -14,15 +15,29 @@ using namespace std;
 ThreadedBST::ThreadedBST() : root{nullptr}, count{0} {}
 
 ThreadedBST::ThreadedBST(int n) : root{nullptr}, count{0} {
-    int front = 1;
-    int mid = n / 2;
-    int nodesToAdd = n;
+    int counter = 1;
+    int mid = n / 2 +1;
     add(mid);
-    while(nodesToAdd != 0) {
-        add(--mid);
-        add(front++);
-        nodesToAdd--;
+    if(n % 2 == 1) {
+        mid++;
     }
+    vector<int> firstHalf;
+    vector<int> secondHalf;
+    while (counter < (n / 2)) {
+        firstHalf.push_back(counter);
+        // cout << counter << ", ";
+        secondHalf.push_back(++mid);
+        // cout << mid << ", ";
+        counter++;
+    }
+    if(n % 2 == 1) {
+        firstHalf.push_back(counter);
+        // cout << counter << ", ";
+    }
+
+    cout << endl << endl;
+    balancedAdd(firstHalf);
+    balancedAdd(secondHalf);
 }
 
 ThreadedBST::~ThreadedBST(){}
@@ -57,6 +72,14 @@ bool ThreadedBST::add(int data) {
     return true;
 }
 
+void ThreadedBST::balancedAdd(vector<int> vect) {
+    if(vect.size() != 0) {
+        add(vect[vect.size() / 2]);
+        vect.erase(vect.begin() + (vect.size() / 2));
+        balancedAdd(vect);
+    }
+}
+
 bool ThreadedBST::remove(int data) {
     // if(!contains(data)) {
     //     return false;
@@ -69,7 +92,7 @@ bool ThreadedBST::remove(int data) {
             node = node->right;
         }
     }
-    cout << "Found " << node->data;
+    cout << endl << "Found " << node->data;
     delete node;
     node = nullptr;
     cout << endl << "Deleted.";
