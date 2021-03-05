@@ -40,7 +40,10 @@ ThreadedBST::ThreadedBST(int n) : root{ nullptr }, count{ 0 } {
     balancedAdd(secondHalf);
 }
 
-ThreadedBST::~ThreadedBST() {}
+ThreadedBST::~ThreadedBST() 
+{
+    clear(root);
+}
 
 void ThreadedBST::insert(TreeNode* node, TreeNode* newNode) {
     if (newNode->data < node->data && node->left != nullptr) {
@@ -105,8 +108,18 @@ bool ThreadedBST::retrieve(const TreeNode& node1, TreeNode node2) {
     return true;
 }
 
-void ThreadedBST::clear()
+void ThreadedBST::clear(TreeNode*& Node)
 {
+
+    if (Node->left != nullptr)
+        clear(Node->left);
+
+    if (Node->right != nullptr)
+        clear(Node->right);
+
+    delete Node;
+    Node = nullptr;
+
 
 }
 

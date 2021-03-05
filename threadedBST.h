@@ -38,7 +38,7 @@ public:
     void balancedAdd(vector<int> vect);
     bool remove(int data);
     bool retrieve(const TreeNode& node1, TreeNode node2);
-    void clear();
+    void clear(TreeNode*& Node)
     bool contains(int target);
     void inorder() const;
     bool isEmpty() const;
