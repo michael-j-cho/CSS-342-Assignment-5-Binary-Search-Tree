@@ -29,7 +29,7 @@ public:
 
     void insert(TreeNode* node, TreeNode* newNode);
     bool add(int data);
-    void balancedAdd(vector<int> vect);
+    void balancedAdd(int arr[], int n);
     bool remove(int data);
     bool retrieve(const TreeNode& node1, TreeNode node2);
     void clear(TreeNode*& root);

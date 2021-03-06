@@ -16,7 +16,15 @@ ThreadedBST::ThreadedBST() : root{ nullptr }, count{ 0 } {}
 
 ThreadedBST::ThreadedBST(int n) : root{ nullptr }, count{ 0 } {
     int arr[n];
+    
+    for(int i = 0; i < n; i++) {
+        arr[i] = i + 1;
+    }
 
+    balancedAdd(arr, n);
+    // for(int i = 0; i < n; i++) {
+    //     cout << arr[i] << ", ";
+    // }
     // int mid = n / 2 + 1;
     // add(mid);
     // if (n % 2 == 1) {
@@ -43,7 +51,7 @@ ThreadedBST::ThreadedBST(int n) : root{ nullptr }, count{ 0 } {
 
 ThreadedBST::~ThreadedBST()
 {
-    clear(root);
+    // clear(root);
 }
 
 void ThreadedBST::insert(TreeNode* node, TreeNode* newNode) {
@@ -77,12 +85,8 @@ bool ThreadedBST::add(int data) {
     return true;
 }
 
-void ThreadedBST::balancedAdd(vector<int> vect) {
-    if (vect.size() != 0) {
-        add(vect[vect.size() / 2]);
-        vect.erase(vect.begin() + (vect.size() / 2));
-        balancedAdd(vect);
-    }
+void ThreadedBST::balancedAdd(int arr[], int n) {
+    add(arr[n/2]);
 }
 
 bool ThreadedBST::remove(int data) {
