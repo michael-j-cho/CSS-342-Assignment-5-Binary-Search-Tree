@@ -1,3 +1,6 @@
+#ifndef ASS5_THREADEDBST_H
+#define ASS5_THREADEDBST_H
+
 #include <vector>
 
 using namespace std;

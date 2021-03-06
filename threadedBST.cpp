@@ -15,29 +15,30 @@ using namespace std;
 ThreadedBST::ThreadedBST() : root{ nullptr }, count{ 0 } {}
 
 ThreadedBST::ThreadedBST(int n) : root{ nullptr }, count{ 0 } {
-    int counter = 1;
-    int mid = n / 2 + 1;
-    add(mid);
-    if (n % 2 == 1) {
-        mid++;
-    }
-    vector<int> firstHalf;
-    vector<int> secondHalf;
-    while (counter < (n / 2)) {
-        firstHalf.push_back(counter);
-        // cout << counter << ", ";
-        secondHalf.push_back(++mid);
-        // cout << mid << ", ";
-        counter++;
-    }
-    if (n % 2 == 1) {
-        firstHalf.push_back(counter);
-        // cout << counter << ", ";
-    }
+    int arr[n];
 
-    cout << endl << endl;
-    balancedAdd(firstHalf);
-    balancedAdd(secondHalf);
+    // int mid = n / 2 + 1;
+    // add(mid);
+    // if (n % 2 == 1) {
+    //     mid++;
+    // }
+    // vector<int> firstHalf;
+    // vector<int> secondHalf;
+    // while (counter < (n / 2)) {
+    //     firstHalf.push_back(counter);
+    //     // cout << counter << ", ";
+    //     secondHalf.push_back(++mid);
+    //     // cout << mid << ", ";
+    //     counter++;
+    // }
+    // if (n % 2 == 1) {
+    //     firstHalf.push_back(counter);
+    //     // cout << counter << ", ";
+    // }
+
+    // cout << endl << endl;
+    // balancedAdd(firstHalf);
+    // balancedAdd(secondHalf);
 }
 
 ThreadedBST::~ThreadedBST()
