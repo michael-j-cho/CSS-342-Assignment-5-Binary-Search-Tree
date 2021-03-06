@@ -1,15 +1,3 @@
-/**
- * Michael Cho
- * Tim D
- *
- * CSS342
- *
- * */
-
-#ifndef ASS5_THREADEDBST_H
-#define ASS5_THREADEDBST_H
-
-#include <iostream>
 #include <vector>
 
 using namespace std;
@@ -28,6 +16,9 @@ private:
     TreeNode* root;
     int count;
 
+    void removeOneChild(TreeNode* prevPtr, TreeNode* delPtr);
+    void removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNode* delPtr, TreeNode* prevInorderPointer);
+
 public:
     ThreadedBST();
     explicit ThreadedBST(int n);
@@ -38,12 +29,13 @@ public:
     void balancedAdd(vector<int> vect);
     bool remove(int data);
     bool retrieve(const TreeNode& node1, TreeNode node2);
-    void clear(TreeNode*& Node)
+    void clear(TreeNode*& root);
     bool contains(int target);
     void inorder() const;
     bool isEmpty() const;
     int height() const;
     int getCount() const;
+
 };
 
 #endif
