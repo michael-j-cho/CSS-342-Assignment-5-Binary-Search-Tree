@@ -1,3 +1,6 @@
+#ifndef ASS5_THREADEDBST_H
+#define ASS5_THREADEDBST_H
+
 #include <vector>
 
 using namespace std;
@@ -33,7 +36,8 @@ public:
     bool contains(int target);
     void inorder() const;
     bool isEmpty() const;
-    int height() const;
+    int getHeight();
+    int heightHelper(TreeNode *node) const;
     int getCount() const;
 
 };

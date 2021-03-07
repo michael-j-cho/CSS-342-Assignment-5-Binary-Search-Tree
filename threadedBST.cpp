@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "threadedBST.h"
 
 using namespace std;
@@ -15,29 +16,36 @@ using namespace std;
 ThreadedBST::ThreadedBST() : root{ nullptr }, count{ 0 } {}
 
 ThreadedBST::ThreadedBST(int n) : root{ nullptr }, count{ 0 } {
-    int counter = 1;
-    int mid = n / 2 + 1;
-    add(mid);
-    if (n % 2 == 1) {
-        mid++;
-    }
-    vector<int> firstHalf;
-    vector<int> secondHalf;
-    while (counter < (n / 2)) {
-        firstHalf.push_back(counter);
-        // cout << counter << ", ";
-        secondHalf.push_back(++mid);
-        // cout << mid << ", ";
-        counter++;
-    }
-    if (n % 2 == 1) {
-        firstHalf.push_back(counter);
-        // cout << counter << ", ";
+   
+    vector<int> vect1;
+    vector<int> vect2;
+    if(n % 2 == 1) {
+        if(root == nullptr) {
+            int mid = n/2 + 1;
+            add(mid);
+        }
+        for(int i = 1; i <= n / 2 + 1; i++) {
+            vect1.push_back(i);
+        }
+        for(int i = 1; i <= n / 2; i++) {
+            vect2.push_back(i + ((n/2) + 1));
+        }        
+    } else {
+        if(root == nullptr) {
+            int mid = n/2;
+            add(mid);
+        }
+        for(int i = 1; i <= n / 2; i++) {
+            vect1.push_back(i);
+        }
+        for(int i = 1; i <= n / 2; i++) {
+            vect2.push_back(i + (n/2));
+        }
     }
 
+    balancedAdd(vect1);
+    balancedAdd(vect2);
     cout << endl << endl;
-    balancedAdd(firstHalf);
-    balancedAdd(secondHalf);
 }
 
 ThreadedBST::~ThreadedBST()
@@ -77,10 +85,15 @@ bool ThreadedBST::add(int data) {
 }
 
 void ThreadedBST::balancedAdd(vector<int> vect) {
-    if (vect.size() != 0) {
-        add(vect[vect.size() / 2]);
-        vect.erase(vect.begin() + (vect.size() / 2));
-        balancedAdd(vect);
+    if(vect.size() > 0) {
+        add(vect.at(vect.size() / 2));
+        vect.erase(vect.begin() + vect.size()/2);
+        
+        vector<int> splitLow(vect.begin(), vect.begin() + vect.size()/2);
+        vector<int> splitHigh(vect.begin() + vect.size()/2, vect.end());
+
+        balancedAdd(splitLow);
+        balancedAdd(splitHigh);
     }
 }
 
@@ -293,8 +306,16 @@ bool ThreadedBST::isEmpty() const
     return count == 0;
 }
 
-int ThreadedBST::height() const {
-    return 0;
+int ThreadedBST::getHeight() {
+    return heightHelper(root);
+}
+
+int ThreadedBST::heightHelper(TreeNode *node) const {
+    if(node == nullptr) {
+        return 0;
+    } else {
+        return 1 + max(heightHelper(node->left), heightHelper(node->right));
+    }
 }
 
 int ThreadedBST::getCount() const {

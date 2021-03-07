@@ -14,11 +14,9 @@
 using namespace std;
 
 void test1() {
-    ThreadedBST tree2(20);
-    // cout << endl;
-    ThreadedBST tree3(21);
-    // tree2.remove(1);
-
+    ThreadedBST tree2(17);
+    ThreadedBST tree1(7);
+    cout << endl << tree2.getHeight() << endl;
 }
 
 void removetest()
@@ -44,7 +42,7 @@ void removetest()
 }
 
 int main() {
-    //test1();
+    test1();
     removetest();
     cout << endl << "Done." << endl;
     return 0;
