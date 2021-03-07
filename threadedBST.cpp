@@ -92,8 +92,10 @@ bool ThreadedBST::remove(int data) {
     TreeNode* delPtr;
     if (data < root->data)
         delPtr = root->left;
-    else
+    else if (data > root->data)
         delPtr = root->right;
+    else
+        delPtr = root;
 
     while (data != delPtr->data) {
         if (data < delPtr->data)
@@ -177,6 +179,18 @@ void ThreadedBST::removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNo
         delPtr = nullptr;
     }
 
+    else if (delPtr == root)
+    {
+        inorderPtr->left = delPtr->left;
+        inorderPtr->right = delPtr->right;
+
+        delete delPtr;
+        delPtr = nullptr;
+
+        root = inorderPtr;
+        prevInorderPointer->left = nullptr;
+    }
+
     else
     {
         inorderPtr->left = delPtr->left;
@@ -246,6 +260,28 @@ bool ThreadedBST::contains(int target)
 
     return true;
 
+}
+
+void ThreadedBST::thread()
+{
+    TreeNode* threadTarget = root;
+    TreeNode* threader;
+}
+
+void ThreadedBST::threadRecur(TreeNode* threadTarget, TreeNode* threader)
+{
+    threader = threadTarget->left;
+    while (threader->right != nullptr)
+    {
+        if (threader->left != nullptr)
+        {
+            threadTarget = threader;
+            threadRecur(threadTarget, threader);
+        }
+
+    }
+
+    threader->rightThread = threadTarget;
 }
 
 void ThreadedBST::inorder() const {
