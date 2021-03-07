@@ -15,21 +15,36 @@ using namespace std;
 ThreadedBST::ThreadedBST() : root{ nullptr }, count{ 0 } {}
 
 ThreadedBST::ThreadedBST(int n) : root{ nullptr }, count{ 0 } {
-    if(root == nullptr) {
-        int mid = n/2;
-        add(mid);
-    }
-    
+   
     vector<int> vect1;
     vector<int> vect2;
-    for(int i = 1; i <= n / 2; i++) {
-        vect1.push_back(i);
+    if(n % 2 == 1) {
+        if(root == nullptr) {
+            int mid = n/2 + 1;
+            add(mid);
+        }
+        for(int i = 1; i <= n / 2 + 1; i++) {
+            vect1.push_back(i);
+        }
+        for(int i = 1; i <= n / 2; i++) {
+            vect2.push_back(i + ((n/2) + 1));
+        }        
+    } else {
+        if(root == nullptr) {
+            int mid = n/2;
+            add(mid);
+        }
+        for(int i = 1; i <= n / 2; i++) {
+            vect1.push_back(i);
+        }
+        for(int i = 1; i <= n / 2; i++) {
+            vect2.push_back(i + (n/2));
+        }
     }
-    for(int i = 1; i <= n / 2; i++) {
-        vect2.push_back(i + (n/2));
-    }
+
     balancedAdd(vect1);
     balancedAdd(vect2);
+    cout << endl << endl;
 }
 
 ThreadedBST::~ThreadedBST()
