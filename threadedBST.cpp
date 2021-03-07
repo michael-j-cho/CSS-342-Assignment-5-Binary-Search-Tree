@@ -15,14 +15,21 @@ using namespace std;
 ThreadedBST::ThreadedBST() : root{ nullptr }, count{ 0 } {}
 
 ThreadedBST::ThreadedBST(int n) : root{ nullptr }, count{ 0 } {
-    int counter = 1;
-    vector<int> vect;
-    while (counter < n) {
-        vect.push_back(counter);
-        counter++;
+    if(root == nullptr) {
+        int mid = n/2;
+        add(mid);
     }
-
-    balancedAdd(vect, n);
+    
+    vector<int> vect1;
+    vector<int> vect2;
+    for(int i = 1; i <= n / 2; i++) {
+        vect1.push_back(i);
+    }
+    for(int i = 1; i <= n / 2; i++) {
+        vect2.push_back(i + (n/2));
+    }
+    balancedAdd(vect1);
+    balancedAdd(vect2);
 }
 
 ThreadedBST::~ThreadedBST()
@@ -61,21 +68,15 @@ bool ThreadedBST::add(int data) {
     return true;
 }
 
-void ThreadedBST::balancedAdd(vector<int> vect, int n) {
-    if(root == nullptr) {
-        add(vect.at(vect.size()/2));
-        vect.erase(vect.begin()+vect.size()/2);
-        n--;
+void ThreadedBST::balancedAdd(vector<int> vect) {
+    if(vect.size() > 0) {
+        add(vect.at(vect.size() / 2));
+        vect.erase(vect.begin() + vect.size()/2);
+        vector<int> split_lo(vect.begin(), vect.begin() + vect.size()/2);
+        vector<int> split_hi(vect.begin() + vect.size()/2, vect.end());
+        balancedAdd(split_lo);
+        balancedAdd(split_hi);
     }
-    if(n != 0) {
-        add(vect.at(vect.size()/4));
-        vect.erase(vect.begin()+vect.size()/4);
-        n--;
-        // add(vect.at(vect.size()*3/4));
-        // n--;
-    }
-    
-
 }
 
 bool ThreadedBST::remove(int data) {
