@@ -31,13 +31,15 @@ public:
     bool add(int data);
     void balancedAdd(vector<int> vect);
     bool remove(int data);
+    void thread();
+    void threadRecur(TreeNode* threadTarget, TreeNode* threader);
     bool retrieve(const TreeNode& node1, TreeNode node2);
     void clear(TreeNode*& root);
     bool contains(int target);
     void inorder() const;
     bool isEmpty() const;
     int getHeight();
-    int heightHelper(TreeNode *node) const;
+    int heightHelper(TreeNode* node) const;
     int getCount() const;
 
 };
