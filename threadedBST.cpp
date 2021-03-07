@@ -88,10 +88,12 @@ void ThreadedBST::balancedAdd(vector<int> vect) {
     if(vect.size() > 0) {
         add(vect.at(vect.size() / 2));
         vect.erase(vect.begin() + vect.size()/2);
-        vector<int> split_lo(vect.begin(), vect.begin() + vect.size()/2);
-        vector<int> split_hi(vect.begin() + vect.size()/2, vect.end());
-        balancedAdd(split_lo);
-        balancedAdd(split_hi);
+        
+        vector<int> splitLow(vect.begin(), vect.begin() + vect.size()/2);
+        vector<int> splitHigh(vect.begin() + vect.size()/2, vect.end());
+
+        balancedAdd(splitLow);
+        balancedAdd(splitHigh);
     }
 }
 

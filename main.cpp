@@ -14,7 +14,7 @@
 using namespace std;
 
 void test1() {
-    ThreadedBST tree2(10);
+    ThreadedBST tree2(17);
     ThreadedBST tree1(7);
     cout << endl << tree2.getHeight() << endl;
 }
