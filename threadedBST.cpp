@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "threadedBST.h"
 
 using namespace std;
@@ -267,8 +268,16 @@ bool ThreadedBST::isEmpty() const
     return count == 0;
 }
 
-int ThreadedBST::height() const {
-    return 0;
+int ThreadedBST::getHeight() {
+    return heightHelper(root);
+}
+
+int ThreadedBST::heightHelper(TreeNode *node) const {
+    if(node == nullptr) {
+        return 0;
+    } else {
+        return 1 + max(heightHelper(node->left), heightHelper(node->right));
+    }
 }
 
 int ThreadedBST::getCount() const {

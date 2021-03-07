@@ -36,7 +36,8 @@ public:
     bool contains(int target);
     void inorder() const;
     bool isEmpty() const;
-    int height() const;
+    int getHeight();
+    int heightHelper(TreeNode *node) const;
     int getCount() const;
 
 };
