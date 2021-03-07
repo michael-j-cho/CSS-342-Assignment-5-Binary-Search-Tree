@@ -16,10 +16,6 @@ using namespace std;
 void test1() {
     ThreadedBST tree2(10);
     ThreadedBST tree1(7);
-    // cout << endl;
-    // ThreadedBST tree3(21);
-    // tree2.remove(1);
-
 }
 
 void removetest()
@@ -45,7 +41,7 @@ void removetest()
 
 int main() {
     test1();
-    // removetest();
+    removetest();
     cout << endl << "Done." << endl;
     return 0;
 }

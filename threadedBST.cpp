@@ -49,7 +49,7 @@ ThreadedBST::ThreadedBST(int n) : root{ nullptr }, count{ 0 } {
 
 ThreadedBST::~ThreadedBST()
 {
-    // clear(root);
+    clear(root);
 }
 
 void ThreadedBST::insert(TreeNode* node, TreeNode* newNode) {
