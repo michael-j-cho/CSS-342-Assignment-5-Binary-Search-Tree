@@ -1,15 +1,3 @@
-/**
- * Michael Cho
- * Tim D
- *
- * CSS342
- *
- * */
-
-#ifndef ASS5_THREADEDBST_H
-#define ASS5_THREADEDBST_H
-
-#include <iostream>
 #include <vector>
 
 using namespace std;
@@ -30,8 +18,6 @@ private:
 
     void removeOneChild(TreeNode* prevPtr, TreeNode* delPtr);
     void removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNode* delPtr, TreeNode* prevInorderPointer);
-    void thread();
-    void threadRecur(TreeNode* threadTarget, TreeNode* threader);
 
 public:
     ThreadedBST();
