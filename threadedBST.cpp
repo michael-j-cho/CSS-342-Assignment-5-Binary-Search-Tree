@@ -215,15 +215,15 @@ void ThreadedBST::copy(TreeNode *node) {
 Precondition: ThreadedBST tree object must exist
 Postcondition: *************/
 void ThreadedBST::deleteEven(TreeNode *node) {
-    if(node->data % 2 == 0) {
-        // remove(node->data);
-        cout << endl << "Deleting " << node->data;
-    }
-    if(node->left != nullptr) {
+    if (node->left != nullptr) {
         deleteEven(node->left);
     }
-    if(node->right != nullptr) {
+    if (node->right != nullptr) {
         deleteEven(node->right);
+    }
+
+    if (node->data % 2 == 0) {
+        remove(node->data);
     }
 }
 
@@ -259,7 +259,7 @@ Precondition: ************
 Postcondition: *************/
 void ThreadedBST::removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNode* delPtr, TreeNode* prevInorderPointer)
 {
-    if (prevInorderPointer == nullptr)
+    if (prevInorderPointer == nullptr)             //Used for if there is no pointer left after moving right once (right once is inorder)
     {
         inorderPtr->left = delPtr->left;
 
@@ -275,6 +275,11 @@ void ThreadedBST::removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNo
 
     else if (delPtr == root)
     {
+        if (inorderPtr->right != nullptr)
+            prevInorderPointer->left = inorderPtr->right;
+        else
+            prevInorderPointer->left = nullptr;
+
         inorderPtr->left = delPtr->left;
         inorderPtr->right = delPtr->right;
 
@@ -282,11 +287,16 @@ void ThreadedBST::removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNo
         delPtr = nullptr;
 
         root = inorderPtr;
-        prevInorderPointer->left = nullptr;
+
     }
 
     else
     {
+        if (inorderPtr->right != nullptr)
+            prevInorderPointer->left = inorderPtr->right;
+        else
+            prevInorderPointer->left = nullptr;
+
         inorderPtr->left = delPtr->left;
         inorderPtr->right = delPtr->right;
 
@@ -296,7 +306,7 @@ void ThreadedBST::removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNo
         else if (inorderPtr->data > prevPtr->data)
             prevPtr->right = inorderPtr;
 
-        prevInorderPointer->left = nullptr;
+
 
         delete delPtr;
         delPtr = nullptr;
