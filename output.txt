@@ -1,13 +1,13 @@
-Mon Mar  8 13:00:16 PST 2021
+Mon Mar  8 13:04:54 PST 2021
 Linux csslab6.uwb.edu 3.10.0-1160.11.1.el7.x86_64 #1 SMP Fri Dec 18 16:34:56 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
 uid=1015102(mikec87) gid=2121015102(mikec87) groups=2121015102(mikec87),605559(lab-access)
 =====================================================
 1. Compiles without warnings with -Wall -Wextra flags
 =====================================================
 threadedBST.cpp: In member function ‘void ThreadedBST::thread()’:
-threadedBST.cpp:359:15: warning: unused variable ‘threadTarget’ [-Wunused-variable]
-  359 |     TreeNode* threadTarget = root;
-      |               ^~~~~~~~~~~~
+threadedBST.cpp:332:13: warning: unused variable ‘threadTarget’ [-Wunused-variable]
+  332 |   TreeNode *threadTarget = root;
+      |             ^~~~~~~~~~~~
 =====================================================
 2. Runs and produces correct output
 =====================================================
@@ -34,1590 +34,819 @@ Done.
 3. clang-tidy warnings are fixed
 =====================================================
 10 warnings generated.
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:122:5: warning: Potential leak of memory pointed to by 'newNode' [clang-analyzer-cplusplus.NewDeleteLeaks]
-    count++;
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:28:8: note: Assuming the condition is false
-    if(n % 2 == 1) {
-       ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:28:5: note: Taking false branch
-    if(n % 2 == 1) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:40:9: note: Taking true branch
-        if(root == nullptr) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:42:13: note: Calling 'ThreadedBST::add'
-            add(mid);
-            ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:112:9: note: Assuming the condition is false
-    if (contains(data)) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:112:5: note: Taking false branch
-    if (contains(data)) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:115:9: note: Assuming the condition is false
-    if (root == nullptr) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:115:5: note: Taking false branch
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:118:3: warning: Potential leak of memory pointed to by 'newNode' [clang-analyzer-cplusplus.NewDeleteLeaks]
+  count++;
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:28:7: note: Assuming the condition is false
+  if (n % 2 == 1) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:28:3: note: Taking false branch
+  if (n % 2 == 1) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:40:5: note: Taking true branch
     if (root == nullptr) {
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:119:29: note: Memory is allocated
-        TreeNode* newNode = new TreeNode(data);
-                            ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:122:5: note: Potential leak of memory pointed to by 'newNode'
-    count++;
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:42:7: note: Calling 'ThreadedBST::add'
+      add(mid);
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:109:7: note: Assuming the condition is false
+  if (contains(data)) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:109:3: note: Taking false branch
+  if (contains(data)) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:112:7: note: Assuming the condition is false
+  if (root == nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:112:3: note: Taking false branch
+  if (root == nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:115:25: note: Memory is allocated
+    TreeNode *newNode = new TreeNode(data);
+                        ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:118:3: note: Potential leak of memory pointed to by 'newNode'
+  count++;
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:155:18: warning: Access to field 'data' results in a dereference of a null pointer (loaded from variable 'delPtr') [clang-analyzer-core.NullDereference]
+  while (data != delPtr->data) {
+                 ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:59:7: note: Assuming the condition is false
+  if (tree.root == nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:59:3: note: Taking false branch
+  if (tree.root == nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:64:3: note: Calling 'ThreadedBST::deleteEven'
+  deleteEven(this->root);
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:205:7: note: Assuming pointer value is null
+  if (node->left != nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:205:3: note: Taking false branch
+  if (node->left != nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:208:7: note: Assuming the condition is true
+  if (node->right != nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:208:3: note: Taking true branch
+  if (node->right != nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:209:5: note: Calling 'ThreadedBST::deleteEven'
+    deleteEven(node->right);
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:159:20: warning: Access to field 'data' results in a dereference of a null pointer (loaded from variable 'delPtr') [clang-analyzer-core.NullDereference]
-    while (data != delPtr->data) {
-                   ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:59:8: note: Assuming the condition is false
-    if(tree.root == nullptr) {
-       ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:59:5: note: Taking false branch
-    if(tree.root == nullptr) {
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:205:7: note: Assuming the condition is false
+  if (node->left != nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:205:3: note: Taking false branch
+  if (node->left != nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:208:7: note: Assuming the condition is false
+  if (node->right != nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:208:3: note: Taking false branch
+  if (node->right != nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:212:7: note: Assuming the condition is true
+  if (node->data % 2 == 0) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:212:3: note: Taking true branch
+  if (node->data % 2 == 0) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:213:5: note: Calling 'ThreadedBST::remove'
+    remove(node->data);
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:65:5: note: Calling 'ThreadedBST::deleteEven'
-    deleteEven(this->root);
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:143:3: note: Taking false branch
+  if (!contains(data)) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:148:7: note: Assuming the condition is true
+  if (data < root->data)
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:148:3: note: Taking true branch
+  if (data < root->data)
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:149:5: note: Null pointer value stored to 'delPtr'
+    delPtr = root->left;
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:218:9: note: Assuming pointer value is null
-    if (node->left != nullptr) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:218:5: note: Taking false branch
-    if (node->left != nullptr) {
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:155:18: note: Access to field 'data' results in a dereference of a null pointer (loaded from variable 'delPtr')
+  while (data != delPtr->data) {
+                 ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:205:7: warning: Access to field 'left' results in a dereference of a null pointer (loaded from variable 'node') [clang-analyzer-core.NullDereference]
+  if (node->left != nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:59:7: note: Assuming the condition is true
+  if (tree.root == nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:59:3: note: Taking true branch
+  if (tree.root == nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:60:5: note: Null pointer value stored to field 'root'
+    root = nullptr;
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:221:9: note: Assuming the condition is true
-    if (node->right != nullptr) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:221:5: note: Taking true branch
-    if (node->right != nullptr) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:222:9: note: Calling 'ThreadedBST::deleteEven'
-        deleteEven(node->right);
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:218:9: note: Assuming the condition is false
-    if (node->left != nullptr) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:218:5: note: Taking false branch
-    if (node->left != nullptr) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:221:9: note: Assuming the condition is false
-    if (node->right != nullptr) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:221:5: note: Taking false branch
-    if (node->right != nullptr) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:225:9: note: Assuming the condition is true
-    if (node->data % 2 == 0) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:225:5: note: Taking true branch
-    if (node->data % 2 == 0) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:226:9: note: Calling 'ThreadedBST::remove'
-        remove(node->data);
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:147:5: note: Taking false branch
-    if (!contains(data)) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:152:9: note: Assuming the condition is true
-    if (data < root->data)
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:152:5: note: Taking true branch
-    if (data < root->data)
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:153:9: note: Null pointer value stored to 'delPtr'
-        delPtr = root->left;
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:159:20: note: Access to field 'data' results in a dereference of a null pointer (loaded from variable 'delPtr')
-    while (data != delPtr->data) {
-                   ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:218:9: warning: Access to field 'left' results in a dereference of a null pointer (loaded from variable 'node') [clang-analyzer-core.NullDereference]
-    if (node->left != nullptr) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:59:8: note: Assuming the condition is true
-    if(tree.root == nullptr) {
-       ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:59:5: note: Taking true branch
-    if(tree.root == nullptr) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:60:9: note: Null pointer value stored to field 'root'
-        root = nullptr;
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:65:16: note: Passing null pointer value via 1st parameter 'node'
-    deleteEven(this->root);
-               ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:65:5: note: Calling 'ThreadedBST::deleteEven'
-    deleteEven(this->root);
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:218:9: note: Access to field 'left' results in a dereference of a null pointer (loaded from variable 'node')
-    if (node->left != nullptr) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:221:9: warning: Use of memory after it is freed [clang-analyzer-cplusplus.NewDelete]
-    if (node->right != nullptr) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:59:8: note: Assuming the condition is false
-    if(tree.root == nullptr) {
-       ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:59:5: note: Taking false branch
-    if(tree.root == nullptr) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:65:5: note: Calling 'ThreadedBST::deleteEven'
-    deleteEven(this->root);
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:218:9: note: Assuming the condition is true
-    if (node->left != nullptr) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:218:5: note: Taking true branch
-    if (node->left != nullptr) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:219:9: note: Calling 'ThreadedBST::deleteEven'
-        deleteEven(node->left);
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:218:9: note: Assuming the condition is false
-    if (node->left != nullptr) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:218:5: note: Taking false branch
-    if (node->left != nullptr) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:221:9: note: Assuming the condition is false
-    if (node->right != nullptr) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:221:5: note: Taking false branch
-    if (node->right != nullptr) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:225:9: note: Assuming the condition is true
-    if (node->data % 2 == 0) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:225:5: note: Taking true branch
-    if (node->data % 2 == 0) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:226:9: note: Calling 'ThreadedBST::remove'
-        remove(node->data);
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:147:5: note: Taking false branch
-    if (!contains(data)) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:152:9: note: Assuming the condition is false
-    if (data < root->data)
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:152:5: note: Taking false branch
-    if (data < root->data)
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:154:14: note: Assuming the condition is false
-    else if (data > root->data)
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:64:14: note: Passing null pointer value via 1st parameter 'node'
+  deleteEven(this->root);
              ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:154:10: note: Taking false branch
-    else if (data > root->data)
-         ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:159:12: note: Assuming the condition is false
-    while (data != delPtr->data) {
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:64:3: note: Calling 'ThreadedBST::deleteEven'
+  deleteEven(this->root);
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:205:7: note: Access to field 'left' results in a dereference of a null pointer (loaded from variable 'node')
+  if (node->left != nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:208:7: warning: Use of memory after it is freed [clang-analyzer-cplusplus.NewDelete]
+  if (node->right != nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:59:7: note: Assuming the condition is false
+  if (tree.root == nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:59:3: note: Taking false branch
+  if (tree.root == nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:64:3: note: Calling 'ThreadedBST::deleteEven'
+  deleteEven(this->root);
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:205:7: note: Assuming the condition is true
+  if (node->left != nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:205:3: note: Taking true branch
+  if (node->left != nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:206:5: note: Calling 'ThreadedBST::deleteEven'
+    deleteEven(node->left);
+    ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:205:7: note: Assuming the condition is false
+  if (node->left != nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:205:3: note: Taking false branch
+  if (node->left != nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:208:7: note: Assuming the condition is false
+  if (node->right != nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:208:3: note: Taking false branch
+  if (node->right != nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:212:7: note: Assuming the condition is true
+  if (node->data % 2 == 0) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:212:3: note: Taking true branch
+  if (node->data % 2 == 0) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:213:5: note: Calling 'ThreadedBST::remove'
+    remove(node->data);
+    ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:143:3: note: Taking false branch
+  if (!contains(data)) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:148:7: note: Assuming the condition is false
+  if (data < root->data)
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:148:3: note: Taking false branch
+  if (data < root->data)
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:150:12: note: Assuming the condition is false
+  else if (data > root->data)
            ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:159:5: note: Loop condition is false. Execution continues on line 172
-    while (data != delPtr->data) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:172:33: note: Left side of '&&' is false
-    if (delPtr->left == nullptr && delPtr->right == nullptr)
-                                ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:181:14: note: Left side of '&&' is true
-    else if (delPtr->left != nullptr && delPtr->right != nullptr)
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:150:8: note: Taking false branch
+  else if (data > root->data)
+       ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:155:10: note: Assuming the condition is false
+  while (data != delPtr->data) {
+         ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:155:3: note: Loop condition is false. Execution continues on line 165
+  while (data != delPtr->data) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:165:31: note: Left side of '&&' is false
+  if (delPtr->left == nullptr && delPtr->right == nullptr) {
+                              ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:172:14: note: Left side of '&&' is true
+  } else if (delPtr->left != nullptr && delPtr->right != nullptr) {
              ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:181:41: note: Assuming the condition is false
-    else if (delPtr->left != nullptr && delPtr->right != nullptr)
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:172:41: note: Assuming the condition is false
+  } else if (delPtr->left != nullptr && delPtr->right != nullptr) {
                                         ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:181:10: note: Taking false branch
-    else if (delPtr->left != nullptr && delPtr->right != nullptr)
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:172:10: note: Taking false branch
+  } else if (delPtr->left != nullptr && delPtr->right != nullptr) {
          ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:195:9: note: Calling 'ThreadedBST::removeOneChild'
-        removeOneChild(prevPtr, delPtr);
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:236:5: note: Taking false branch
-    if (prevPtr->data < delPtr->data)
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:182:5: note: Calling 'ThreadedBST::removeOneChild'
+    removeOneChild(prevPtr, delPtr);
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:244:10: note: Taking false branch
-    else if (prevPtr->data > delPtr->data)
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:222:3: note: Taking false branch
+  if (prevPtr->data < delPtr->data) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:228:10: note: Taking false branch
+  } else if (prevPtr->data > delPtr->data) {
          ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:254:5: note: Memory is released
-    delete delPtr;
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:236:3: note: Memory is released
+  delete delPtr;
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:182:5: note: Returning; memory was released via 1st parameter
+    removeOneChild(prevPtr, delPtr);
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:195:9: note: Returning; memory was released via 1st parameter
-        removeOneChild(prevPtr, delPtr);
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:226:9: note: Returning; memory was released
-        remove(node->data);
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:219:9: note: Returning; memory was released
-        deleteEven(node->left);
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:221:9: note: Use of memory after it is freed
-    if (node->right != nullptr) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:225:9: warning: Use of memory after it is freed [clang-analyzer-cplusplus.NewDelete]
-    if (node->data % 2 == 0) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:59:8: note: Assuming the condition is false
-    if(tree.root == nullptr) {
-       ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:59:5: note: Taking false branch
-    if(tree.root == nullptr) {
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:213:5: note: Returning; memory was released
+    remove(node->data);
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:65:5: note: Calling 'ThreadedBST::deleteEven'
-    deleteEven(this->root);
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:206:5: note: Returning; memory was released
+    deleteEven(node->left);
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:218:9: note: Assuming the condition is false
-    if (node->left != nullptr) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:218:5: note: Taking false branch
-    if (node->left != nullptr) {
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:208:7: note: Use of memory after it is freed
+  if (node->right != nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:212:7: warning: Use of memory after it is freed [clang-analyzer-cplusplus.NewDelete]
+  if (node->data % 2 == 0) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:59:7: note: Assuming the condition is false
+  if (tree.root == nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:59:3: note: Taking false branch
+  if (tree.root == nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:64:3: note: Calling 'ThreadedBST::deleteEven'
+  deleteEven(this->root);
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:205:7: note: Assuming the condition is false
+  if (node->left != nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:205:3: note: Taking false branch
+  if (node->left != nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:208:7: note: Assuming the condition is true
+  if (node->right != nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:208:3: note: Taking true branch
+  if (node->right != nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:209:5: note: Calling 'ThreadedBST::deleteEven'
+    deleteEven(node->right);
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:221:9: note: Assuming the condition is true
-    if (node->right != nullptr) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:221:5: note: Taking true branch
-    if (node->right != nullptr) {
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:205:7: note: Assuming the condition is false
+  if (node->left != nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:205:3: note: Taking false branch
+  if (node->left != nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:208:7: note: Assuming the condition is false
+  if (node->right != nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:208:3: note: Taking false branch
+  if (node->right != nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:212:7: note: Assuming the condition is true
+  if (node->data % 2 == 0) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:212:3: note: Taking true branch
+  if (node->data % 2 == 0) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:213:5: note: Calling 'ThreadedBST::remove'
+    remove(node->data);
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:222:9: note: Calling 'ThreadedBST::deleteEven'
-        deleteEven(node->right);
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:218:9: note: Assuming the condition is false
-    if (node->left != nullptr) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:218:5: note: Taking false branch
-    if (node->left != nullptr) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:221:9: note: Assuming the condition is false
-    if (node->right != nullptr) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:221:5: note: Taking false branch
-    if (node->right != nullptr) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:225:9: note: Assuming the condition is true
-    if (node->data % 2 == 0) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:225:5: note: Taking true branch
-    if (node->data % 2 == 0) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:226:9: note: Calling 'ThreadedBST::remove'
-        remove(node->data);
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:147:5: note: Taking false branch
-    if (!contains(data)) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:152:9: note: Assuming the condition is false
-    if (data < root->data)
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:152:5: note: Taking false branch
-    if (data < root->data)
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:154:14: note: Assuming the condition is false
-    else if (data > root->data)
-             ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:154:10: note: Taking false branch
-    else if (data > root->data)
-         ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:159:12: note: Assuming the condition is false
-    while (data != delPtr->data) {
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:143:3: note: Taking false branch
+  if (!contains(data)) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:148:7: note: Assuming the condition is false
+  if (data < root->data)
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:148:3: note: Taking false branch
+  if (data < root->data)
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:150:12: note: Assuming the condition is false
+  else if (data > root->data)
            ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:159:5: note: Loop condition is false. Execution continues on line 172
-    while (data != delPtr->data) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:172:9: note: Left side of '&&' is true
-    if (delPtr->left == nullptr && delPtr->right == nullptr)
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:172:5: note: Taking false branch
-    if (delPtr->left == nullptr && delPtr->right == nullptr)
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:181:38: note: Left side of '&&' is false
-    else if (delPtr->left != nullptr && delPtr->right != nullptr)
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:150:8: note: Taking false branch
+  else if (data > root->data)
+       ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:155:10: note: Assuming the condition is false
+  while (data != delPtr->data) {
+         ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:155:3: note: Loop condition is false. Execution continues on line 165
+  while (data != delPtr->data) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:165:7: note: Left side of '&&' is true
+  if (delPtr->left == nullptr && delPtr->right == nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:165:3: note: Taking false branch
+  if (delPtr->left == nullptr && delPtr->right == nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:172:38: note: Left side of '&&' is false
+  } else if (delPtr->left != nullptr && delPtr->right != nullptr) {
                                      ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:195:9: note: Calling 'ThreadedBST::removeOneChild'
-        removeOneChild(prevPtr, delPtr);
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:236:5: note: Taking false branch
-    if (prevPtr->data < delPtr->data)
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:182:5: note: Calling 'ThreadedBST::removeOneChild'
+    removeOneChild(prevPtr, delPtr);
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:244:10: note: Taking false branch
-    else if (prevPtr->data > delPtr->data)
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:222:3: note: Taking false branch
+  if (prevPtr->data < delPtr->data) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:228:10: note: Taking false branch
+  } else if (prevPtr->data > delPtr->data) {
          ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:254:5: note: Memory is released
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:236:3: note: Memory is released
+  delete delPtr;
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:182:5: note: Returning; memory was released via 1st parameter
+    removeOneChild(prevPtr, delPtr);
+    ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:213:5: note: Returning; memory was released
+    remove(node->data);
+    ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:209:5: note: Returning; memory was released
+    deleteEven(node->right);
+    ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:212:7: note: Use of memory after it is freed
+  if (node->data % 2 == 0) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:214:36: warning: Use of memory after it is freed [clang-analyzer-cplusplus.NewDelete]
+    cout << endl << "Deleting " << node->data;
+                                   ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:59:7: note: Assuming the condition is false
+  if (tree.root == nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:59:3: note: Taking false branch
+  if (tree.root == nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:62:5: note: Calling 'ThreadedBST::copy'
+    copy(tree.root);
+    ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:192:3: note: Calling 'ThreadedBST::add'
+  add(node->data);
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:109:3: note: Taking false branch
+  if (contains(data)) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:112:3: note: Taking true branch
+  if (root == nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:113:12: note: Memory is allocated
+    root = new TreeNode(data);
+           ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:192:3: note: Returned allocated memory
+  add(node->data);
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:193:7: note: Assuming the condition is false
+  if (node->left != nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:193:3: note: Taking false branch
+  if (node->left != nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:196:7: note: Assuming the condition is false
+  if (node->right != nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:196:3: note: Taking false branch
+  if (node->right != nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:62:5: note: Returned allocated memory
+    copy(tree.root);
+    ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:64:3: note: Calling 'ThreadedBST::deleteEven'
+  deleteEven(this->root);
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:205:3: note: Taking false branch
+  if (node->left != nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:208:3: note: Taking false branch
+  if (node->right != nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:212:7: note: Assuming the condition is true
+  if (node->data % 2 == 0) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:212:3: note: Taking true branch
+  if (node->data % 2 == 0) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:213:5: note: Calling 'ThreadedBST::remove'
+    remove(node->data);
+    ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:143:3: note: Taking false branch
+  if (!contains(data)) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:148:3: note: Taking false branch
+  if (data < root->data)
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:150:8: note: Taking false branch
+  else if (data > root->data)
+       ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:155:3: note: Loop condition is false. Execution continues on line 165
+  while (data != delPtr->data) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:165:7: note: Left side of '&&' is true
+  if (delPtr->left == nullptr && delPtr->right == nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:165:3: note: Taking true branch
+  if (delPtr->left == nullptr && delPtr->right == nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:166:5: note: Taking false branch
+    if (delPtr->data < prevPtr->data)
+    ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:170:5: note: Memory is released
     delete delPtr;
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:195:9: note: Returning; memory was released via 1st parameter
-        removeOneChild(prevPtr, delPtr);
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:213:5: note: Returning; memory was released
+    remove(node->data);
+    ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:214:36: note: Use of memory after it is freed
+    cout << endl << "Deleting " << node->data;
+                                   ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:332:13: warning: Value stored to 'threadTarget' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
+  TreeNode *threadTarget = root;
+            ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:332:13: note: Value stored to 'threadTarget' during its initialization is never read
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:347:9: warning: Access to field 'left' results in a dereference of a null pointer (loaded from variable 'threader') [clang-analyzer-core.NullDereference]
+    if (threader->left != nullptr)
         ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:226:9: note: Returning; memory was released
-        remove(node->data);
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:222:9: note: Returning; memory was released
-        deleteEven(node->right);
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:225:9: note: Use of memory after it is freed
-    if (node->data % 2 == 0) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:227:40: warning: Use of memory after it is freed [clang-analyzer-cplusplus.NewDelete]
-        cout << endl << "Deleting " << node->data;
-                                       ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:59:8: note: Assuming the condition is false
-    if(tree.root == nullptr) {
-       ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:59:5: note: Taking false branch
-    if(tree.root == nullptr) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:63:9: note: Calling 'ThreadedBST::copy'
-        copy(tree.root);
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:205:5: note: Calling 'ThreadedBST::add'
-    add(node->data);
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:112:5: note: Taking false branch
-    if (contains(data)) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:115:5: note: Taking true branch
-    if (root == nullptr) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:116:16: note: Memory is allocated
-        root = new TreeNode(data);
-               ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:205:5: note: Returned allocated memory
-    add(node->data);
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:206:9: note: Assuming the condition is false
-    if (node->left != nullptr) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:206:5: note: Taking false branch
-    if (node->left != nullptr) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:209:9: note: Assuming the condition is false
-    if (node->right != nullptr) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:209:5: note: Taking false branch
-    if (node->right != nullptr) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:63:9: note: Returned allocated memory
-        copy(tree.root);
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:65:5: note: Calling 'ThreadedBST::deleteEven'
-    deleteEven(this->root);
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:218:5: note: Taking false branch
-    if (node->left != nullptr) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:221:5: note: Taking false branch
-    if (node->right != nullptr) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:225:9: note: Assuming the condition is true
-    if (node->data % 2 == 0) {
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:225:5: note: Taking true branch
-    if (node->data % 2 == 0) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:226:9: note: Calling 'ThreadedBST::remove'
-        remove(node->data);
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:147:5: note: Taking false branch
-    if (!contains(data)) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:152:5: note: Taking false branch
-    if (data < root->data)
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:154:10: note: Taking false branch
-    else if (data > root->data)
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:333:3: note: 'threader' initialized to a null pointer value
+  TreeNode *threader = nullptr;
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:334:26: note: Passing null pointer value via 2nd parameter 'threader'
+  threadRecurRight(root, threader);
+                         ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:334:3: note: Calling 'ThreadedBST::threadRecurRight'
+  threadRecurRight(root, threader);
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:343:10: note: Assuming the condition is true
+  while (threadTarget->right != nullptr) {
          ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:159:5: note: Loop condition is false. Execution continues on line 172
-    while (data != delPtr->data) {
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:172:9: note: Left side of '&&' is true
-    if (delPtr->left == nullptr && delPtr->right == nullptr)
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:343:3: note: Loop condition is true.  Entering loop body
+  while (threadTarget->right != nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:344:9: note: Assuming the condition is false
+    if (threadTarget->left != nullptr)
         ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:172:5: note: Taking true branch
-    if (delPtr->left == nullptr && delPtr->right == nullptr)
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:344:5: note: Taking false branch
+    if (threadTarget->left != nullptr)
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:174:9: note: Taking false branch
-        if (delPtr->data < prevPtr->data)
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:347:9: note: Access to field 'left' results in a dereference of a null pointer (loaded from variable 'threader')
+    if (threader->left != nullptr)
         ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:178:9: note: Memory is released
-        delete delPtr;
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:226:9: note: Returning; memory was released
-        remove(node->data);
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:227:40: note: Use of memory after it is freed
-        cout << endl << "Deleting " << node->data;
-                                       ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:359:15: warning: Value stored to 'threadTarget' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
-    TreeNode* threadTarget = root;
-              ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:359:15: note: Value stored to 'threadTarget' during its initialization is never read
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:376:13: warning: Access to field 'left' results in a dereference of a null pointer (loaded from variable 'threader') [clang-analyzer-core.NullDereference]
-        if (threader->left != nullptr)
-            ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:360:5: note: 'threader' initialized to a null pointer value
-    TreeNode* threader = nullptr;
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:364:10: warning: Access to field 'left' results in a dereference of a null pointer (loaded from variable 'threadTarget') [clang-analyzer-core.NullDereference]
+  while (threadTarget->left != nullptr) {
+         ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:335:3: note: Calling 'ThreadedBST::threadRecurLeft'
+  threadRecurLeft(root, threader);
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:364:3: note: Loop condition is true.  Entering loop body
+  while (threadTarget->left != nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:365:5: note: Taking true branch
+    if (threadTarget->right != nullptr)
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:361:28: note: Passing null pointer value via 2nd parameter 'threader'
-    threadRecurRight(root, threader);
-                           ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:361:5: note: Calling 'ThreadedBST::threadRecurRight'
-    threadRecurRight(root, threader);
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:368:5: note: Taking false branch
+    if (threader->right != nullptr)
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:371:12: note: Assuming the condition is true
-    while (threadTarget->right != nullptr)
-           ^
 /home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:371:5: note: Loop condition is true.  Entering loop body
-    while (threadTarget->right != nullptr)
+    while (threader != nullptr) {
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:373:13: note: Assuming the condition is false
-        if (threadTarget->left != nullptr)
-            ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:373:9: note: Taking false branch
-        if (threadTarget->left != nullptr)
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:376:13: note: Access to field 'left' results in a dereference of a null pointer (loaded from variable 'threader')
-        if (threader->left != nullptr)
-            ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:397:12: warning: Access to field 'left' results in a dereference of a null pointer (loaded from variable 'threadTarget') [clang-analyzer-core.NullDereference]
-    while (threadTarget->left != nullptr)
-           ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:362:5: note: Calling 'ThreadedBST::threadRecurLeft'
-    threadRecurLeft(root, threader);
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:372:11: note: Assuming the condition is false
+      if (threader->left == nullptr) {
+          ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:372:7: note: Taking false branch
+      if (threader->left == nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:376:7: note: Taking false branch
+      if (threader->right != nullptr)
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:371:5: note: Loop condition is true.  Entering loop body
+    while (threader != nullptr) {
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:397:5: note: Loop condition is true.  Entering loop body
-    while (threadTarget->left != nullptr)
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:372:11: note: Assuming the condition is false
+      if (threader->left == nullptr) {
+          ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:372:7: note: Taking false branch
+      if (threader->left == nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:376:11: note: Assuming the condition is true
+      if (threader->right != nullptr)
+          ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:376:7: note: Taking true branch
+      if (threader->right != nullptr)
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:377:9: note: Calling 'ThreadedBST::threadRecurLeft'
+        threadRecurLeft(threader, threader);
+        ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:364:3: note: Loop condition is true.  Entering loop body
+  while (threadTarget->left != nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:365:5: note: Taking true branch
+    if (threadTarget->right != nullptr)
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:399:9: note: Taking true branch
-        if (threadTarget->right != nullptr)
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:368:9: note: Assuming the condition is false
+    if (threader->right != nullptr)
         ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:402:9: note: Taking false branch
-        if (threader->right != nullptr)
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:405:9: note: Loop condition is true.  Entering loop body
-        while (threader != nullptr)
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:407:17: note: Assuming the condition is false
-            if (threader->left == nullptr)
-                ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:407:13: note: Taking false branch
-            if (threader->left == nullptr)
-            ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:412:13: note: Taking false branch
-            if (threader->right != nullptr)
-            ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:405:9: note: Loop condition is true.  Entering loop body
-        while (threader != nullptr)
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:407:17: note: Assuming the condition is false
-            if (threader->left == nullptr)
-                ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:407:13: note: Taking false branch
-            if (threader->left == nullptr)
-            ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:412:17: note: Assuming the condition is true
-            if (threader->right != nullptr)
-                ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:412:13: note: Taking true branch
-            if (threader->right != nullptr)
-            ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:413:17: note: Calling 'ThreadedBST::threadRecurLeft'
-                threadRecurLeft(threader, threader);
-                ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:397:5: note: Loop condition is true.  Entering loop body
-    while (threadTarget->left != nullptr)
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:368:5: note: Taking false branch
+    if (threader->right != nullptr)
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:399:9: note: Taking true branch
-        if (threadTarget->right != nullptr)
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:402:13: note: Assuming the condition is false
-        if (threader->right != nullptr)
-            ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:402:9: note: Taking false branch
-        if (threader->right != nullptr)
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:405:9: note: Loop condition is true.  Entering loop body
-        while (threader != nullptr)
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:407:17: note: Assuming the condition is false
-            if (threader->left == nullptr)
-                ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:407:13: note: Taking false branch
-            if (threader->left == nullptr)
-            ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:412:13: note: Taking false branch
-            if (threader->right != nullptr)
-            ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:405:9: note: Loop condition is true.  Entering loop body
-        while (threader != nullptr)
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:407:17: note: Assuming the condition is true
-            if (threader->left == nullptr)
-                ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:407:13: note: Taking true branch
-            if (threader->left == nullptr)
-            ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:410:17: note:  Execution continues on line 417
-                break;
-                ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:397:12: note: Assuming the condition is true
-    while (threadTarget->left != nullptr)
-           ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:397:5: note: Loop condition is true.  Entering loop body
-    while (threadTarget->left != nullptr)
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:371:5: note: Loop condition is true.  Entering loop body
+    while (threader != nullptr) {
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:399:13: note: Assuming pointer value is null
-        if (threadTarget->right != nullptr)
-            ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:399:13: note: Assuming the condition is false
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:399:9: note: Taking false branch
-        if (threadTarget->right != nullptr)
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:402:13: note: Assuming the condition is true
-        if (threader->right != nullptr)
-            ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:402:9: note: Taking true branch
-        if (threader->right != nullptr)
-        ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:403:29: note: Passing null pointer value via 1st parameter 'threadTarget'
-            threadRecurLeft(threadTarget->right, threader);
-                            ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:403:13: note: Calling 'ThreadedBST::threadRecurLeft'
-            threadRecurLeft(threadTarget->right, threader);
-            ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:397:12: note: Access to field 'left' results in a dereference of a null pointer (loaded from variable 'threadTarget')
-    while (threadTarget->left != nullptr)
-           ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:402:13: warning: Access to field 'right' results in a dereference of a null pointer (loaded from variable 'threader') [clang-analyzer-core.NullDereference]
-        if (threader->right != nullptr)
-            ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:360:5: note: 'threader' initialized to a null pointer value
-    TreeNode* threader = nullptr;
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:372:11: note: Assuming the condition is false
+      if (threader->left == nullptr) {
+          ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:372:7: note: Taking false branch
+      if (threader->left == nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:376:7: note: Taking false branch
+      if (threader->right != nullptr)
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:371:5: note: Loop condition is true.  Entering loop body
+    while (threader != nullptr) {
     ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:362:27: note: Passing null pointer value via 2nd parameter 'threader'
-    threadRecurLeft(root, threader);
-                          ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:362:5: note: Calling 'ThreadedBST::threadRecurLeft'
-    threadRecurLeft(root, threader);
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:397:12: note: Assuming the condition is true
-    while (threadTarget->left != nullptr)
-           ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:397:5: note: Loop condition is true.  Entering loop body
-    while (threadTarget->left != nullptr)
-    ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:399:9: note: Taking false branch
-        if (threadTarget->right != nullptr)
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:372:11: note: Assuming the condition is true
+      if (threader->left == nullptr) {
+          ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:372:7: note: Taking true branch
+      if (threader->left == nullptr) {
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:374:9: note:  Execution continues on line 380
+        break;
         ^
-/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:402:13: note: Access to field 'right' results in a dereference of a null pointer (loaded from variable 'threader')
-        if (threader->right != nullptr)
-            ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:364:10: note: Assuming the condition is true
+  while (threadTarget->left != nullptr) {
+         ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:364:3: note: Loop condition is true.  Entering loop body
+  while (threadTarget->left != nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:365:9: note: Assuming pointer value is null
+    if (threadTarget->right != nullptr)
+        ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:365:9: note: Assuming the condition is false
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:365:5: note: Taking false branch
+    if (threadTarget->right != nullptr)
+    ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:368:9: note: Assuming the condition is true
+    if (threader->right != nullptr)
+        ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:368:5: note: Taking true branch
+    if (threader->right != nullptr)
+    ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:369:23: note: Passing null pointer value via 1st parameter 'threadTarget'
+      threadRecurLeft(threadTarget->right, threader);
+                      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:369:7: note: Calling 'ThreadedBST::threadRecurLeft'
+      threadRecurLeft(threadTarget->right, threader);
+      ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:364:10: note: Access to field 'left' results in a dereference of a null pointer (loaded from variable 'threadTarget')
+  while (threadTarget->left != nullptr) {
+         ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:368:9: warning: Access to field 'right' results in a dereference of a null pointer (loaded from variable 'threader') [clang-analyzer-core.NullDereference]
+    if (threader->right != nullptr)
+        ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:333:3: note: 'threader' initialized to a null pointer value
+  TreeNode *threader = nullptr;
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:335:25: note: Passing null pointer value via 2nd parameter 'threader'
+  threadRecurLeft(root, threader);
+                        ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:335:3: note: Calling 'ThreadedBST::threadRecurLeft'
+  threadRecurLeft(root, threader);
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:364:10: note: Assuming the condition is true
+  while (threadTarget->left != nullptr) {
+         ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:364:3: note: Loop condition is true.  Entering loop body
+  while (threadTarget->left != nullptr) {
+  ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:365:5: note: Taking false branch
+    if (threadTarget->right != nullptr)
+    ^
+/home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:368:9: note: Access to field 'right' results in a dereference of a null pointer (loaded from variable 'threader')
+    if (threader->right != nullptr)
+        ^
 =====================================================
 4. clang-format does not find any formatting issues
 =====================================================
 Running clang-format on ./main.cpp
-18,23c18,23
-<     cout << "Running test1: Testing add and contains" << endl;
-<     ThreadedBST tree1(20);
-<     assert(!tree1.contains(21));
-<     tree1.add(21);
-<     assert(tree1.contains(20));
-<     cout << endl << endl;
----
->   cout << "Running test1: Testing add and contains" << endl;
->   ThreadedBST tree1(20);
->   assert(!tree1.contains(21));
->   tree1.add(21);
->   assert(tree1.contains(20));
->   cout << endl << endl;
-28,32c28,32
-<     cout << "Running test2: Testing copy constructor" << endl;
-<     ThreadedBST tree2(20);
-<     cout << endl;
-<     ThreadedBST tree3(tree2);
-<     cout << endl << endl;
----
->   cout << "Running test2: Testing copy constructor" << endl;
->   ThreadedBST tree2(20);
->   cout << endl;
->   ThreadedBST tree3(tree2);
->   cout << endl << endl;
-35,54c35,53
-< void removetest()
-< {
-<     ThreadedBST tree1;
-<     tree1.add(10);
-<     tree1.add(15);
-<     tree1.add(5);
-<     tree1.add(3);
-<     tree1.add(7);
-<     tree1.add(12);
-<     tree1.add(9);
-<     tree1.add(6);
-<     tree1.add(8);
-<     tree1.add(11);
-<     /* tree1.remove(8);
-<      assert(!tree1.contains(8));
-<      tree1.remove(12);
-<      assert(!tree1.contains(12));
-<      tree1.remove(7);
-<      assert(!tree1.contains(7));*/
-<     tree1.remove(10);
----
-> void removetest() {
->   ThreadedBST tree1;
->   tree1.add(10);
->   tree1.add(15);
->   tree1.add(5);
->   tree1.add(3);
->   tree1.add(7);
->   tree1.add(12);
->   tree1.add(9);
->   tree1.add(6);
->   tree1.add(8);
->   tree1.add(11);
->   /* tree1.remove(8);
->    assert(!tree1.contains(8));
->    tree1.remove(12);
->    assert(!tree1.contains(12));
->    tree1.remove(7);
->    assert(!tree1.contains(7));*/
->   tree1.remove(10);
-57,70c56,68
-< void threadtest()
-< {
-<     ThreadedBST tree1;
-<     tree1.add(6);
-<     tree1.add(3);
-<     tree1.add(1);
-<     tree1.add(2);
-<     tree1.add(5);
-<     tree1.add(8);
-<     tree1.add(7);
-<     tree1.add(11);
-<     tree1.add(9);
-<     tree1.add(13);
-<     tree1.thread();
----
-> void threadtest() {
->   ThreadedBST tree1;
->   tree1.add(6);
->   tree1.add(3);
->   tree1.add(1);
->   tree1.add(2);
->   tree1.add(5);
->   tree1.add(8);
->   tree1.add(7);
->   tree1.add(11);
->   tree1.add(9);
->   tree1.add(13);
->   tree1.thread();
-74,79c72,77
-<     test1();
-<     test2();
-<     removetest();
-<     threadtest();
-<     cout << endl << "Done." << endl;
-<     return 0;
----
->   test1();
->   test2();
->   removetest();
->   threadtest();
->   cout << endl << "Done." << endl;
->   return 0;
 Running clang-format on ./threadedBST.cpp
-8a9,10
-> #include "threadedBST.h"
-> #include <algorithm>
-11,12d12
-< #include <algorithm>
-< #include "threadedBST.h"
-19c19
-< ThreadedBST::ThreadedBST() : root{ nullptr }, count{ 0 } {}
----
-> ThreadedBST::ThreadedBST() : root{nullptr}, count{0} {}
-25,49c25,42
-< ThreadedBST::ThreadedBST(int n) : root{ nullptr }, count{ 0 } {  
-<     vector<int> vect1;
-<     vector<int> vect2;
-<     if(n % 2 == 1) {
-<         if(root == nullptr) {
-<             int mid = n/2 + 1;
-<             add(mid);
-<         }
-<         for(int i = 1; i <= n / 2 + 1; i++) {
-<             vect1.push_back(i);
-<         }
-<         for(int i = 1; i <= n / 2; i++) {
-<             vect2.push_back(i + ((n/2) + 1));
-<         }        
-<     } else {
-<         if(root == nullptr) {
-<             int mid = n/2;
-<             add(mid);
-<         }
-<         for(int i = 1; i <= n / 2; i++) {
-<             vect1.push_back(i);
-<         }
-<         for(int i = 1; i <= n / 2; i++) {
-<             vect2.push_back(i + (n/2));
-<         }
----
-> ThreadedBST::ThreadedBST(int n) : root{nullptr}, count{0} {
->   vector<int> vect1;
->   vector<int> vect2;
->   if (n % 2 == 1) {
->     if (root == nullptr) {
->       int mid = n / 2 + 1;
->       add(mid);
->     }
->     for (int i = 1; i <= n / 2 + 1; i++) {
->       vect1.push_back(i);
->     }
->     for (int i = 1; i <= n / 2; i++) {
->       vect2.push_back(i + ((n / 2) + 1));
->     }
->   } else {
->     if (root == nullptr) {
->       int mid = n / 2;
->       add(mid);
-51,52c44,52
-<     balancedAdd(vect1);
-<     balancedAdd(vect2);
----
->     for (int i = 1; i <= n / 2; i++) {
->       vect1.push_back(i);
->     }
->     for (int i = 1; i <= n / 2; i++) {
->       vect2.push_back(i + (n / 2));
->     }
->   }
->   balancedAdd(vect1);
->   balancedAdd(vect2);
-59,65c59,64
-<     if(tree.root == nullptr) {
-<         root = nullptr;
-<     } 
-<     else {
-<         copy(tree.root);
-<     }
-<     deleteEven(this->root);
----
->   if (tree.root == nullptr) {
->     root = nullptr;
->   } else {
->     copy(tree.root);
->   }
->   deleteEven(this->root);
-71,73c70
-< ThreadedBST::~ThreadedBST() {
-<     clear(root);
-< }
----
-> ThreadedBST::~ThreadedBST() { clear(root); }
-79,81c76,78
-< void ThreadedBST::clear(TreeNode*& Node) {
-<     if (Node->left != nullptr)
-<         clear(Node->left);
----
-> void ThreadedBST::clear(TreeNode *&Node) {
->   if (Node->left != nullptr)
->     clear(Node->left);
-83,84c80,81
-<     if (Node->right != nullptr)
-<         clear(Node->right);
----
->   if (Node->right != nullptr)
->     clear(Node->right);
-86,87c83,84
-<     delete Node;
-<     Node = nullptr;
----
->   delete Node;
->   Node = nullptr;
-93,105c90,102
-< void ThreadedBST::insert(TreeNode* node, TreeNode* newNode) {
-<     if (newNode->data < node->data && node->left != nullptr) {
-<         insert(node->left, newNode);
-<     }
-<     if (newNode->data > node->data && node->right != nullptr) {
-<         insert(node->right, newNode);
-<     }
-<     if (newNode->data < node->data && node->left == nullptr) {
-<         node->left = newNode;
-<     }
-<     if (newNode->data > node->data && node->right == nullptr) {
-<         node->right = newNode;
-<     }
----
-> void ThreadedBST::insert(TreeNode *node, TreeNode *newNode) {
->   if (newNode->data < node->data && node->left != nullptr) {
->     insert(node->left, newNode);
->   }
->   if (newNode->data > node->data && node->right != nullptr) {
->     insert(node->right, newNode);
->   }
->   if (newNode->data < node->data && node->left == nullptr) {
->     node->left = newNode;
->   }
->   if (newNode->data > node->data && node->right == nullptr) {
->     node->right = newNode;
->   }
-112,124c109,120
-<     if (contains(data)) {
-<         return false;
-<     }
-<     if (root == nullptr) {
-<         root = new TreeNode(data);
-<     }
-<     else {
-<         TreeNode* newNode = new TreeNode(data);
-<         insert(root, newNode);
-<     }
-<     count++;
-<     cout << data << ", ";
-<     return true;
----
->   if (contains(data)) {
->     return false;
->   }
->   if (root == nullptr) {
->     root = new TreeNode(data);
->   } else {
->     TreeNode *newNode = new TreeNode(data);
->     insert(root, newNode);
->   }
->   count++;
->   cout << data << ", ";
->   return true;
-131,140c127,136
-<     if(vect.size() > 0) {
-<         add(vect.at(vect.size() / 2));
-<         vect.erase(vect.begin() + vect.size()/2);
-< 
-<         vector<int> splitLow(vect.begin(), vect.begin() + vect.size()/2);
-<         vector<int> splitHigh(vect.begin() + vect.size()/2, vect.end());
-< 
-<         balancedAdd(splitLow);
-<         balancedAdd(splitHigh);
-<     }
----
->   if (vect.size() > 0) {
->     add(vect.at(vect.size() / 2));
->     vect.erase(vect.begin() + vect.size() / 2);
-> 
->     vector<int> splitLow(vect.begin(), vect.begin() + vect.size() / 2);
->     vector<int> splitHigh(vect.begin() + vect.size() / 2, vect.end());
-> 
->     balancedAdd(splitLow);
->     balancedAdd(splitHigh);
->   }
-147,192c143,167
-<     if (!contains(data)) {
-<         return false;
-<     }
-<     TreeNode* prevPtr = root;
-<     TreeNode* delPtr;
-<     if (data < root->data)
-<         delPtr = root->left;
-<     else if (data > root->data)
-<         delPtr = root->right;
-<     else
-<         delPtr = root;
-< 
-<     while (data != delPtr->data) {
-<         if (data < delPtr->data)
-<         {
-<             prevPtr = delPtr;
-<             delPtr = delPtr->left;
-<         }
-<         else if (data > delPtr->data)
-<         {
-<             prevPtr = delPtr;
-<             delPtr = delPtr->right;
-<         }
-<     }
-< 
-<     if (delPtr->left == nullptr && delPtr->right == nullptr)
-<     {
-<         if (delPtr->data < prevPtr->data)
-<             prevPtr->left = nullptr;
-<         else
-<             prevPtr->right = nullptr;
-<         delete delPtr;
-<         delPtr = nullptr;
-<     }
-<     else if (delPtr->left != nullptr && delPtr->right != nullptr)
-<     {
-<         TreeNode* inorderPointer = delPtr->right;
-<         TreeNode* prevInorderPointer = nullptr;
-<         while (inorderPointer->left != nullptr)
-<         {
-<             prevInorderPointer = inorderPointer;
-<             inorderPointer = inorderPointer->left;
-<         }
-< 
-<         removeTwoChild(prevPtr, inorderPointer, delPtr, prevInorderPointer);
-<     }
----
->   if (!contains(data)) {
->     return false;
->   }
->   TreeNode *prevPtr = root;
->   TreeNode *delPtr;
->   if (data < root->data)
->     delPtr = root->left;
->   else if (data > root->data)
->     delPtr = root->right;
->   else
->     delPtr = root;
-> 
->   while (data != delPtr->data) {
->     if (data < delPtr->data) {
->       prevPtr = delPtr;
->       delPtr = delPtr->left;
->     } else if (data > delPtr->data) {
->       prevPtr = delPtr;
->       delPtr = delPtr->right;
->     }
->   }
-> 
->   if (delPtr->left == nullptr && delPtr->right == nullptr) {
->     if (delPtr->data < prevPtr->data)
->       prevPtr->left = nullptr;
-194,195c169,177
-<     {
-<         removeOneChild(prevPtr, delPtr);
----
->       prevPtr->right = nullptr;
->     delete delPtr;
->     delPtr = nullptr;
->   } else if (delPtr->left != nullptr && delPtr->right != nullptr) {
->     TreeNode *inorderPointer = delPtr->right;
->     TreeNode *prevInorderPointer = nullptr;
->     while (inorderPointer->left != nullptr) {
->       prevInorderPointer = inorderPointer;
->       inorderPointer = inorderPointer->left;
-197,198c179,185
-<     count--;
-<     return true;
----
-> 
->     removeTwoChild(prevPtr, inorderPointer, delPtr, prevInorderPointer);
->   } else {
->     removeOneChild(prevPtr, delPtr);
->   }
->   count--;
->   return true;
-205,211c192,198
-<     add(node->data);
-<     if (node->left != nullptr) {
-<         copy(node->left);
-<     }
-<     if (node->right != nullptr) {
-<         copy(node->right);
-<     }
----
->   add(node->data);
->   if (node->left != nullptr) {
->     copy(node->left);
->   }
->   if (node->right != nullptr) {
->     copy(node->right);
->   }
-218,228c205,215
-<     if (node->left != nullptr) {
-<         deleteEven(node->left);
-<     }
-<     if (node->right != nullptr) {
-<         deleteEven(node->right);
-<     }
-< 
-<     if (node->data % 2 == 0) {
-<         remove(node->data);
-<         cout << endl << "Deleting " << node->data;
-<     }
----
->   if (node->left != nullptr) {
->     deleteEven(node->left);
->   }
->   if (node->right != nullptr) {
->     deleteEven(node->right);
->   }
-> 
->   if (node->data % 2 == 0) {
->     remove(node->data);
->     cout << endl << "Deleting " << node->data;
->   }
-234,247c221,234
-< void ThreadedBST::removeOneChild(TreeNode* prevPtr, TreeNode* delPtr)
-< {
-<     if (prevPtr->data < delPtr->data)
-<     {
-<         if (delPtr->left != nullptr)
-<             prevPtr->right = delPtr->left;
-< 
-<         else if (delPtr->right != nullptr)
-<             prevPtr->right = delPtr->right;
-<     }
-<     else if (prevPtr->data > delPtr->data)
-<     {
-<         if (delPtr->left != nullptr)
-<             prevPtr->left = delPtr->left;
----
-> void ThreadedBST::removeOneChild(TreeNode *prevPtr, TreeNode *delPtr) {
->   if (prevPtr->data < delPtr->data) {
->     if (delPtr->left != nullptr)
->       prevPtr->right = delPtr->left;
-> 
->     else if (delPtr->right != nullptr)
->       prevPtr->right = delPtr->right;
->   } else if (prevPtr->data > delPtr->data) {
->     if (delPtr->left != nullptr)
->       prevPtr->left = delPtr->left;
-> 
->     else if (delPtr->right != nullptr)
->       prevPtr->left = delPtr->right;
->   }
-249,255c236,237
-<         else if (delPtr->right != nullptr)
-<             prevPtr->left = delPtr->right;
-< 
-<     }
-< 
-<     delete delPtr;
-<     delPtr = nullptr;
----
->   delete delPtr;
->   delPtr = nullptr;
-261,268c243,250
-< void ThreadedBST::removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNode* delPtr, TreeNode* prevInorderPointer)
-< {
-<     if (prevInorderPointer == nullptr)             //Used for if there is no pointer left after moving right once (right once is inorder)
-<     {
-<         inorderPtr->left = delPtr->left;
-< 
-<         if (inorderPtr->data < prevPtr->data)
-<             prevPtr->left = inorderPtr;
----
-> void ThreadedBST::removeTwoChild(TreeNode *prevPtr, TreeNode *inorderPtr,
->                                  TreeNode *delPtr,
->                                  TreeNode *prevInorderPointer) {
->   if (prevInorderPointer ==
->       nullptr) // Used for if there is no pointer left after moving right once
->                // (right once is inorder)
->   {
->     inorderPtr->left = delPtr->left;
-270,271c252,253
-<         else if (inorderPtr->data > prevPtr->data)
-<             prevPtr->right = inorderPtr;
----
->     if (inorderPtr->data < prevPtr->data)
->       prevPtr->left = inorderPtr;
-273,290c255,256
-<         delete delPtr;
-<         delPtr = nullptr;
-<     }
-< 
-<     else if (delPtr == root)
-<     {
-<         if (inorderPtr->right != nullptr)
-<             prevInorderPointer->left = inorderPtr->right;
-<         else
-<             prevInorderPointer->left = nullptr;
-< 
-<         inorderPtr->left = delPtr->left;
-<         inorderPtr->right = delPtr->right;
-< 
-<         delete delPtr;
-<         delPtr = nullptr;
-< 
-<         root = inorderPtr;
----
->     else if (inorderPtr->data > prevPtr->data)
->       prevPtr->right = inorderPtr;
-292c258,260
-<     }
----
->     delete delPtr;
->     delPtr = nullptr;
->   }
-293a262,264
->   else if (delPtr == root) {
->     if (inorderPtr->right != nullptr)
->       prevInorderPointer->left = inorderPtr->right;
-295,299c266
-<     {
-<         if (inorderPtr->right != nullptr)
-<             prevInorderPointer->left = inorderPtr->right;
-<         else
-<             prevInorderPointer->left = nullptr;
----
->       prevInorderPointer->left = nullptr;
-301,302c268,269
-<         inorderPtr->left = delPtr->left;
-<         inorderPtr->right = delPtr->right;
----
->     inorderPtr->left = delPtr->left;
->     inorderPtr->right = delPtr->right;
-304,305c271,272
-<         if (inorderPtr->data < prevPtr->data)
-<             prevPtr->left = inorderPtr;
----
->     delete delPtr;
->     delPtr = nullptr;
-307,308c274
-<         else if (inorderPtr->data > prevPtr->data)
-<             prevPtr->right = inorderPtr;
----
->     root = inorderPtr;
-309a276
->   }
-310a278,282
->   else {
->     if (inorderPtr->right != nullptr)
->       prevInorderPointer->left = inorderPtr->right;
->     else
->       prevInorderPointer->left = nullptr;
-312,314c284,285
-<         delete delPtr;
-<         delPtr = nullptr;
-<     }
----
->     inorderPtr->left = delPtr->left;
->     inorderPtr->right = delPtr->right;
-315a287,288
->     if (inorderPtr->data < prevPtr->data)
->       prevPtr->left = inorderPtr;
-316a290,291
->     else if (inorderPtr->data > prevPtr->data)
->       prevPtr->right = inorderPtr;
-317a293,295
->     delete delPtr;
->     delPtr = nullptr;
->   }
-320c298
-< /** Contains: Boolean method that checks whether a particular value exists 
----
-> /** Contains: Boolean method that checks whether a particular value exists
-325,326c303,304
-<     if (root == nullptr)
-<         return false;
----
->   if (root == nullptr)
->     return false;
-328c306
-<     TreeNode* curPtr = root;
----
->   TreeNode *curPtr = root;
-330,331c308
-<     while (curPtr->data != target)
-<     {
----
->   while (curPtr->data != target) {
-333,347c310,314
-<         if (target < curPtr->data)
-<         {
-<             if (curPtr->left == nullptr)
-<                 return false;
-<             else
-<                 curPtr = curPtr->left;
-<         }
-< 
-<         else if (target > curPtr->data)
-<         {
-<             if (curPtr->right == nullptr)
-<                 return false;
-<             else
-<                 curPtr = curPtr->right;
-<         }
----
->     if (target < curPtr->data) {
->       if (curPtr->left == nullptr)
->         return false;
->       else
->         curPtr = curPtr->left;
-350c317,323
-<     return true;
----
->     else if (target > curPtr->data) {
->       if (curPtr->right == nullptr)
->         return false;
->       else
->         curPtr = curPtr->right;
->     }
->   }
-351a325
->   return true;
-357,362c331,335
-< void ThreadedBST::thread() 
-< {
-<     TreeNode* threadTarget = root;
-<     TreeNode* threader = nullptr;
-<     threadRecurRight(root, threader);
-<     threadRecurLeft(root, threader);
----
-> void ThreadedBST::thread() {
->   TreeNode *threadTarget = root;
->   TreeNode *threader = nullptr;
->   threadRecurRight(root, threader);
->   threadRecurLeft(root, threader);
-368,369c341
-< void ThreadedBST::threadRecurRight(TreeNode* threadTarget, TreeNode* threader)
-< {
----
-> void ThreadedBST::threadRecurRight(TreeNode *threadTarget, TreeNode *threader) {
-371,417c343,378
-<     while (threadTarget->right != nullptr)
-<     {
-<         if (threadTarget->left != nullptr)
-<             threader = threadTarget->left;
-< 
-<         if (threader->left != nullptr)
-<             threadRecurRight(threadTarget->left, threader);
-< 
-<         while (threader != nullptr)
-<         {
-<             if (threader->right == nullptr)
-<             {
-<                 threader->rightThread = threadTarget;
-<                 break;
-<             }
-<             if (threader->left != nullptr)
-<                 threadRecurRight(threader, threader);
-<             threader = threader->right;
-< 
-<         }
-<         threadTarget = threadTarget->right;
-<     }
-< }
-< 
-< void ThreadedBST::threadRecurLeft(TreeNode* threadTarget, TreeNode* threader)
-< {
-<     while (threadTarget->left != nullptr)
-<     {
-<         if (threadTarget->right != nullptr)
-<             threader = threadTarget->right;
-< 
-<         if (threader->right != nullptr)
-<             threadRecurLeft(threadTarget->right, threader);
-< 
-<         while (threader != nullptr)
-<         {
-<             if (threader->left == nullptr)
-<             {
-<                 threader->leftThread = threadTarget;
-<                 break;
-<             }
-<             if (threader->right != nullptr)
-<                 threadRecurLeft(threader, threader);
-<             threader = threader->left;
-< 
-<         }
-<         threadTarget = threadTarget->left;
----
->   while (threadTarget->right != nullptr) {
->     if (threadTarget->left != nullptr)
->       threader = threadTarget->left;
-> 
->     if (threader->left != nullptr)
->       threadRecurRight(threadTarget->left, threader);
-> 
->     while (threader != nullptr) {
->       if (threader->right == nullptr) {
->         threader->rightThread = threadTarget;
->         break;
->       }
->       if (threader->left != nullptr)
->         threadRecurRight(threader, threader);
->       threader = threader->right;
->     }
->     threadTarget = threadTarget->right;
->   }
-> }
-> 
-> void ThreadedBST::threadRecurLeft(TreeNode *threadTarget, TreeNode *threader) {
->   while (threadTarget->left != nullptr) {
->     if (threadTarget->right != nullptr)
->       threader = threadTarget->right;
-> 
->     if (threader->right != nullptr)
->       threadRecurLeft(threadTarget->right, threader);
-> 
->     while (threader != nullptr) {
->       if (threader->left == nullptr) {
->         threader->leftThread = threadTarget;
->         break;
->       }
->       if (threader->right != nullptr)
->         threadRecurLeft(threader, threader);
->       threader = threader->left;
-418a380,381
->     threadTarget = threadTarget->left;
->   }
-424,426c387
-< void ThreadedBST::inorder() const {
-< 
-< }
----
-> void ThreadedBST::inorder() const {}
-431,433c392
-< int ThreadedBST::getHeight() {
-<     return heightHelper(root);
-< }
----
-> int ThreadedBST::getHeight() { return heightHelper(root); }
-440,444c399,403
-<     if(node == nullptr) {
-<         return 0;
-<     } else {
-<         return 1 + max(heightHelper(node->left), heightHelper(node->right));
-<     }
----
->   if (node == nullptr) {
->     return 0;
->   } else {
->     return 1 + max(heightHelper(node->left), heightHelper(node->right));
->   }
-450,452c409
-< int ThreadedBST::getCount() const {
-<     return count;
-< }
-\ No newline at end of file
----
-> int ThreadedBST::getCount() const { return count; }
-\ No newline at end of file
 =====================================================
 5. No memory leaks using g++
 =====================================================
 =====================================================
 6. No memory leaks using valgrind, look for "definitely lost" 
 =====================================================
-==14158== Memcheck, a memory error detector
-==14158== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==14158== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==14158== Command: ./a.out
-==14158== Parent PID: 13980
-==14158== 
-==14158== Invalid read of size 4
-==14158==    at 0x401C9E: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:227)
-==14158==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:222)
-==14158==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:219)
-==14158==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:219)
-==14158==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:219)
-==14158==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:65)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158==  Address 0x5b0d040 is 16 bytes inside a block of size 40 free'd
-==14158==    at 0x4C2B51D: operator delete(void*) (vg_replace_malloc.c:586)
-==14158==    by 0x401AE7: ThreadedBST::remove(int) (threadedBST.cpp:178)
-==14158==    by 0x401C7A: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:226)
-==14158==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:222)
-==14158==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:219)
-==14158==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:219)
-==14158==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:219)
-==14158==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:65)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158==  Block was alloc'd at
-==14158==    at 0x4C2A593: operator new(unsigned long) (vg_replace_malloc.c:344)
-==14158==    by 0x401667: ThreadedBST::add(int) (threadedBST.cpp:119)
-==14158==    by 0x401BB8: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:205)
-==14158==    by 0x401BFE: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:210)
-==14158==    by 0x401BDA: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:207)
-==14158==    by 0x401BDA: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:207)
-==14158==    by 0x401BDA: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:207)
-==14158==    by 0x401462: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:63)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158== 
-==14158== Invalid read of size 4
-==14158==    at 0x401C9E: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:227)
-==14158==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:222)
-==14158==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:219)
-==14158==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:65)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158==  Address 0x5b0d190 is 16 bytes inside a block of size 40 free'd
-==14158==    at 0x4C2B51D: operator delete(void*) (vg_replace_malloc.c:586)
-==14158==    by 0x401DF4: ThreadedBST::removeTwoChild(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*) (threadedBST.cpp:273)
-==14158==    by 0x401B61: ThreadedBST::remove(int) (threadedBST.cpp:191)
-==14158==    by 0x401C7A: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:226)
-==14158==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:222)
-==14158==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:219)
-==14158==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:65)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158==  Block was alloc'd at
-==14158==    at 0x4C2A593: operator new(unsigned long) (vg_replace_malloc.c:344)
-==14158==    by 0x401667: ThreadedBST::add(int) (threadedBST.cpp:119)
-==14158==    by 0x401BB8: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:205)
-==14158==    by 0x401BFE: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:210)
-==14158==    by 0x401BDA: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:207)
-==14158==    by 0x401462: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:63)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158== 
-==14158== Invalid read of size 4
-==14158==    at 0x401C9E: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:227)
-==14158==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:219)
-==14158==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:65)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158==  Address 0x5b0cef0 is 16 bytes inside a block of size 40 free'd
-==14158==    at 0x4C2B51D: operator delete(void*) (vg_replace_malloc.c:586)
-==14158==    by 0x401F13: ThreadedBST::removeTwoChild(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*) (threadedBST.cpp:312)
-==14158==    by 0x401B61: ThreadedBST::remove(int) (threadedBST.cpp:191)
-==14158==    by 0x401C7A: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:226)
-==14158==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:219)
-==14158==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:65)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158==  Block was alloc'd at
-==14158==    at 0x4C2A593: operator new(unsigned long) (vg_replace_malloc.c:344)
-==14158==    by 0x401667: ThreadedBST::add(int) (threadedBST.cpp:119)
-==14158==    by 0x401BB8: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:205)
-==14158==    by 0x401BDA: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:207)
-==14158==    by 0x401462: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:63)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158== 
-==14158== Invalid read of size 4
-==14158==    at 0x401C9E: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:227)
-==14158==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:222)
-==14158==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:219)
-==14158==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:222)
-==14158==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:65)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158==  Address 0x5b0d4a0 is 16 bytes inside a block of size 40 free'd
-==14158==    at 0x4C2B51D: operator delete(void*) (vg_replace_malloc.c:586)
-==14158==    by 0x401D6A: ThreadedBST::removeOneChild(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*) (threadedBST.cpp:254)
-==14158==    by 0x401B7A: ThreadedBST::remove(int) (threadedBST.cpp:195)
-==14158==    by 0x401C7A: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:226)
-==14158==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:222)
-==14158==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:219)
-==14158==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:222)
-==14158==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:65)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158==  Block was alloc'd at
-==14158==    at 0x4C2A593: operator new(unsigned long) (vg_replace_malloc.c:344)
-==14158==    by 0x401667: ThreadedBST::add(int) (threadedBST.cpp:119)
-==14158==    by 0x401BB8: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:205)
-==14158==    by 0x401BFE: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:210)
-==14158==    by 0x401BDA: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:207)
-==14158==    by 0x401BFE: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:210)
-==14158==    by 0x401462: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:63)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158== 
-==14158== Invalid read of size 4
-==14158==    at 0x401C9E: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:227)
-==14158==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:222)
-==14158==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:222)
-==14158==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:222)
-==14158==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:65)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158==  Address 0x5b0d660 is 16 bytes inside a block of size 40 free'd
-==14158==    at 0x4C2B51D: operator delete(void*) (vg_replace_malloc.c:586)
-==14158==    by 0x401D6A: ThreadedBST::removeOneChild(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*) (threadedBST.cpp:254)
-==14158==    by 0x401B7A: ThreadedBST::remove(int) (threadedBST.cpp:195)
-==14158==    by 0x401C7A: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:226)
-==14158==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:222)
-==14158==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:222)
-==14158==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:222)
-==14158==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:65)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158==  Block was alloc'd at
-==14158==    at 0x4C2A593: operator new(unsigned long) (vg_replace_malloc.c:344)
-==14158==    by 0x401667: ThreadedBST::add(int) (threadedBST.cpp:119)
-==14158==    by 0x401BB8: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:205)
-==14158==    by 0x401BFE: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:210)
-==14158==    by 0x401BFE: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:210)
-==14158==    by 0x401BFE: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:210)
-==14158==    by 0x401462: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:63)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158== 
-==14158== Invalid read of size 4
-==14158==    at 0x401C9E: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:227)
-==14158==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:222)
-==14158==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:222)
-==14158==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:65)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158==  Address 0x5b0d580 is 16 bytes inside a block of size 40 free'd
-==14158==    at 0x4C2B51D: operator delete(void*) (vg_replace_malloc.c:586)
-==14158==    by 0x401DF4: ThreadedBST::removeTwoChild(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*) (threadedBST.cpp:273)
-==14158==    by 0x401B61: ThreadedBST::remove(int) (threadedBST.cpp:191)
-==14158==    by 0x401C7A: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:226)
-==14158==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:222)
-==14158==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:222)
-==14158==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:65)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158==  Block was alloc'd at
-==14158==    at 0x4C2A593: operator new(unsigned long) (vg_replace_malloc.c:344)
-==14158==    by 0x401667: ThreadedBST::add(int) (threadedBST.cpp:119)
-==14158==    by 0x401BB8: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:205)
-==14158==    by 0x401BFE: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:210)
-==14158==    by 0x401BFE: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:210)
-==14158==    by 0x401462: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:63)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158== 
-==14158== Invalid read of size 4
-==14158==    at 0x401C9E: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:227)
-==14158==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:222)
-==14158==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:65)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158==  Address 0x5b0d2e0 is 16 bytes inside a block of size 40 free'd
-==14158==    at 0x4C2B51D: operator delete(void*) (vg_replace_malloc.c:586)
-==14158==    by 0x401F13: ThreadedBST::removeTwoChild(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*) (threadedBST.cpp:312)
-==14158==    by 0x401B61: ThreadedBST::remove(int) (threadedBST.cpp:191)
-==14158==    by 0x401C7A: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:226)
-==14158==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:222)
-==14158==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:65)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158==  Block was alloc'd at
-==14158==    at 0x4C2A593: operator new(unsigned long) (vg_replace_malloc.c:344)
-==14158==    by 0x401667: ThreadedBST::add(int) (threadedBST.cpp:119)
-==14158==    by 0x401BB8: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:205)
-==14158==    by 0x401BFE: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:210)
-==14158==    by 0x401462: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:63)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158== 
-==14158== Invalid read of size 4
-==14158==    at 0x401C9E: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:227)
-==14158==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:65)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158==  Address 0x5b0ce80 is 16 bytes inside a block of size 40 free'd
-==14158==    at 0x4C2B51D: operator delete(void*) (vg_replace_malloc.c:586)
-==14158==    by 0x401E66: ThreadedBST::removeTwoChild(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*) (threadedBST.cpp:287)
-==14158==    by 0x401B61: ThreadedBST::remove(int) (threadedBST.cpp:191)
-==14158==    by 0x401C7A: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:226)
-==14158==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:65)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158==  Block was alloc'd at
-==14158==    at 0x4C2A593: operator new(unsigned long) (vg_replace_malloc.c:344)
-==14158==    by 0x401644: ThreadedBST::add(int) (threadedBST.cpp:116)
-==14158==    by 0x401BB8: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:205)
-==14158==    by 0x401462: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:63)
-==14158==    by 0x400DFA: test2() (main.cpp:31)
-==14158==    by 0x401069: main (main.cpp:75)
-==14158== 
-==14158== 
-==14158== HEAP SUMMARY:
-==14158==     in use at exit: 0 bytes in 0 blocks
-==14158==   total heap usage: 178 allocs, 178 frees, 77,208 bytes allocated
-==14158== 
-==14158== All heap blocks were freed -- no leaks are possible
-==14158== 
-==14158== For lists of detected and suppressed errors, rerun with: -s
-==14158== ERROR SUMMARY: 10 errors from 8 contexts (suppressed: 0 from 0)
+==15799== Memcheck, a memory error detector
+==15799== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==15799== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==15799== Command: ./a.out
+==15799== Parent PID: 15633
+==15799== 
+==15799== Invalid read of size 4
+==15799==    at 0x401C9E: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:214)
+==15799==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:209)
+==15799==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:206)
+==15799==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:206)
+==15799==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:206)
+==15799==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:64)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799==  Address 0x5b0d040 is 16 bytes inside a block of size 40 free'd
+==15799==    at 0x4C2B51D: operator delete(void*) (vg_replace_malloc.c:586)
+==15799==    by 0x401AE7: ThreadedBST::remove(int) (threadedBST.cpp:170)
+==15799==    by 0x401C7A: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:213)
+==15799==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:209)
+==15799==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:206)
+==15799==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:206)
+==15799==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:206)
+==15799==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:64)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799==  Block was alloc'd at
+==15799==    at 0x4C2A593: operator new(unsigned long) (vg_replace_malloc.c:344)
+==15799==    by 0x401667: ThreadedBST::add(int) (threadedBST.cpp:115)
+==15799==    by 0x401BB8: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:192)
+==15799==    by 0x401BFE: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:197)
+==15799==    by 0x401BDA: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:194)
+==15799==    by 0x401BDA: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:194)
+==15799==    by 0x401BDA: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:194)
+==15799==    by 0x401462: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:62)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799== 
+==15799== Invalid read of size 4
+==15799==    at 0x401C9E: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:214)
+==15799==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:209)
+==15799==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:206)
+==15799==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:64)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799==  Address 0x5b0d190 is 16 bytes inside a block of size 40 free'd
+==15799==    at 0x4C2B51D: operator delete(void*) (vg_replace_malloc.c:586)
+==15799==    by 0x401DF4: ThreadedBST::removeTwoChild(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*) (threadedBST.cpp:258)
+==15799==    by 0x401B61: ThreadedBST::remove(int) (threadedBST.cpp:180)
+==15799==    by 0x401C7A: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:213)
+==15799==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:209)
+==15799==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:206)
+==15799==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:64)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799==  Block was alloc'd at
+==15799==    at 0x4C2A593: operator new(unsigned long) (vg_replace_malloc.c:344)
+==15799==    by 0x401667: ThreadedBST::add(int) (threadedBST.cpp:115)
+==15799==    by 0x401BB8: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:192)
+==15799==    by 0x401BFE: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:197)
+==15799==    by 0x401BDA: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:194)
+==15799==    by 0x401462: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:62)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799== 
+==15799== Invalid read of size 4
+==15799==    at 0x401C9E: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:214)
+==15799==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:206)
+==15799==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:64)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799==  Address 0x5b0cef0 is 16 bytes inside a block of size 40 free'd
+==15799==    at 0x4C2B51D: operator delete(void*) (vg_replace_malloc.c:586)
+==15799==    by 0x401F13: ThreadedBST::removeTwoChild(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*) (threadedBST.cpp:293)
+==15799==    by 0x401B61: ThreadedBST::remove(int) (threadedBST.cpp:180)
+==15799==    by 0x401C7A: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:213)
+==15799==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:206)
+==15799==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:64)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799==  Block was alloc'd at
+==15799==    at 0x4C2A593: operator new(unsigned long) (vg_replace_malloc.c:344)
+==15799==    by 0x401667: ThreadedBST::add(int) (threadedBST.cpp:115)
+==15799==    by 0x401BB8: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:192)
+==15799==    by 0x401BDA: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:194)
+==15799==    by 0x401462: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:62)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799== 
+==15799== Invalid read of size 4
+==15799==    at 0x401C9E: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:214)
+==15799==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:209)
+==15799==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:206)
+==15799==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:209)
+==15799==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:64)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799==  Address 0x5b0d4a0 is 16 bytes inside a block of size 40 free'd
+==15799==    at 0x4C2B51D: operator delete(void*) (vg_replace_malloc.c:586)
+==15799==    by 0x401D6A: ThreadedBST::removeOneChild(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*) (threadedBST.cpp:236)
+==15799==    by 0x401B7A: ThreadedBST::remove(int) (threadedBST.cpp:182)
+==15799==    by 0x401C7A: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:213)
+==15799==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:209)
+==15799==    by 0x401C33: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:206)
+==15799==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:209)
+==15799==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:64)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799==  Block was alloc'd at
+==15799==    at 0x4C2A593: operator new(unsigned long) (vg_replace_malloc.c:344)
+==15799==    by 0x401667: ThreadedBST::add(int) (threadedBST.cpp:115)
+==15799==    by 0x401BB8: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:192)
+==15799==    by 0x401BFE: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:197)
+==15799==    by 0x401BDA: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:194)
+==15799==    by 0x401BFE: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:197)
+==15799==    by 0x401462: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:62)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799== 
+==15799== Invalid read of size 4
+==15799==    at 0x401C9E: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:214)
+==15799==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:209)
+==15799==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:209)
+==15799==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:209)
+==15799==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:64)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799==  Address 0x5b0d660 is 16 bytes inside a block of size 40 free'd
+==15799==    at 0x4C2B51D: operator delete(void*) (vg_replace_malloc.c:586)
+==15799==    by 0x401D6A: ThreadedBST::removeOneChild(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*) (threadedBST.cpp:236)
+==15799==    by 0x401B7A: ThreadedBST::remove(int) (threadedBST.cpp:182)
+==15799==    by 0x401C7A: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:213)
+==15799==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:209)
+==15799==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:209)
+==15799==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:209)
+==15799==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:64)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799==  Block was alloc'd at
+==15799==    at 0x4C2A593: operator new(unsigned long) (vg_replace_malloc.c:344)
+==15799==    by 0x401667: ThreadedBST::add(int) (threadedBST.cpp:115)
+==15799==    by 0x401BB8: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:192)
+==15799==    by 0x401BFE: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:197)
+==15799==    by 0x401BFE: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:197)
+==15799==    by 0x401BFE: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:197)
+==15799==    by 0x401462: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:62)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799== 
+==15799== Invalid read of size 4
+==15799==    at 0x401C9E: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:214)
+==15799==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:209)
+==15799==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:209)
+==15799==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:64)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799==  Address 0x5b0d580 is 16 bytes inside a block of size 40 free'd
+==15799==    at 0x4C2B51D: operator delete(void*) (vg_replace_malloc.c:586)
+==15799==    by 0x401DF4: ThreadedBST::removeTwoChild(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*) (threadedBST.cpp:258)
+==15799==    by 0x401B61: ThreadedBST::remove(int) (threadedBST.cpp:180)
+==15799==    by 0x401C7A: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:213)
+==15799==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:209)
+==15799==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:209)
+==15799==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:64)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799==  Block was alloc'd at
+==15799==    at 0x4C2A593: operator new(unsigned long) (vg_replace_malloc.c:344)
+==15799==    by 0x401667: ThreadedBST::add(int) (threadedBST.cpp:115)
+==15799==    by 0x401BB8: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:192)
+==15799==    by 0x401BFE: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:197)
+==15799==    by 0x401BFE: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:197)
+==15799==    by 0x401462: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:62)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799== 
+==15799== Invalid read of size 4
+==15799==    at 0x401C9E: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:214)
+==15799==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:209)
+==15799==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:64)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799==  Address 0x5b0d2e0 is 16 bytes inside a block of size 40 free'd
+==15799==    at 0x4C2B51D: operator delete(void*) (vg_replace_malloc.c:586)
+==15799==    by 0x401F13: ThreadedBST::removeTwoChild(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*) (threadedBST.cpp:293)
+==15799==    by 0x401B61: ThreadedBST::remove(int) (threadedBST.cpp:180)
+==15799==    by 0x401C7A: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:213)
+==15799==    by 0x401C57: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:209)
+==15799==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:64)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799==  Block was alloc'd at
+==15799==    at 0x4C2A593: operator new(unsigned long) (vg_replace_malloc.c:344)
+==15799==    by 0x401667: ThreadedBST::add(int) (threadedBST.cpp:115)
+==15799==    by 0x401BB8: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:192)
+==15799==    by 0x401BFE: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:197)
+==15799==    by 0x401462: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:62)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799== 
+==15799== Invalid read of size 4
+==15799==    at 0x401C9E: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:214)
+==15799==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:64)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799==  Address 0x5b0ce80 is 16 bytes inside a block of size 40 free'd
+==15799==    at 0x4C2B51D: operator delete(void*) (vg_replace_malloc.c:586)
+==15799==    by 0x401E66: ThreadedBST::removeTwoChild(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*) (threadedBST.cpp:271)
+==15799==    by 0x401B61: ThreadedBST::remove(int) (threadedBST.cpp:180)
+==15799==    by 0x401C7A: ThreadedBST::deleteEven(ThreadedBST::TreeNode*) (threadedBST.cpp:213)
+==15799==    by 0x401478: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:64)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799==  Block was alloc'd at
+==15799==    at 0x4C2A593: operator new(unsigned long) (vg_replace_malloc.c:344)
+==15799==    by 0x401644: ThreadedBST::add(int) (threadedBST.cpp:113)
+==15799==    by 0x401BB8: ThreadedBST::copy(ThreadedBST::TreeNode*) (threadedBST.cpp:192)
+==15799==    by 0x401462: ThreadedBST::ThreadedBST(ThreadedBST const&) (threadedBST.cpp:62)
+==15799==    by 0x400DFA: test2() (main.cpp:31)
+==15799==    by 0x401069: main (main.cpp:73)
+==15799== 
+==15799== 
+==15799== HEAP SUMMARY:
+==15799==     in use at exit: 0 bytes in 0 blocks
+==15799==   total heap usage: 178 allocs, 178 frees, 77,208 bytes allocated
+==15799== 
+==15799== All heap blocks were freed -- no leaks are possible
+==15799== 
+==15799== For lists of detected and suppressed errors, rerun with: -s
+==15799== ERROR SUMMARY: 10 errors from 8 contexts (suppressed: 0 from 0)
 =====================================================
 7. Tests have full code coverage
 =====================================================
@@ -1637,27 +866,27 @@ Name                                                                            
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ThreadedBST::ThreadedBST()                                                                                                          1       0 100.00%         1       0 100.00%
 ThreadedBST::ThreadedBST(int)                                                                                                      20       9  55.00%        29      10  65.52%
-ThreadedBST::ThreadedBST(ThreadedBST const&)                                                                                        4       1  75.00%         9       2  77.78%
-ThreadedBST::~ThreadedBST()                                                                                                         1       0 100.00%         3       0 100.00%
+ThreadedBST::ThreadedBST(ThreadedBST const&)                                                                                        4       1  75.00%         8       1  87.50%
+ThreadedBST::~ThreadedBST()                                                                                                         1       0 100.00%         1       0 100.00%
 ThreadedBST::clear(ThreadedBST::TreeNode*&)                                                                                         5       0 100.00%        10       0 100.00%
 ThreadedBST::insert(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*)                                                                17       0 100.00%        14       0 100.00%
-ThreadedBST::add(int)                                                                                                               7       0 100.00%        15       0 100.00%
+ThreadedBST::add(int)                                                                                                               7       0 100.00%        14       0 100.00%
 ThreadedBST::balancedAdd(std::vector<int, std::allocator<int> >)                                                                    3       0 100.00%        12       0 100.00%
-ThreadedBST::remove(int)                                                                                                           32       2  93.75%        54       3  94.44%
+ThreadedBST::remove(int)                                                                                                           32       2  93.75%        45       3  93.33%
 ThreadedBST::copy(ThreadedBST::TreeNode*)                                                                                           5       0 100.00%         9       0 100.00%
 ThreadedBST::deleteEven(ThreadedBST::TreeNode*)                                                                                     7       0 100.00%        13       0 100.00%
-ThreadedBST::removeOneChild(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*)                                                        16       8  50.00%        22       9  59.09%
-ThreadedBST::removeTwoChild(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*)        23       3  86.96%        57       3  94.74%
-ThreadedBST::contains(int)                                                                                                         18       0 100.00%        29       0 100.00%
+ThreadedBST::removeOneChild(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*)                                                        16       8  50.00%        18       6  66.67%
+ThreadedBST::removeTwoChild(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*, ThreadedBST::TreeNode*)        23       3  86.96%        52       3  94.23%
+ThreadedBST::contains(int)                                                                                                         18       0 100.00%        25       0 100.00%
 ThreadedBST::thread()                                                                                                               1       0 100.00%         6       0 100.00%
-ThreadedBST::threadRecurRight(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*)                                                      14       0 100.00%        25       0 100.00%
-ThreadedBST::threadRecurLeft(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*)                                                       14       0 100.00%        24       0 100.00%
-ThreadedBST::inorder() const                                                                                                        1       1   0.00%         3       3   0.00%
-ThreadedBST::getHeight()                                                                                                            1       1   0.00%         3       3   0.00%
+ThreadedBST::threadRecurRight(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*)                                                      14       0 100.00%        21       0 100.00%
+ThreadedBST::threadRecurLeft(ThreadedBST::TreeNode*, ThreadedBST::TreeNode*)                                                       14       0 100.00%        20       0 100.00%
+ThreadedBST::inorder() const                                                                                                        1       1   0.00%         1       1   0.00%
+ThreadedBST::getHeight()                                                                                                            1       1   0.00%         1       1   0.00%
 ThreadedBST::heightHelper(ThreadedBST::TreeNode*) const                                                                             4       4   0.00%         7       7   0.00%
-ThreadedBST::getCount() const                                                                                                       1       1   0.00%         3       3   0.00%
+ThreadedBST::getCount() const                                                                                                       1       1   0.00%         1       1   0.00%
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-TOTAL                                                                                                                             195      30  84.62%       348      43  87.64%
+TOTAL                                                                                                                             195      30  84.62%       308      33  89.29%
 /home/NETID/mikec87/C++/CSS342/ass5-threadedBST/main.cpp:
     1|       |/**
     2|       | * Michael Cho
@@ -1676,69 +905,67 @@ TOTAL                                                                           
    15|       |
    16|       |// Testing constructor, add, and contains methods.
    17|      1|void test1() {
-   18|      1|    cout << "Running test1: Testing add and contains" << endl;
-   19|      1|    ThreadedBST tree1(20);
-   20|      1|    assert(!tree1.contains(21));
-   21|      1|    tree1.add(21);
-   22|      1|    assert(tree1.contains(20));
-   23|      1|    cout << endl << endl;
+   18|      1|  cout << "Running test1: Testing add and contains" << endl;
+   19|      1|  ThreadedBST tree1(20);
+   20|      1|  assert(!tree1.contains(21));
+   21|      1|  tree1.add(21);
+   22|      1|  assert(tree1.contains(20));
+   23|      1|  cout << endl << endl;
    24|      1|}
    25|       |
    26|       |// Testing copy constuctor
    27|      1|void test2() {
-   28|      1|    cout << "Running test2: Testing copy constructor" << endl;
-   29|      1|    ThreadedBST tree2(20);
-   30|      1|    cout << endl;
-   31|      1|    ThreadedBST tree3(tree2);
-   32|      1|    cout << endl << endl;
+   28|      1|  cout << "Running test2: Testing copy constructor" << endl;
+   29|      1|  ThreadedBST tree2(20);
+   30|      1|  cout << endl;
+   31|      1|  ThreadedBST tree3(tree2);
+   32|      1|  cout << endl << endl;
    33|      1|}
    34|       |
-   35|       |void removetest()
-   36|      1|{
-   37|      1|    ThreadedBST tree1;
-   38|      1|    tree1.add(10);
-   39|      1|    tree1.add(15);
-   40|      1|    tree1.add(5);
-   41|      1|    tree1.add(3);
-   42|      1|    tree1.add(7);
-   43|      1|    tree1.add(12);
-   44|      1|    tree1.add(9);
-   45|      1|    tree1.add(6);
-   46|      1|    tree1.add(8);
-   47|      1|    tree1.add(11);
-   48|      1|    /* tree1.remove(8);
-   49|      1|     assert(!tree1.contains(8));
-   50|      1|     tree1.remove(12);
-   51|      1|     assert(!tree1.contains(12));
-   52|      1|     tree1.remove(7);
-   53|      1|     assert(!tree1.contains(7));*/
-   54|      1|    tree1.remove(10);
-   55|      1|}
-   56|       |
-   57|       |void threadtest()
-   58|      1|{
-   59|      1|    ThreadedBST tree1;
-   60|      1|    tree1.add(6);
-   61|      1|    tree1.add(3);
-   62|      1|    tree1.add(1);
-   63|      1|    tree1.add(2);
-   64|      1|    tree1.add(5);
-   65|      1|    tree1.add(8);
-   66|      1|    tree1.add(7);
-   67|      1|    tree1.add(11);
-   68|      1|    tree1.add(9);
-   69|      1|    tree1.add(13);
-   70|      1|    tree1.thread();
-   71|      1|}
-   72|       |
-   73|      1|int main() {
-   74|      1|    test1();
-   75|      1|    test2();
-   76|      1|    removetest();
-   77|      1|    threadtest();
-   78|      1|    cout << endl << "Done." << endl;
-   79|      1|    return 0;
-   80|      1|}
+   35|      1|void removetest() {
+   36|      1|  ThreadedBST tree1;
+   37|      1|  tree1.add(10);
+   38|      1|  tree1.add(15);
+   39|      1|  tree1.add(5);
+   40|      1|  tree1.add(3);
+   41|      1|  tree1.add(7);
+   42|      1|  tree1.add(12);
+   43|      1|  tree1.add(9);
+   44|      1|  tree1.add(6);
+   45|      1|  tree1.add(8);
+   46|      1|  tree1.add(11);
+   47|      1|  /* tree1.remove(8);
+   48|      1|   assert(!tree1.contains(8));
+   49|      1|   tree1.remove(12);
+   50|      1|   assert(!tree1.contains(12));
+   51|      1|   tree1.remove(7);
+   52|      1|   assert(!tree1.contains(7));*/
+   53|      1|  tree1.remove(10);
+   54|      1|}
+   55|       |
+   56|      1|void threadtest() {
+   57|      1|  ThreadedBST tree1;
+   58|      1|  tree1.add(6);
+   59|      1|  tree1.add(3);
+   60|      1|  tree1.add(1);
+   61|      1|  tree1.add(2);
+   62|      1|  tree1.add(5);
+   63|      1|  tree1.add(8);
+   64|      1|  tree1.add(7);
+   65|      1|  tree1.add(11);
+   66|      1|  tree1.add(9);
+   67|      1|  tree1.add(13);
+   68|      1|  tree1.thread();
+   69|      1|}
+   70|       |
+   71|      1|int main() {
+   72|      1|  test1();
+   73|      1|  test2();
+   74|      1|  removetest();
+   75|      1|  threadtest();
+   76|      1|  cout << endl << "Done." << endl;
+   77|      1|  return 0;
+   78|      1|}
 
 /home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.cpp:
     1|       |/**
@@ -1749,450 +976,407 @@ TOTAL                                                                           
     6|       | * **************ADD DESCRIPTION***********
     7|       | * */
     8|       |
-    9|       |#include <iostream>
-   10|       |#include <vector>
-   11|       |#include <algorithm>
-   12|       |#include "threadedBST.h"
+    9|       |#include "threadedBST.h"
+   10|       |#include <algorithm>
+   11|       |#include <iostream>
+   12|       |#include <vector>
    13|       |
    14|       |using namespace std;
    15|       |
    16|       |/** Constructor: Default constructor
    17|       |Precondition: None
    18|       |Postcondition: Creates an empty ThreadedBST tree obj*/
-   19|      2|ThreadedBST::ThreadedBST() : root{ nullptr }, count{ 0 } {}
+   19|      2|ThreadedBST::ThreadedBST() : root{nullptr}, count{0} {}
    20|       |
    21|       |/** Constructor: Constructor that takes an integer n as input and
    22|       |creates a tree with n nodes
    23|       |Precondition: None
    24|       |Postcondition: Creates a ThreadedBST tree obj with n nodes*/
-   25|      2|ThreadedBST::ThreadedBST(int n) : root{ nullptr }, count{ 0 } {  
-   26|      2|    vector<int> vect1;
-   27|      2|    vector<int> vect2;
-   28|      2|    if(n % 2 == 1) {
-   29|      0|        if(root == nullptr) {
-   30|      0|            int mid = n/2 + 1;
-   31|      0|            add(mid);
-   32|      0|        }
-   33|      0|        for(int i = 1; i <= n / 2 + 1; i++) {
-   34|      0|            vect1.push_back(i);
-   35|      0|        }
-   36|      0|        for(int i = 1; i <= n / 2; i++) {
-   37|      0|            vect2.push_back(i + ((n/2) + 1));
-   38|      0|        }        
-   39|      2|    } else {
-   40|      2|        if(root == nullptr) {
-   41|      2|            int mid = n/2;
-   42|      2|            add(mid);
-   43|      2|        }
-   44|     22|        for(int i = 1; i <= n / 2; i++) {
-   45|     20|            vect1.push_back(i);
-   46|     20|        }
-   47|     22|        for(int i = 1; i <= n / 2; i++) {
-   48|     20|            vect2.push_back(i + (n/2));
-   49|     20|        }
-   50|      2|    }
-   51|      2|    balancedAdd(vect1);
-   52|      2|    balancedAdd(vect2);
+   25|      2|ThreadedBST::ThreadedBST(int n) : root{nullptr}, count{0} {
+   26|      2|  vector<int> vect1;
+   27|      2|  vector<int> vect2;
+   28|      2|  if (n % 2 == 1) {
+   29|      0|    if (root == nullptr) {
+   30|      0|      int mid = n / 2 + 1;
+   31|      0|      add(mid);
+   32|      0|    }
+   33|      0|    for (int i = 1; i <= n / 2 + 1; i++) {
+   34|      0|      vect1.push_back(i);
+   35|      0|    }
+   36|      0|    for (int i = 1; i <= n / 2; i++) {
+   37|      0|      vect2.push_back(i + ((n / 2) + 1));
+   38|      0|    }
+   39|      2|  } else {
+   40|      2|    if (root == nullptr) {
+   41|      2|      int mid = n / 2;
+   42|      2|      add(mid);
+   43|      2|    }
+   44|     22|    for (int i = 1; i <= n / 2; i++) {
+   45|     20|      vect1.push_back(i);
+   46|     20|    }
+   47|     22|    for (int i = 1; i <= n / 2; i++) {
+   48|     20|      vect2.push_back(i + (n / 2));
+   49|     20|    }
+   50|      2|  }
+   51|      2|  balancedAdd(vect1);
+   52|      2|  balancedAdd(vect2);
    53|      2|}
    54|       |
    55|       |/** Constructor: Constructor copy
    56|       |Precondition: None
    57|       |Postcondition: Creates a copy of a Threaded BST tree*/
    58|      1|ThreadedBST::ThreadedBST(const ThreadedBST &tree) : root{nullptr}, count{0} {
-   59|      1|    if(tree.root == nullptr) {
-   60|      0|        root = nullptr;
-   61|      0|    } 
-   62|      1|    else {
-   63|      1|        copy(tree.root);
-   64|      1|    }
-   65|      1|    deleteEven(this->root);
-   66|      1|}
-   67|       |
-   68|       |/** Destructor: Calls the clear method
-   69|       |Precondition: ThreadedBST tree object must exist
-   70|       |Postcondition: Deletes the ThreadedBST tree object with the clear method*/
-   71|      5|ThreadedBST::~ThreadedBST() {
-   72|      5|    clear(root);
-   73|      5|}
-   74|       |
-   75|       |/** Clear: Deletes each dynamically created TreeNode in the ThreadedBST
-   76|       |tree object and sets each one to nullptr
-   77|       |Precondition: ThreadedBST tree object must exist
-   78|       |Postcondition: Deletes all TreeNodes*/
-   79|     70|void ThreadedBST::clear(TreeNode*& Node) {
-   80|     70|    if (Node->left != nullptr)
-   81|     29|        clear(Node->left);
+   59|      1|  if (tree.root == nullptr) {
+   60|      0|    root = nullptr;
+   61|      1|  } else {
+   62|      1|    copy(tree.root);
+   63|      1|  }
+   64|      1|  deleteEven(this->root);
+   65|      1|}
+   66|       |
+   67|       |/** Destructor: Calls the clear method
+   68|       |Precondition: ThreadedBST tree object must exist
+   69|       |Postcondition: Deletes the ThreadedBST tree object with the clear method*/
+   70|      5|ThreadedBST::~ThreadedBST() { clear(root); }
+   71|       |
+   72|       |/** Clear: Deletes each dynamically created TreeNode in the ThreadedBST
+   73|       |tree object and sets each one to nullptr
+   74|       |Precondition: ThreadedBST tree object must exist
+   75|       |Postcondition: Deletes all TreeNodes*/
+   76|     70|void ThreadedBST::clear(TreeNode *&Node) {
+   77|     70|  if (Node->left != nullptr)
+   78|     29|    clear(Node->left);
+   79|     70|
+   80|     70|  if (Node->right != nullptr)
+   81|     36|    clear(Node->right);
    82|     70|
-   83|     70|    if (Node->right != nullptr)
-   84|     36|        clear(Node->right);
-   85|     70|
-   86|     70|    delete Node;
-   87|     70|    Node = nullptr;
-   88|     70|}
-   89|       |
-   90|       |/** Insert: ************
-   91|       |Precondition: ThreadedBST tree object must exist
-   92|       |Postcondition:*********** */
-   93|    206|void ThreadedBST::insert(TreeNode* node, TreeNode* newNode) {
-   94|    206|    if (newNode->data < node->data && node->left != nullptr) {
-   95|     64|        insert(node->left, newNode);
-   96|     64|    }
-   97|    206|    if (newNode->data > node->data && node->right != nullptr) {
-   98|     66|        insert(node->right, newNode);
-   99|     66|    }
-  100|    206|    if (newNode->data < node->data && node->left == nullptr) {
-  101|     34|        node->left = newNode;
-  102|     34|    }
-  103|    206|    if (newNode->data > node->data && node->right == nullptr) {
-  104|     42|        node->right = newNode;
-  105|     42|    }
-  106|    206|}
-  107|       |
-  108|       |/** Add: ************
-  109|       |Precondition: ThreadedBST tree object must exist
-  110|       |Postcondition: Returns true add is successful*/
-  111|     83|bool ThreadedBST::add(int data) {
-  112|     83|    if (contains(data)) {
-  113|      2|        return false;
-  114|      2|    }
-  115|     81|    if (root == nullptr) {
-  116|      5|        root = new TreeNode(data);
-  117|      5|    }
-  118|     76|    else {
-  119|     76|        TreeNode* newNode = new TreeNode(data);
-  120|     76|        insert(root, newNode);
-  121|     76|    }
-  122|     81|    count++;
-  123|     81|    cout << data << ", ";
-  124|     81|    return true;
-  125|     81|}
-  126|       |
-  127|       |/** Balanced Add: ************
-  128|       |Precondition: ThreadedBST tree object must exist
-  129|       |Postcondition: *************/
-  130|     84|void ThreadedBST::balancedAdd(vector<int> vect) {
-  131|     84|    if(vect.size() > 0) {
-  132|     40|        add(vect.at(vect.size() / 2));
-  133|     40|        vect.erase(vect.begin() + vect.size()/2);
-  134|     40|
-  135|     40|        vector<int> splitLow(vect.begin(), vect.begin() + vect.size()/2);
-  136|     40|        vector<int> splitHigh(vect.begin() + vect.size()/2, vect.end());
-  137|     40|
-  138|     40|        balancedAdd(splitLow);
-  139|     40|        balancedAdd(splitHigh);
-  140|     40|    }
-  141|     84|}
-  142|       |
-  143|       |/** Remove: ************
-  144|       |Precondition: ThreadedBST tree object must exist
-  145|       |Postcondition: Returns true removed successfully*/
-  146|     11|bool ThreadedBST::remove(int data) {
-  147|     11|    if (!contains(data)) {
-  148|      0|        return false;
-  149|      0|    }
-  150|     11|    TreeNode* prevPtr = root;
-  151|     11|    TreeNode* delPtr;
-  152|     11|    if (data < root->data)
-  153|      4|        delPtr = root->left;
-  154|      7|    else if (data > root->data)
-  155|      5|        delPtr = root->right;
-  156|      2|    else
-  157|      2|        delPtr = root;
-  158|     11|
-  159|     25|    while (data != delPtr->data) {
-  160|     14|        if (data < delPtr->data)
-  161|      6|        {
-  162|      6|            prevPtr = delPtr;
-  163|      6|            delPtr = delPtr->left;
-  164|      6|        }
-  165|      8|        else if (data > delPtr->data)
-  166|      8|        {
-  167|      8|            prevPtr = delPtr;
-  168|      8|            delPtr = delPtr->right;
-  169|      8|        }
-  170|     14|    }
-  171|     11|
-  172|     11|    if (delPtr->left == nullptr && delPtr->right == nullptr)
-  173|      2|    {
-  174|      2|        if (delPtr->data < prevPtr->data)
-  175|      0|            prevPtr->left = nullptr;
-  176|      2|        else
-  177|      2|            prevPtr->right = nullptr;
-  178|      2|        delete delPtr;
-  179|      2|        delPtr = nullptr;
-  180|      2|    }
-  181|      9|    else if (delPtr->left != nullptr && delPtr->right != nullptr)
-  182|      6|    {
-  183|      6|        TreeNode* inorderPointer = delPtr->right;
-  184|      6|        TreeNode* prevInorderPointer = nullptr;
-  185|     12|        while (inorderPointer->left != nullptr)
-  186|      6|        {
-  187|      6|            prevInorderPointer = inorderPointer;
-  188|      6|            inorderPointer = inorderPointer->left;
-  189|      6|        }
-  190|      6|
-  191|      6|        removeTwoChild(prevPtr, inorderPointer, delPtr, prevInorderPointer);
-  192|      6|    }
-  193|      3|    else
-  194|      3|    {
-  195|      3|        removeOneChild(prevPtr, delPtr);
-  196|      3|    }
-  197|     11|    count--;
-  198|     11|    return true;
-  199|     11|}
+   83|     70|  delete Node;
+   84|     70|  Node = nullptr;
+   85|     70|}
+   86|       |
+   87|       |/** Insert: ************
+   88|       |Precondition: ThreadedBST tree object must exist
+   89|       |Postcondition:*********** */
+   90|    206|void ThreadedBST::insert(TreeNode *node, TreeNode *newNode) {
+   91|    206|  if (newNode->data < node->data && node->left != nullptr) {
+   92|     64|    insert(node->left, newNode);
+   93|     64|  }
+   94|    206|  if (newNode->data > node->data && node->right != nullptr) {
+   95|     66|    insert(node->right, newNode);
+   96|     66|  }
+   97|    206|  if (newNode->data < node->data && node->left == nullptr) {
+   98|     34|    node->left = newNode;
+   99|     34|  }
+  100|    206|  if (newNode->data > node->data && node->right == nullptr) {
+  101|     42|    node->right = newNode;
+  102|     42|  }
+  103|    206|}
+  104|       |
+  105|       |/** Add: ************
+  106|       |Precondition: ThreadedBST tree object must exist
+  107|       |Postcondition: Returns true add is successful*/
+  108|     83|bool ThreadedBST::add(int data) {
+  109|     83|  if (contains(data)) {
+  110|      2|    return false;
+  111|      2|  }
+  112|     81|  if (root == nullptr) {
+  113|      5|    root = new TreeNode(data);
+  114|     76|  } else {
+  115|     76|    TreeNode *newNode = new TreeNode(data);
+  116|     76|    insert(root, newNode);
+  117|     76|  }
+  118|     81|  count++;
+  119|     81|  cout << data << ", ";
+  120|     81|  return true;
+  121|     81|}
+  122|       |
+  123|       |/** Balanced Add: ************
+  124|       |Precondition: ThreadedBST tree object must exist
+  125|       |Postcondition: *************/
+  126|     84|void ThreadedBST::balancedAdd(vector<int> vect) {
+  127|     84|  if (vect.size() > 0) {
+  128|     40|    add(vect.at(vect.size() / 2));
+  129|     40|    vect.erase(vect.begin() + vect.size() / 2);
+  130|     40|
+  131|     40|    vector<int> splitLow(vect.begin(), vect.begin() + vect.size() / 2);
+  132|     40|    vector<int> splitHigh(vect.begin() + vect.size() / 2, vect.end());
+  133|     40|
+  134|     40|    balancedAdd(splitLow);
+  135|     40|    balancedAdd(splitHigh);
+  136|     40|  }
+  137|     84|}
+  138|       |
+  139|       |/** Remove: ************
+  140|       |Precondition: ThreadedBST tree object must exist
+  141|       |Postcondition: Returns true removed successfully*/
+  142|     11|bool ThreadedBST::remove(int data) {
+  143|     11|  if (!contains(data)) {
+  144|      0|    return false;
+  145|      0|  }
+  146|     11|  TreeNode *prevPtr = root;
+  147|     11|  TreeNode *delPtr;
+  148|     11|  if (data < root->data)
+  149|      4|    delPtr = root->left;
+  150|      7|  else if (data > root->data)
+  151|      5|    delPtr = root->right;
+  152|      2|  else
+  153|      2|    delPtr = root;
+  154|     11|
+  155|     25|  while (data != delPtr->data) {
+  156|     14|    if (data < delPtr->data) {
+  157|      6|      prevPtr = delPtr;
+  158|      6|      delPtr = delPtr->left;
+  159|      8|    } else if (data > delPtr->data) {
+  160|      8|      prevPtr = delPtr;
+  161|      8|      delPtr = delPtr->right;
+  162|      8|    }
+  163|     14|  }
+  164|     11|
+  165|     11|  if (delPtr->left == nullptr && delPtr->right == nullptr) {
+  166|      2|    if (delPtr->data < prevPtr->data)
+  167|      0|      prevPtr->left = nullptr;
+  168|      2|    else
+  169|      2|      prevPtr->right = nullptr;
+  170|      2|    delete delPtr;
+  171|      2|    delPtr = nullptr;
+  172|      9|  } else if (delPtr->left != nullptr && delPtr->right != nullptr) {
+  173|      6|    TreeNode *inorderPointer = delPtr->right;
+  174|      6|    TreeNode *prevInorderPointer = nullptr;
+  175|     12|    while (inorderPointer->left != nullptr) {
+  176|      6|      prevInorderPointer = inorderPointer;
+  177|      6|      inorderPointer = inorderPointer->left;
+  178|      6|    }
+  179|      6|
+  180|      6|    removeTwoChild(prevPtr, inorderPointer, delPtr, prevInorderPointer);
+  181|      6|  } else {
+  182|      3|    removeOneChild(prevPtr, delPtr);
+  183|      3|  }
+  184|     11|  count--;
+  185|     11|  return true;
+  186|     11|}
+  187|       |
+  188|       |/** Copy: ************
+  189|       |Precondition: ThreadedBST tree object must exist
+  190|       |Postcondition: *************/
+  191|     20|void ThreadedBST::copy(TreeNode *node) {
+  192|     20|  add(node->data);
+  193|     20|  if (node->left != nullptr) {
+  194|      8|    copy(node->left);
+  195|      8|  }
+  196|     20|  if (node->right != nullptr) {
+  197|     11|    copy(node->right);
+  198|     11|  }
+  199|     20|}
   200|       |
-  201|       |/** Copy: ************
+  201|       |/** Delete Even: ************
   202|       |Precondition: ThreadedBST tree object must exist
   203|       |Postcondition: *************/
-  204|     20|void ThreadedBST::copy(TreeNode *node) {
-  205|     20|    add(node->data);
-  206|     20|    if (node->left != nullptr) {
-  207|      8|        copy(node->left);
-  208|      8|    }
-  209|     20|    if (node->right != nullptr) {
-  210|     11|        copy(node->right);
-  211|     11|    }
-  212|     20|}
-  213|       |
-  214|       |/** Delete Even: ************
-  215|       |Precondition: ThreadedBST tree object must exist
-  216|       |Postcondition: *************/
-  217|     20|void ThreadedBST::deleteEven(TreeNode *node) {
-  218|     20|    if (node->left != nullptr) {
-  219|      8|        deleteEven(node->left);
-  220|      8|    }
-  221|     20|    if (node->right != nullptr) {
-  222|     11|        deleteEven(node->right);
-  223|     11|    }
-  224|     20|
-  225|     20|    if (node->data % 2 == 0) {
-  226|     10|        remove(node->data);
-  227|     10|        cout << endl << "Deleting " << node->data;
-  228|     10|    }
-  229|     20|}
-  230|       |
-  231|       |/** Remove One Child: ************
-  232|       |Precondition: ************
-  233|       |Postcondition: *************/
-  234|       |void ThreadedBST::removeOneChild(TreeNode* prevPtr, TreeNode* delPtr)
-  235|      3|{
-  236|      3|    if (prevPtr->data < delPtr->data)
-  237|      3|    {
-  238|      3|        if (delPtr->left != nullptr)
-  239|      1|            prevPtr->right = delPtr->left;
-  240|      2|
-  241|      2|        else if (delPtr->right != nullptr)
-  242|      2|            prevPtr->right = delPtr->right;
-  243|      3|    }
-  244|      0|    else if (prevPtr->data > delPtr->data)
-  245|      0|    {
-  246|      0|        if (delPtr->left != nullptr)
-  247|      0|            prevPtr->left = delPtr->left;
-  248|      0|
-  249|      0|        else if (delPtr->right != nullptr)
-  250|      0|            prevPtr->left = delPtr->right;
-  251|      0|
-  252|      0|    }
-  253|      3|
-  254|      3|    delete delPtr;
-  255|      3|    delPtr = nullptr;
-  256|      3|}
-  257|       |
-  258|       |/** Remove Two Child: ************
-  259|       |Precondition: ************
-  260|       |Postcondition: *************/
-  261|       |void ThreadedBST::removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNode* delPtr, TreeNode* prevInorderPointer)
-  262|      6|{
-  263|      6|    if (prevInorderPointer == nullptr)             //Used for if there is no pointer left after moving right once (right once is inorder)
-  264|      2|    {
-  265|      2|        inorderPtr->left = delPtr->left;
-  266|      2|
-  267|      2|        if (inorderPtr->data < prevPtr->data)
-  268|      0|            prevPtr->left = inorderPtr;
-  269|      2|
-  270|      2|        else if (inorderPtr->data > prevPtr->data)
-  271|      2|            prevPtr->right = inorderPtr;
-  272|      2|
-  273|      2|        delete delPtr;
-  274|      2|        delPtr = nullptr;
-  275|      2|    }
-  276|      4|
-  277|      4|    else if (delPtr == root)
-  278|      2|    {
-  279|      2|        if (inorderPtr->right != nullptr)
-  280|      0|            prevInorderPointer->left = inorderPtr->right;
-  281|      2|        else
-  282|      2|            prevInorderPointer->left = nullptr;
+  204|     20|void ThreadedBST::deleteEven(TreeNode *node) {
+  205|     20|  if (node->left != nullptr) {
+  206|      8|    deleteEven(node->left);
+  207|      8|  }
+  208|     20|  if (node->right != nullptr) {
+  209|     11|    deleteEven(node->right);
+  210|     11|  }
+  211|     20|
+  212|     20|  if (node->data % 2 == 0) {
+  213|     10|    remove(node->data);
+  214|     10|    cout << endl << "Deleting " << node->data;
+  215|     10|  }
+  216|     20|}
+  217|       |
+  218|       |/** Remove One Child: ************
+  219|       |Precondition: ************
+  220|       |Postcondition: *************/
+  221|      3|void ThreadedBST::removeOneChild(TreeNode *prevPtr, TreeNode *delPtr) {
+  222|      3|  if (prevPtr->data < delPtr->data) {
+  223|      3|    if (delPtr->left != nullptr)
+  224|      1|      prevPtr->right = delPtr->left;
+  225|      2|
+  226|      2|    else if (delPtr->right != nullptr)
+  227|      2|      prevPtr->right = delPtr->right;
+  228|      3|  } else if (prevPtr->data > delPtr->data) {
+  229|      0|    if (delPtr->left != nullptr)
+  230|      0|      prevPtr->left = delPtr->left;
+  231|      0|
+  232|      0|    else if (delPtr->right != nullptr)
+  233|      0|      prevPtr->left = delPtr->right;
+  234|      0|  }
+  235|      3|
+  236|      3|  delete delPtr;
+  237|      3|  delPtr = nullptr;
+  238|      3|}
+  239|       |
+  240|       |/** Remove Two Child: ************
+  241|       |Precondition: ************
+  242|       |Postcondition: *************/
+  243|       |void ThreadedBST::removeTwoChild(TreeNode *prevPtr, TreeNode *inorderPtr,
+  244|       |                                 TreeNode *delPtr,
+  245|      6|                                 TreeNode *prevInorderPointer) {
+  246|      6|  if (prevInorderPointer ==
+  247|      6|      nullptr) // Used for if there is no pointer left after moving right once
+  248|      2|               // (right once is inorder)
+  249|      2|  {
+  250|      2|    inorderPtr->left = delPtr->left;
+  251|      2|
+  252|      2|    if (inorderPtr->data < prevPtr->data)
+  253|      0|      prevPtr->left = inorderPtr;
+  254|      2|
+  255|      2|    else if (inorderPtr->data > prevPtr->data)
+  256|      2|      prevPtr->right = inorderPtr;
+  257|      2|
+  258|      2|    delete delPtr;
+  259|      2|    delPtr = nullptr;
+  260|      2|  }
+  261|      4|
+  262|      4|  else if (delPtr == root) {
+  263|      2|    if (inorderPtr->right != nullptr)
+  264|      0|      prevInorderPointer->left = inorderPtr->right;
+  265|      2|    else
+  266|      2|      prevInorderPointer->left = nullptr;
+  267|      2|
+  268|      2|    inorderPtr->left = delPtr->left;
+  269|      2|    inorderPtr->right = delPtr->right;
+  270|      2|
+  271|      2|    delete delPtr;
+  272|      2|    delPtr = nullptr;
+  273|      2|
+  274|      2|    root = inorderPtr;
+  275|      2|
+  276|      2|  }
+  277|      2|
+  278|      2|  else {
+  279|      2|    if (inorderPtr->right != nullptr)
+  280|      0|      prevInorderPointer->left = inorderPtr->right;
+  281|      2|    else
+  282|      2|      prevInorderPointer->left = nullptr;
   283|      2|
-  284|      2|        inorderPtr->left = delPtr->left;
-  285|      2|        inorderPtr->right = delPtr->right;
+  284|      2|    inorderPtr->left = delPtr->left;
+  285|      2|    inorderPtr->right = delPtr->right;
   286|      2|
-  287|      2|        delete delPtr;
-  288|      2|        delPtr = nullptr;
-  289|      2|
-  290|      2|        root = inorderPtr;
-  291|      2|
-  292|      2|    }
-  293|      2|
-  294|      2|    else
-  295|      2|    {
-  296|      2|        if (inorderPtr->right != nullptr)
-  297|      0|            prevInorderPointer->left = inorderPtr->right;
-  298|      2|        else
-  299|      2|            prevInorderPointer->left = nullptr;
-  300|      2|
-  301|      2|        inorderPtr->left = delPtr->left;
-  302|      2|        inorderPtr->right = delPtr->right;
-  303|      2|
-  304|      2|        if (inorderPtr->data < prevPtr->data)
-  305|      1|            prevPtr->left = inorderPtr;
-  306|      1|
-  307|      1|        else if (inorderPtr->data > prevPtr->data)
-  308|      1|            prevPtr->right = inorderPtr;
-  309|      2|
-  310|      2|
-  311|      2|
-  312|      2|        delete delPtr;
-  313|      2|        delPtr = nullptr;
-  314|      2|    }
-  315|      6|
-  316|      6|
-  317|      6|
-  318|      6|}
-  319|       |
-  320|       |/** Contains: Boolean method that checks whether a particular value exists 
-  321|       |within the ThreadedBST tree
-  322|       |Precondition: ThreadedBST tree object must exist
-  323|       |Postcondition: Returns true if the value is found*/
-  324|     96|bool ThreadedBST::contains(int target) {
-  325|     96|    if (root == nullptr)
-  326|      5|        return false;
-  327|     91|
-  328|     91|    TreeNode* curPtr = root;
-  329|     91|
-  330|    250|    while (curPtr->data != target)
-  331|    236|    {
-  332|    236|
-  333|    236|        if (target < curPtr->data)
-  334|    108|        {
-  335|    108|            if (curPtr->left == nullptr)
-  336|     34|                return false;
-  337|     74|            else
-  338|     74|                curPtr = curPtr->left;
-  339|    108|        }
-  340|    128|
-  341|    128|        else if (target > curPtr->data)
-  342|    128|        {
-  343|    128|            if (curPtr->right == nullptr)
-  344|     43|                return false;
-  345|     85|            else
-  346|     85|                curPtr = curPtr->right;
-  347|    128|        }
-  348|    236|    }
-  349|     91|
-  350|     91|    return true;
-  351|     91|
-  352|     91|}
-  353|       |
-  354|       |/** Thread: ************
-  355|       |Precondition: ************
-  356|       |Postcondition: *************/
-  357|       |void ThreadedBST::thread() 
-  358|      1|{
-  359|      1|    TreeNode* threadTarget = root;
-  360|      1|    TreeNode* threader = nullptr;
-  361|      1|    threadRecurRight(root, threader);
-  362|      1|    threadRecurLeft(root, threader);
-  363|      1|}
-  364|       |
-  365|       |/** Thread Recursion: ************
-  366|       |Precondition: ************
-  367|       |Postcondition: *************/
-  368|       |void ThreadedBST::threadRecurRight(TreeNode* threadTarget, TreeNode* threader)
-  369|      3|{
-  370|      3|
-  371|      8|    while (threadTarget->right != nullptr)
-  372|      5|    {
-  373|      5|        if (threadTarget->left != nullptr)
-  374|      5|            threader = threadTarget->left;
-  375|      5|
-  376|      5|        if (threader->left != nullptr)
-  377|      1|            threadRecurRight(threadTarget->left, threader);
-  378|      5|
-  379|      8|        while (threader != nullptr)
-  380|      8|        {
-  381|      8|            if (threader->right == nullptr)
-  382|      5|            {
-  383|      5|                threader->rightThread = threadTarget;
-  384|      5|                break;
-  385|      5|            }
-  386|      3|            if (threader->left != nullptr)
-  387|      1|                threadRecurRight(threader, threader);
-  388|      3|            threader = threader->right;
-  389|      3|
-  390|      3|        }
-  391|      5|        threadTarget = threadTarget->right;
-  392|      5|    }
-  393|      3|}
-  394|       |
-  395|       |void ThreadedBST::threadRecurLeft(TreeNode* threadTarget, TreeNode* threader)
-  396|      7|{
-  397|     15|    while (threadTarget->left != nullptr)
-  398|      8|    {
-  399|      8|        if (threadTarget->right != nullptr)
-  400|      8|            threader = threadTarget->right;
-  401|      8|
-  402|      8|        if (threader->right != nullptr)
-  403|      3|            threadRecurLeft(threadTarget->right, threader);
-  404|      8|
-  405|     11|        while (threader != nullptr)
-  406|     11|        {
-  407|     11|            if (threader->left == nullptr)
-  408|      8|            {
-  409|      8|                threader->leftThread = threadTarget;
-  410|      8|                break;
-  411|      8|            }
-  412|      3|            if (threader->right != nullptr)
-  413|      3|                threadRecurLeft(threader, threader);
-  414|      3|            threader = threader->left;
-  415|      3|
-  416|      3|        }
-  417|      8|        threadTarget = threadTarget->left;
-  418|      8|    }
-  419|      7|}
-  420|       |
-  421|       |/** In Order: ************
-  422|       |Precondition: ************
-  423|       |Postcondition: *************/
-  424|      0|void ThreadedBST::inorder() const {
-  425|      0|
-  426|      0|}
-  427|       |
-  428|       |/** Get Height: Calls the height helper method and returns the height
-  429|       |Precondition:ThreadedBST tree object must exist
-  430|       |Postcondition: Returns the height of the tree*/
-  431|      0|int ThreadedBST::getHeight() {
-  432|      0|    return heightHelper(root);
-  433|      0|}
-  434|       |
-  435|       |/** Height Helper: Recursive method that traverses through the tree and
-  436|       |tallys up the height of the tree
-  437|       |Precondition:ThreadedBST tree object must exist
-  438|       |Postcondition: Returns the height of the tree*/
-  439|      0|int ThreadedBST::heightHelper(TreeNode *node) const {
-  440|      0|    if(node == nullptr) {
-  441|      0|        return 0;
-  442|      0|    } else {
-  443|      0|        return 1 + max(heightHelper(node->left), heightHelper(node->right));
-  444|      0|    }
-  445|      0|}
-  446|       |
-  447|       |/** Get Count: Returns the TreeNode count of the ThreadedBST tree
-  448|       |Precondition:ThreadedBST tree object must exist
-  449|       |Postcondition: Returns int count*/
-  450|      0|int ThreadedBST::getCount() const {
-  451|      0|    return count;
-  452|      0|}
+  287|      2|    if (inorderPtr->data < prevPtr->data)
+  288|      1|      prevPtr->left = inorderPtr;
+  289|      1|
+  290|      1|    else if (inorderPtr->data > prevPtr->data)
+  291|      1|      prevPtr->right = inorderPtr;
+  292|      2|
+  293|      2|    delete delPtr;
+  294|      2|    delPtr = nullptr;
+  295|      2|  }
+  296|      6|}
+  297|       |
+  298|       |/** Contains: Boolean method that checks whether a particular value exists
+  299|       |within the ThreadedBST tree
+  300|       |Precondition: ThreadedBST tree object must exist
+  301|       |Postcondition: Returns true if the value is found*/
+  302|     96|bool ThreadedBST::contains(int target) {
+  303|     96|  if (root == nullptr)
+  304|      5|    return false;
+  305|     91|
+  306|     91|  TreeNode *curPtr = root;
+  307|     91|
+  308|    250|  while (curPtr->data != target) {
+  309|    236|
+  310|    236|    if (target < curPtr->data) {
+  311|    108|      if (curPtr->left == nullptr)
+  312|     34|        return false;
+  313|     74|      else
+  314|     74|        curPtr = curPtr->left;
+  315|    108|    }
+  316|    128|
+  317|    128|    else if (target > curPtr->data) {
+  318|    128|      if (curPtr->right == nullptr)
+  319|     43|        return false;
+  320|     85|      else
+  321|     85|        curPtr = curPtr->right;
+  322|    128|    }
+  323|    236|  }
+  324|     91|
+  325|     91|  return true;
+  326|     91|}
+  327|       |
+  328|       |/** Thread: ************
+  329|       |Precondition: ************
+  330|       |Postcondition: *************/
+  331|      1|void ThreadedBST::thread() {
+  332|      1|  TreeNode *threadTarget = root;
+  333|      1|  TreeNode *threader = nullptr;
+  334|      1|  threadRecurRight(root, threader);
+  335|      1|  threadRecurLeft(root, threader);
+  336|      1|}
+  337|       |
+  338|       |/** Thread Recursion: ************
+  339|       |Precondition: ************
+  340|       |Postcondition: *************/
+  341|      3|void ThreadedBST::threadRecurRight(TreeNode *threadTarget, TreeNode *threader) {
+  342|      3|
+  343|      8|  while (threadTarget->right != nullptr) {
+  344|      5|    if (threadTarget->left != nullptr)
+  345|      5|      threader = threadTarget->left;
+  346|      5|
+  347|      5|    if (threader->left != nullptr)
+  348|      1|      threadRecurRight(threadTarget->left, threader);
+  349|      5|
+  350|      8|    while (threader != nullptr) {
+  351|      8|      if (threader->right == nullptr) {
+  352|      5|        threader->rightThread = threadTarget;
+  353|      5|        break;
+  354|      5|      }
+  355|      3|      if (threader->left != nullptr)
+  356|      1|        threadRecurRight(threader, threader);
+  357|      3|      threader = threader->right;
+  358|      3|    }
+  359|      5|    threadTarget = threadTarget->right;
+  360|      5|  }
+  361|      3|}
+  362|       |
+  363|      7|void ThreadedBST::threadRecurLeft(TreeNode *threadTarget, TreeNode *threader) {
+  364|     15|  while (threadTarget->left != nullptr) {
+  365|      8|    if (threadTarget->right != nullptr)
+  366|      8|      threader = threadTarget->right;
+  367|      8|
+  368|      8|    if (threader->right != nullptr)
+  369|      3|      threadRecurLeft(threadTarget->right, threader);
+  370|      8|
+  371|     11|    while (threader != nullptr) {
+  372|     11|      if (threader->left == nullptr) {
+  373|      8|        threader->leftThread = threadTarget;
+  374|      8|        break;
+  375|      8|      }
+  376|      3|      if (threader->right != nullptr)
+  377|      3|        threadRecurLeft(threader, threader);
+  378|      3|      threader = threader->left;
+  379|      3|    }
+  380|      8|    threadTarget = threadTarget->left;
+  381|      8|  }
+  382|      7|}
+  383|       |
+  384|       |/** In Order: ************
+  385|       |Precondition: ************
+  386|       |Postcondition: *************/
+  387|      0|void ThreadedBST::inorder() const {}
+  388|       |
+  389|       |/** Get Height: Calls the height helper method and returns the height
+  390|       |Precondition:ThreadedBST tree object must exist
+  391|       |Postcondition: Returns the height of the tree*/
+  392|      0|int ThreadedBST::getHeight() { return heightHelper(root); }
+  393|       |
+  394|       |/** Height Helper: Recursive method that traverses through the tree and
+  395|       |tallys up the height of the tree
+  396|       |Precondition:ThreadedBST tree object must exist
+  397|       |Postcondition: Returns the height of the tree*/
+  398|      0|int ThreadedBST::heightHelper(TreeNode *node) const {
+  399|      0|  if (node == nullptr) {
+  400|      0|    return 0;
+  401|      0|  } else {
+  402|      0|    return 1 + max(heightHelper(node->left), heightHelper(node->right));
+  403|      0|  }
+  404|      0|}
+  405|       |
+  406|       |/** Get Count: Returns the TreeNode count of the ThreadedBST tree
+  407|       |Precondition:ThreadedBST tree object must exist
+  408|       |Postcondition: Returns int count*/
+  409|      0|int ThreadedBST::getCount() const { return count; }
 
 /home/NETID/mikec87/C++/CSS342/ass5-threadedBST/threadedBST.h:
     1|       |#ifndef ASS5_THREADEDBST_H
@@ -2247,7 +1431,7 @@ TOTAL                                                                           
    50|       |
    51|       |#endif
 
-Mon Mar  8 13:00:43 PST 2021
+Mon Mar  8 13:05:18 PST 2021
 =====================================================
 To create an output.txt file with all the output from this script
 Run the below command
