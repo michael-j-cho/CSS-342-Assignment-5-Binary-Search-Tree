@@ -376,7 +376,7 @@ void ThreadedBST::threadRecurLeft(TreeNode *threadTarget, TreeNode *threader) {
 
     while (threader != nullptr) {
       if (threader->left == nullptr) {
-        threader->leftThread = threadTarget;
+        threader->left = threadTarget;
         break;
       }
       threader = threader->left;
