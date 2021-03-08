@@ -27,6 +27,7 @@ void test2() {
     ThreadedBST tree2(20);
     cout << endl << endl;
     ThreadedBST tree3(tree2);
+    cout << endl << endl;
 }
 
 void removetest()

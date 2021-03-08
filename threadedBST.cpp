@@ -15,8 +15,7 @@ using namespace std;
 
 ThreadedBST::ThreadedBST() : root{ nullptr }, count{ 0 } {}
 
-ThreadedBST::ThreadedBST(int n) : root{ nullptr }, count{ 0 } {
-   
+ThreadedBST::ThreadedBST(int n) : root{ nullptr }, count{ 0 } {  
     vector<int> vect1;
     vector<int> vect2;
     if(n % 2 == 1) {
@@ -42,7 +41,6 @@ ThreadedBST::ThreadedBST(int n) : root{ nullptr }, count{ 0 } {
             vect2.push_back(i + (n/2));
         }
     }
-
     balancedAdd(vect1);
     balancedAdd(vect2);
 }
@@ -57,8 +55,7 @@ ThreadedBST::ThreadedBST(const ThreadedBST &tree) : root{nullptr}, count{0} {
     deleteEven(this->root);
 }
 
-ThreadedBST::~ThreadedBST()
-{
+ThreadedBST::~ThreadedBST() {
     clear(root);
 }
 
@@ -97,7 +94,7 @@ void ThreadedBST::balancedAdd(vector<int> vect) {
     if(vect.size() > 0) {
         add(vect.at(vect.size() / 2));
         vect.erase(vect.begin() + vect.size()/2);
-        
+
         vector<int> splitLow(vect.begin(), vect.begin() + vect.size()/2);
         vector<int> splitHigh(vect.begin() + vect.size()/2, vect.end());
 
@@ -174,7 +171,7 @@ void ThreadedBST::copy(TreeNode *node) {
 void ThreadedBST::deleteEven(TreeNode *node) {
     if(node->data % 2 == 0) {
         // remove(node->data);
-        cout << "Deleting " << node->data << endl;
+        cout << endl << "Deleting " << node->data;
     }
     if(node->left != nullptr) {
         deleteEven(node->left);
@@ -257,13 +254,7 @@ void ThreadedBST::removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNo
 
 }
 
-bool ThreadedBST::retrieve(const TreeNode& node1, TreeNode node2) {
-    return true;
-}
-
-void ThreadedBST::clear(TreeNode*& Node)
-{
-
+void ThreadedBST::clear(TreeNode*& Node) {
     if (Node->left != nullptr)
         clear(Node->left);
 
@@ -272,12 +263,9 @@ void ThreadedBST::clear(TreeNode*& Node)
 
     delete Node;
     Node = nullptr;
-
-
 }
 
-bool ThreadedBST::contains(int target)
-{
+bool ThreadedBST::contains(int target) {
     if (root == nullptr)
         return false;
 
@@ -307,14 +295,12 @@ bool ThreadedBST::contains(int target)
 
 }
 
-void ThreadedBST::thread()
-{
+void ThreadedBST::thread() {
     TreeNode* threadTarget = root;
     TreeNode* threader;
 }
 
-void ThreadedBST::threadRecur(TreeNode* threadTarget, TreeNode* threader)
-{
+void ThreadedBST::threadRecur(TreeNode* threadTarget, TreeNode* threader) {
     threader = threadTarget->left;
     while (threader->right != nullptr)
     {
