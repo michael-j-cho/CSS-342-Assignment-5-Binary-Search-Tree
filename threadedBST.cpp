@@ -197,13 +197,16 @@ void ThreadedBST::copy(TreeNode *node) {
   }
 }
 
-/** Delete Even Helper: ************
+/** Remove Even: ************
 Precondition: ThreadedBST tree object must exist
 Postcondition: *************/
 void ThreadedBST::removeEven() {
     removeEvenHelper(this->root);
 }
 
+/** Remove Even Helper: ************
+Precondition: ThreadedBST tree object must exist
+Postcondition: *************/
 void ThreadedBST::removeEvenHelper(TreeNode *node) {
   if (node->left != nullptr) {
     removeEvenHelper(node->left);
