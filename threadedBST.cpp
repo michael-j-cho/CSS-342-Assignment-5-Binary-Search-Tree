@@ -16,30 +16,31 @@ using namespace std;
 ThreadedBST::ThreadedBST() : root{ nullptr }, count{ 0 } {}
 
 ThreadedBST::ThreadedBST(int n) : root{ nullptr }, count{ 0 } {
-   
+
     vector<int> vect1;
     vector<int> vect2;
-    if(n % 2 == 1) {
-        if(root == nullptr) {
-            int mid = n/2 + 1;
+    if (n % 2 == 1) {
+        if (root == nullptr) {
+            int mid = n / 2 + 1;
             add(mid);
         }
-        for(int i = 1; i <= n / 2 + 1; i++) {
+        for (int i = 1; i <= n / 2 + 1; i++) {
             vect1.push_back(i);
         }
-        for(int i = 1; i <= n / 2; i++) {
-            vect2.push_back(i + ((n/2) + 1));
-        }        
-    } else {
-        if(root == nullptr) {
-            int mid = n/2;
+        for (int i = 1; i <= n / 2; i++) {
+            vect2.push_back(i + ((n / 2) + 1));
+        }
+    }
+    else {
+        if (root == nullptr) {
+            int mid = n / 2;
             add(mid);
         }
-        for(int i = 1; i <= n / 2; i++) {
+        for (int i = 1; i <= n / 2; i++) {
             vect1.push_back(i);
         }
-        for(int i = 1; i <= n / 2; i++) {
-            vect2.push_back(i + (n/2));
+        for (int i = 1; i <= n / 2; i++) {
+            vect2.push_back(i + (n / 2));
         }
     }
 
@@ -47,10 +48,10 @@ ThreadedBST::ThreadedBST(int n) : root{ nullptr }, count{ 0 } {
     balancedAdd(vect2);
 }
 
-ThreadedBST::ThreadedBST(const ThreadedBST &tree) : root{nullptr}, count{0} {
-    if(tree.root == nullptr) {
+ThreadedBST::ThreadedBST(const ThreadedBST& tree) : root{ nullptr }, count{ 0 } {
+    if (tree.root == nullptr) {
         root = nullptr;
-    } 
+    }
     else {
         copy(tree.root);
     }
@@ -94,12 +95,12 @@ bool ThreadedBST::add(int data) {
 }
 
 void ThreadedBST::balancedAdd(vector<int> vect) {
-    if(vect.size() > 0) {
+    if (vect.size() > 0) {
         add(vect.at(vect.size() / 2));
-        vect.erase(vect.begin() + vect.size()/2);
-        
-        vector<int> splitLow(vect.begin(), vect.begin() + vect.size()/2);
-        vector<int> splitHigh(vect.begin() + vect.size()/2, vect.end());
+        vect.erase(vect.begin() + vect.size() / 2);
+
+        vector<int> splitLow(vect.begin(), vect.begin() + vect.size() / 2);
+        vector<int> splitHigh(vect.begin() + vect.size() / 2, vect.end());
 
         balancedAdd(splitLow);
         balancedAdd(splitHigh);
@@ -161,7 +162,7 @@ bool ThreadedBST::remove(int data) {
     return true;
 }
 
-void ThreadedBST::copy(TreeNode *node) {
+void ThreadedBST::copy(TreeNode* node) {
     add(node->data);
     if (node->left != nullptr) {
         copy(node->left);
@@ -171,16 +172,17 @@ void ThreadedBST::copy(TreeNode *node) {
     }
 }
 
-void ThreadedBST::deleteEven(TreeNode *node) {
-    if(node->data % 2 == 0) {
-        // remove(node->data);
-        cout << "Deleting " << node->data << endl;
-    }
-    if(node->left != nullptr) {
+void ThreadedBST::deleteEven(TreeNode* node) {
+
+    if (node->left != nullptr) {
         deleteEven(node->left);
     }
-    if(node->right != nullptr) {
+    if (node->right != nullptr) {
         deleteEven(node->right);
+    }
+
+    if (node->data % 2 == 0) {
+        remove(node->data);
     }
 }
 
@@ -210,7 +212,7 @@ void ThreadedBST::removeOneChild(TreeNode* prevPtr, TreeNode* delPtr)
 
 void ThreadedBST::removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNode* delPtr, TreeNode* prevInorderPointer)
 {
-    if (prevInorderPointer == nullptr)
+    if (prevInorderPointer == nullptr)             //Used for if there is no pointer left after moving right once (right once is inorder
     {
         inorderPtr->left = delPtr->left;
 
@@ -226,6 +228,11 @@ void ThreadedBST::removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNo
 
     else if (delPtr == root)
     {
+        if (inorderPtr->right != nullptr)
+            prevInorderPointer->left = inorderPtr->right;
+        else
+            prevInorderPointer->left = nullptr;
+
         inorderPtr->left = delPtr->left;
         inorderPtr->right = delPtr->right;
 
@@ -233,11 +240,16 @@ void ThreadedBST::removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNo
         delPtr = nullptr;
 
         root = inorderPtr;
-        prevInorderPointer->left = nullptr;
+
     }
 
     else
     {
+        if (inorderPtr->right != nullptr)
+            prevInorderPointer->left = inorderPtr->right;
+        else
+            prevInorderPointer->left = nullptr;
+
         inorderPtr->left = delPtr->left;
         inorderPtr->right = delPtr->right;
 
@@ -247,7 +259,7 @@ void ThreadedBST::removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNo
         else if (inorderPtr->data > prevPtr->data)
             prevPtr->right = inorderPtr;
 
-        prevInorderPointer->left = nullptr;
+
 
         delete delPtr;
         delPtr = nullptr;
@@ -315,18 +327,28 @@ void ThreadedBST::thread()
 
 void ThreadedBST::threadRecur(TreeNode* threadTarget, TreeNode* threader)
 {
-    threader = threadTarget->left;
-    while (threader->right != nullptr)
+    threader = threader->left;
+    while (threader != nullptr)
     {
-        if (threader->left != nullptr)
+        if (threader->right != nullptr)
         {
-            threadTarget = threader;
-            threadRecur(threadTarget, threader);
+
+            if (threader->left != nullptr)
+            {
+                threadRecur(threader, threader);
+            }
+            else if (threader->right == nullptr)
+            {
+                threader->rightThread = threadTarget;
+                threader = nullptr;
+            }
+            else
+            {
+            }
         }
 
+        threader = threader->right;
     }
-
-    threader->rightThread = threadTarget;
 }
 
 void ThreadedBST::inorder() const {
@@ -337,10 +359,11 @@ int ThreadedBST::getHeight() {
     return heightHelper(root);
 }
 
-int ThreadedBST::heightHelper(TreeNode *node) const {
-    if(node == nullptr) {
+int ThreadedBST::heightHelper(TreeNode* node) const {
+    if (node == nullptr) {
         return 0;
-    } else {
+    }
+    else {
         return 1 + max(heightHelper(node->left), heightHelper(node->right));
     }
 }
