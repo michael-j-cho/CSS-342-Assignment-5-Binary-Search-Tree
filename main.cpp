@@ -18,7 +18,7 @@ void test1() {
     ThreadedBST tree1(20);
     assert(!tree1.contains(21));
     tree1.add(21);
-    assert(tree1.contains(21));
+    assert(tree1.contains(20));
     cout << endl << endl;
 }
 
@@ -27,7 +27,6 @@ void test2() {
     ThreadedBST tree2(20);
     cout << endl << endl;
     ThreadedBST tree3(tree2);
-    cout << endl << endl;
 }
 
 void removetest()
@@ -52,10 +51,27 @@ void removetest()
     tree1.remove(10);
 }
 
+void threadtest()
+{
+    ThreadedBST tree1;
+    tree1.add(6);
+    tree1.add(3);
+    tree1.add(1);
+    tree1.add(2);
+    tree1.add(5);
+    tree1.add(8);
+    tree1.add(7);
+    tree1.add(11);
+    tree1.add(9);
+    tree1.add(13);
+    tree1.thread();
+}
+
 int main() {
-    test1();
-    test2();
-    removetest();
+    //test1();
+    //test2();
+    //removetest();
+    threadtest();
     cout << endl << "Done." << endl;
     return 0;
 }
