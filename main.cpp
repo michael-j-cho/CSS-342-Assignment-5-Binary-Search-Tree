@@ -18,7 +18,7 @@ void test1() {
     ThreadedBST tree1(20);
     assert(!tree1.contains(21));
     tree1.add(21);
-    assert(tree1.contains(20));
+    assert(tree1.contains(21));
     cout << endl << endl;
 }
 
@@ -27,6 +27,7 @@ void test2() {
     ThreadedBST tree2(20);
     cout << endl << endl;
     ThreadedBST tree3(tree2);
+    cout << endl << endl;
 }
 
 void removetest()
