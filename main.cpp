@@ -22,6 +22,14 @@ void test1() {
     cout << endl << endl;
 }
 
+// Testing copy constuctor
+void test2() {
+    ThreadedBST tree2(20);
+    cout << endl << endl;
+    ThreadedBST tree3(tree2);
+    cout << endl << endl;
+}
+
 void removetest()
 {
     ThreadedBST tree1;
@@ -46,6 +54,7 @@ void removetest()
 
 int main() {
     test1();
+    test2();
     removetest();
     cout << endl << "Done." << endl;
     return 0;

@@ -23,14 +23,16 @@ private:
     void removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNode* delPtr, TreeNode* prevInorderPointer);
 
 public:
-    ThreadedBST();
+    explicit ThreadedBST();
     explicit ThreadedBST(int n);
+    explicit ThreadedBST(const ThreadedBST &tree);
     ~ThreadedBST();
 
     void insert(TreeNode* node, TreeNode* newNode);
     bool add(int data);
     void balancedAdd(vector<int> vect);
     bool remove(int data);
+    void copy(TreeNode *node);
     void thread();
     void threadRecur(TreeNode* threadTarget, TreeNode* threader);
     bool retrieve(const TreeNode& node1, TreeNode node2);

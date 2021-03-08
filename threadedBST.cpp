@@ -47,6 +47,15 @@ ThreadedBST::ThreadedBST(int n) : root{ nullptr }, count{ 0 } {
     balancedAdd(vect2);
 }
 
+ThreadedBST::ThreadedBST(const ThreadedBST &tree) : root{nullptr}, count{0} {
+    if(tree.root == nullptr) {
+        root = nullptr;
+    } 
+    else {
+        copy(tree.root);
+    }
+}
+
 ThreadedBST::~ThreadedBST()
 {
     clear(root);
@@ -149,6 +158,16 @@ bool ThreadedBST::remove(int data) {
     }
     count--;
     return true;
+}
+
+void ThreadedBST::copy(TreeNode *node) {
+    add(node->data);
+    if (node->left != nullptr) {
+        copy(node->left);
+    }
+    if (node->right != nullptr) {
+        copy(node->right);
+    }
 }
 
 void ThreadedBST::removeOneChild(TreeNode* prevPtr, TreeNode* delPtr)
