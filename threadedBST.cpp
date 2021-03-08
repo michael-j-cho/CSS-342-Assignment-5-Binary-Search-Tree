@@ -353,27 +353,68 @@ bool ThreadedBST::contains(int target) {
 /** Thread: ************
 Precondition: ************
 Postcondition: *************/
-void ThreadedBST::thread() {
+void ThreadedBST::thread() 
+{
     TreeNode* threadTarget = root;
-    TreeNode* threader;
+    TreeNode* threader = nullptr;
+    threadRecurRight(root, threader);
+    threadRecurLeft(root, threader);
 }
 
 /** Thread Recursion: ************
 Precondition: ************
 Postcondition: *************/
-void ThreadedBST::threadRecur(TreeNode* threadTarget, TreeNode* threader) {
-    threader = threadTarget->left;
-    while (threader->right != nullptr)
+void ThreadedBST::threadRecurRight(TreeNode* threadTarget, TreeNode* threader)
+{
+
+    while (threadTarget->right != nullptr)
     {
+        if (threadTarget->left != nullptr)
+            threader = threadTarget->left;
+
         if (threader->left != nullptr)
+            threadRecurRight(threadTarget->left, threader);
+
+        while (threader != nullptr)
         {
-            threadTarget = threader;
-            threadRecur(threadTarget, threader);
+            if (threader->right == nullptr)
+            {
+                threader->rightThread = threadTarget;
+                break;
+            }
+            if (threader->left != nullptr)
+                threadRecurRight(threader, threader);
+            threader = threader->right;
+
         }
-
+        threadTarget = threadTarget->right;
     }
+}
 
-    threader->rightThread = threadTarget;
+void ThreadedBST::threadRecurLeft(TreeNode* threadTarget, TreeNode* threader)
+{
+    while (threadTarget->left != nullptr)
+    {
+        if (threadTarget->right != nullptr)
+            threader = threadTarget->right;
+
+        if (threader->right != nullptr)
+            threadRecurLeft(threadTarget->right, threader);
+
+        while (threader != nullptr)
+        {
+            if (threader->left == nullptr)
+            {
+                threader->leftThread = threadTarget;
+                break;
+            }
+            if (threader->right != nullptr)
+                threadRecurLeft(threader, threader);
+            threader = threader->left;
+
+        }
+        threadTarget = threadTarget->left;
+    }
 }
 
 /** In Order: ************
