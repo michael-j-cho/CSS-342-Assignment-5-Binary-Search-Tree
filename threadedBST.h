@@ -13,8 +13,7 @@ private:
         TreeNode* left;
         TreeNode* right;
         int data;
-        TreeNode* leftThread;
-        TreeNode* rightThread;
+
     };
     TreeNode* root;
     int count = 0;
