@@ -3,7 +3,7 @@
  * Tim D
  *
  * CSS342
- *
+ * **************ADD DESCRIPTION***********
  * */
 
 #include <iostream>
@@ -13,8 +13,15 @@
 
 using namespace std;
 
+/** Constructor: Default constructor
+Precondition: None
+Postcondition: Creates an empty ThreadedBST tree obj*/
 ThreadedBST::ThreadedBST() : root{ nullptr }, count{ 0 } {}
 
+/** Constructor: Constructor that takes an integer n as input and
+creates a tree with n nodes
+Precondition: None
+Postcondition: Creates a ThreadedBST tree obj with n nodes*/
 ThreadedBST::ThreadedBST(int n) : root{ nullptr }, count{ 0 } {  
     vector<int> vect1;
     vector<int> vect2;
@@ -45,6 +52,9 @@ ThreadedBST::ThreadedBST(int n) : root{ nullptr }, count{ 0 } {
     balancedAdd(vect2);
 }
 
+/** Constructor: Constructor copy
+Precondition: None
+Postcondition: Creates a copy of a Threaded BST tree*/
 ThreadedBST::ThreadedBST(const ThreadedBST &tree) : root{nullptr}, count{0} {
     if(tree.root == nullptr) {
         root = nullptr;
@@ -55,10 +65,31 @@ ThreadedBST::ThreadedBST(const ThreadedBST &tree) : root{nullptr}, count{0} {
     deleteEven(this->root);
 }
 
+/** Destructor: Calls the clear method
+Precondition: ThreadedBST tree object must exist
+Postcondition: Deletes the ThreadedBST tree object with the clear method*/
 ThreadedBST::~ThreadedBST() {
     clear(root);
 }
 
+/** Clear: Deletes each dynamically created TreeNode in the ThreadedBST
+tree object and sets each one to nullptr
+Precondition: ThreadedBST tree object must exist
+Postcondition: Deletes all TreeNodes*/
+void ThreadedBST::clear(TreeNode*& Node) {
+    if (Node->left != nullptr)
+        clear(Node->left);
+
+    if (Node->right != nullptr)
+        clear(Node->right);
+
+    delete Node;
+    Node = nullptr;
+}
+
+/** Insert: ************
+Precondition: ThreadedBST tree object must exist
+Postcondition:*********** */
 void ThreadedBST::insert(TreeNode* node, TreeNode* newNode) {
     if (newNode->data < node->data && node->left != nullptr) {
         insert(node->left, newNode);
@@ -74,6 +105,9 @@ void ThreadedBST::insert(TreeNode* node, TreeNode* newNode) {
     }
 }
 
+/** Add: ************
+Precondition: ThreadedBST tree object must exist
+Postcondition: Returns true add is successful*/
 bool ThreadedBST::add(int data) {
     if (contains(data)) {
         return false;
@@ -90,6 +124,9 @@ bool ThreadedBST::add(int data) {
     return true;
 }
 
+/** Balanced Add: ************
+Precondition: ThreadedBST tree object must exist
+Postcondition: *************/
 void ThreadedBST::balancedAdd(vector<int> vect) {
     if(vect.size() > 0) {
         add(vect.at(vect.size() / 2));
@@ -103,6 +140,9 @@ void ThreadedBST::balancedAdd(vector<int> vect) {
     }
 }
 
+/** Remove: ************
+Precondition: ThreadedBST tree object must exist
+Postcondition: Returns true removed successfully*/
 bool ThreadedBST::remove(int data) {
     if (!contains(data)) {
         return false;
@@ -158,6 +198,9 @@ bool ThreadedBST::remove(int data) {
     return true;
 }
 
+/** Copy: ************
+Precondition: ThreadedBST tree object must exist
+Postcondition: *************/
 void ThreadedBST::copy(TreeNode *node) {
     add(node->data);
     if (node->left != nullptr) {
@@ -168,6 +211,9 @@ void ThreadedBST::copy(TreeNode *node) {
     }
 }
 
+/** Delete Even: ************
+Precondition: ThreadedBST tree object must exist
+Postcondition: *************/
 void ThreadedBST::deleteEven(TreeNode *node) {
     if(node->data % 2 == 0) {
         // remove(node->data);
@@ -181,6 +227,9 @@ void ThreadedBST::deleteEven(TreeNode *node) {
     }
 }
 
+/** Remove One Child: ************
+Precondition: ************
+Postcondition: *************/
 void ThreadedBST::removeOneChild(TreeNode* prevPtr, TreeNode* delPtr)
 {
     if (prevPtr->data < delPtr->data)
@@ -205,6 +254,9 @@ void ThreadedBST::removeOneChild(TreeNode* prevPtr, TreeNode* delPtr)
     delPtr = nullptr;
 }
 
+/** Remove Two Child: ************
+Precondition: ************
+Postcondition: *************/
 void ThreadedBST::removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNode* delPtr, TreeNode* prevInorderPointer)
 {
     if (prevInorderPointer == nullptr)
@@ -254,17 +306,10 @@ void ThreadedBST::removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNo
 
 }
 
-void ThreadedBST::clear(TreeNode*& Node) {
-    if (Node->left != nullptr)
-        clear(Node->left);
-
-    if (Node->right != nullptr)
-        clear(Node->right);
-
-    delete Node;
-    Node = nullptr;
-}
-
+/** Contains: Boolean method that checks whether a particular value exists 
+within the ThreadedBST tree
+Precondition: ThreadedBST tree object must exist
+Postcondition: Returns true if the value is found*/
 bool ThreadedBST::contains(int target) {
     if (root == nullptr)
         return false;
@@ -295,11 +340,17 @@ bool ThreadedBST::contains(int target) {
 
 }
 
+/** Thread: ************
+Precondition: ************
+Postcondition: *************/
 void ThreadedBST::thread() {
     TreeNode* threadTarget = root;
     TreeNode* threader;
 }
 
+/** Thread Recursion: ************
+Precondition: ************
+Postcondition: *************/
 void ThreadedBST::threadRecur(TreeNode* threadTarget, TreeNode* threader) {
     threader = threadTarget->left;
     while (threader->right != nullptr)
@@ -315,14 +366,24 @@ void ThreadedBST::threadRecur(TreeNode* threadTarget, TreeNode* threader) {
     threader->rightThread = threadTarget;
 }
 
+/** In Order: ************
+Precondition: ************
+Postcondition: *************/
 void ThreadedBST::inorder() const {
 
 }
 
+/** Get Height: Calls the height helper method and returns the height
+Precondition:ThreadedBST tree object must exist
+Postcondition: Returns the height of the tree*/
 int ThreadedBST::getHeight() {
     return heightHelper(root);
 }
 
+/** Height Helper: Recursive method that traverses through the tree and
+tallys up the height of the tree
+Precondition:ThreadedBST tree object must exist
+Postcondition: Returns the height of the tree*/
 int ThreadedBST::heightHelper(TreeNode *node) const {
     if(node == nullptr) {
         return 0;
@@ -331,6 +392,9 @@ int ThreadedBST::heightHelper(TreeNode *node) const {
     }
 }
 
+/** Get Count: Returns the TreeNode count of the ThreadedBST tree
+Precondition:ThreadedBST tree object must exist
+Postcondition: Returns int count*/
 int ThreadedBST::getCount() const {
     return count;
 }

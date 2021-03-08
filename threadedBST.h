@@ -28,6 +28,7 @@ public:
     explicit ThreadedBST(const ThreadedBST &tree);
     ~ThreadedBST();
 
+    void clear(TreeNode*& root);
     void insert(TreeNode* node, TreeNode* newNode);
     bool add(int data);
     void balancedAdd(vector<int> vect);
@@ -37,7 +38,6 @@ public:
     void thread();
     void threadRecur(TreeNode* threadTarget, TreeNode* threader);
     bool retrieve(const TreeNode& node1, TreeNode node2);
-    void clear(TreeNode*& root);
     bool contains(int target);
     void inorder() const;
     int getHeight();
