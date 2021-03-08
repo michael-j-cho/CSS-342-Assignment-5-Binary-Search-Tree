@@ -21,23 +21,25 @@ private:
 
     void removeOneChild(TreeNode* prevPtr, TreeNode* delPtr);
     void removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNode* delPtr, TreeNode* prevInorderPointer);
+    void threadRecurRight(TreeNode* threadTarget, TreeNode* threader);
+    void threadRecurLeft(TreeNode* threadTarget, TreeNode* threader);
 
 public:
     explicit ThreadedBST();
     explicit ThreadedBST(int n);
-    explicit ThreadedBST(const ThreadedBST &tree);
+    explicit ThreadedBST(const ThreadedBST& tree);
     ~ThreadedBST();
 
-    void clear(TreeNode*& root);
     void insert(TreeNode* node, TreeNode* newNode);
     bool add(int data);
     void balancedAdd(vector<int> vect);
     bool remove(int data);
-    void copy(TreeNode *node);
-    void deleteEven(TreeNode *node);
+    void copy(TreeNode* node);
+    void deleteEven(TreeNode* node);
     void thread();
-    void threadRecur(TreeNode* threadTarget, TreeNode* threader);
+
     bool retrieve(const TreeNode& node1, TreeNode node2);
+    void clear(TreeNode*& root);
     bool contains(int target);
     void inorder() const;
     int getHeight();
