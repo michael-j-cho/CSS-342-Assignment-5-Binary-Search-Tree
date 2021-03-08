@@ -346,7 +346,7 @@ Precondition: ************
 Postcondition: *************/
 void ThreadedBST::threadRecurRight(TreeNode *threadTarget, TreeNode *threader) {
 
-  while (threadTarget->right != nullptr) {
+  while (threadTarget->right != nullptr) {                        
     if (threadTarget->left != nullptr)
       threader = threadTarget->left;
 
@@ -355,12 +355,12 @@ void ThreadedBST::threadRecurRight(TreeNode *threadTarget, TreeNode *threader) {
 
     while (threader != nullptr) {
       if (threader->right == nullptr) {
-        threader->rightThread = threadTarget;
+        threader->right = threadTarget;
         break;
       }
+      threader = threader->right;
       if (threader->left != nullptr)
         threadRecurRight(threader, threader);
-      threader = threader->right;
     }
     threadTarget = threadTarget->right;
   }
@@ -379,9 +379,9 @@ void ThreadedBST::threadRecurLeft(TreeNode *threadTarget, TreeNode *threader) {
         threader->leftThread = threadTarget;
         break;
       }
+      threader = threader->left;
       if (threader->right != nullptr)
         threadRecurLeft(threader, threader);
-      threader = threader->left;
     }
     threadTarget = threadTarget->left;
   }
