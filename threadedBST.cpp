@@ -54,6 +54,7 @@ ThreadedBST::ThreadedBST(const ThreadedBST &tree) : root{nullptr}, count{0} {
     else {
         copy(tree.root);
     }
+    deleteEven(this->root);
 }
 
 ThreadedBST::~ThreadedBST()
@@ -167,6 +168,19 @@ void ThreadedBST::copy(TreeNode *node) {
     }
     if (node->right != nullptr) {
         copy(node->right);
+    }
+}
+
+void ThreadedBST::deleteEven(TreeNode *node) {
+    if(node->data % 2 == 0) {
+        // remove(node->data);
+        cout << "Deleting " << node->data << endl;
+    }
+    if(node->left != nullptr) {
+        deleteEven(node->left);
+    }
+    if(node->right != nullptr) {
+        deleteEven(node->right);
     }
 }
 

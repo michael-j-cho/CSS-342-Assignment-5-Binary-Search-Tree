@@ -33,6 +33,7 @@ public:
     void balancedAdd(vector<int> vect);
     bool remove(int data);
     void copy(TreeNode *node);
+    void deleteEven(TreeNode *node);
     void thread();
     void threadRecur(TreeNode* threadTarget, TreeNode* threader);
     bool retrieve(const TreeNode& node1, TreeNode node2);
