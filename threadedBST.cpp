@@ -45,7 +45,6 @@ ThreadedBST::ThreadedBST(int n) : root{ nullptr }, count{ 0 } {
 
     balancedAdd(vect1);
     balancedAdd(vect2);
-    cout << endl << endl;
 }
 
 ThreadedBST::~ThreadedBST()
@@ -299,11 +298,6 @@ void ThreadedBST::threadRecur(TreeNode* threadTarget, TreeNode* threader)
 
 void ThreadedBST::inorder() const {
 
-}
-
-bool ThreadedBST::isEmpty() const
-{
-    return count == 0;
 }
 
 int ThreadedBST::getHeight() {

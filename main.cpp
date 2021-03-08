@@ -13,10 +13,13 @@
 
 using namespace std;
 
+// Testing constructor, add, and contains methods.
 void test1() {
-    ThreadedBST tree2(17);
-    ThreadedBST tree1(7);
-    cout << endl << tree2.getHeight() << endl;
+    ThreadedBST tree1(20);
+    assert(!tree1.contains(21));
+    tree1.add(21);
+    assert(tree1.contains(20));
+    cout << endl << endl;
 }
 
 void removetest()

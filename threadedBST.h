@@ -17,7 +17,7 @@ private:
         TreeNode* rightThread;
     };
     TreeNode* root;
-    int count;
+    int count = 0;
 
     void removeOneChild(TreeNode* prevPtr, TreeNode* delPtr);
     void removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNode* delPtr, TreeNode* prevInorderPointer);
@@ -37,7 +37,6 @@ public:
     void clear(TreeNode*& root);
     bool contains(int target);
     void inorder() const;
-    bool isEmpty() const;
     int getHeight();
     int heightHelper(TreeNode* node) const;
     int getCount() const;
