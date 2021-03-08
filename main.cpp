@@ -29,6 +29,7 @@ void test2() {
   ThreadedBST tree2(20);
   cout << endl;
   ThreadedBST tree3(tree2);
+  tree3.removeEven();
   cout << endl << endl;
 }
 

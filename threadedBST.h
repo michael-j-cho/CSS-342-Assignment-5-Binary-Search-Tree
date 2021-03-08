@@ -35,7 +35,8 @@ public:
     void balancedAdd(vector<int> vect);
     bool remove(int data);
     void copy(TreeNode* node);
-    void deleteEven(TreeNode* node);
+    void removeEven();
+    void removeEvenHelper(TreeNode *node);
     void thread();
 
     bool retrieve(const TreeNode& node1, TreeNode node2);

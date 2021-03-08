@@ -61,7 +61,6 @@ ThreadedBST::ThreadedBST(const ThreadedBST &tree) : root{nullptr}, count{0} {
   } else {
     copy(tree.root);
   }
-  deleteEven(this->root);
 }
 
 /** Destructor: Calls the clear method
@@ -198,15 +197,19 @@ void ThreadedBST::copy(TreeNode *node) {
   }
 }
 
-/** Delete Even: ************
+/** Delete Even Helper: ************
 Precondition: ThreadedBST tree object must exist
 Postcondition: *************/
-void ThreadedBST::deleteEven(TreeNode *node) {
+void ThreadedBST::removeEven() {
+    removeEvenHelper(this->root);
+}
+
+void ThreadedBST::removeEvenHelper(TreeNode *node) {
   if (node->left != nullptr) {
-    deleteEven(node->left);
+    removeEvenHelper(node->left);
   }
   if (node->right != nullptr) {
-    deleteEven(node->right);
+    removeEvenHelper(node->right);
   }
 
   if (node->data % 2 == 0) {
