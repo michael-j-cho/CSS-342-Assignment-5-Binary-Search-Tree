@@ -39,7 +39,7 @@ public:
     void thread();
 
     bool retrieve(const TreeNode& node1, TreeNode node2);
-    void clear(TreeNode*& root);
+    void clear();
     bool contains(int target);
     void inorder() const;
     int getHeight();
