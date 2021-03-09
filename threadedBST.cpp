@@ -66,21 +66,41 @@ ThreadedBST::ThreadedBST(const ThreadedBST &tree) : root{nullptr}, count{0} {
 /** Destructor: Calls the clear method
 Precondition: ThreadedBST tree object must exist
 Postcondition: Deletes the ThreadedBST tree object with the clear method*/
-ThreadedBST::~ThreadedBST() { clear(root); }
+ThreadedBST::~ThreadedBST() { clear(); }
 
 /** Clear: Deletes each dynamically created TreeNode in the ThreadedBST
 tree object and sets each one to nullptr
 Precondition: ThreadedBST tree object must exist
 Postcondition: Deletes all TreeNodes*/
-void ThreadedBST::clear(TreeNode *&Node) {
-  if (Node->left != nullptr)
-    clear(Node->left);
+void ThreadedBST::clear() {
+  TreeNode *curPtr = root;
+  TreeNode *delPtr;
 
-  if (Node->right != nullptr)
-    clear(Node->right);
+  while (curPtr->left != nullptr)
+    curPtr = curPtr->left;
+  delPtr = curPtr;
 
-  delete Node;
-  Node = nullptr;
+  while (curPtr != root) {
+    curPtr = curPtr->right;
+    delete delPtr;
+    delPtr = nullptr;
+    delPtr = curPtr;
+  }
+
+  while (curPtr->right != nullptr)
+    curPtr = curPtr->right;
+  delPtr = curPtr;
+
+  while (curPtr != root) {
+    curPtr = curPtr->left;
+    delete delPtr;
+    delPtr = nullptr;
+    delPtr = curPtr;
+  }
+
+  delete delPtr;
+  delPtr = nullptr;
+  curPtr = nullptr;
 }
 
 /** Insert: ************
