@@ -15,7 +15,6 @@ using namespace std;
 
 // Testing constructor, add, and contains methods.
 void test1() {
-  cout << "Running test1: Testing add and contains" << endl;
   ThreadedBST tree1(20);
   assert(!tree1.contains(21));
   tree1.add(21);
@@ -25,12 +24,9 @@ void test1() {
 
 // Testing copy constuctor
 void test2() {
-  cout << "Running test2: Testing copy constructor" << endl;
   ThreadedBST tree2(20);
-  cout << endl;
-  ThreadedBST tree3(tree2);
-  tree3.removeEven();
   cout << endl << endl;
+  ThreadedBST tree3(tree2);
 }
 
 void removetest() {
@@ -69,10 +65,24 @@ void threadtest() {
   tree1.thread();
 }
 
+void officialtest() {
+  cout << "Input number of nodes from 1-n to put into a BST";
+  int n;
+  cin >> n;
+  while (n <= 0) {
+    cout << "Not a valid number, please input a number greater than 0";
+    cin >> n;
+  }
+  ThreadedBST tree(n);
+  tree.inorder();
+  ThreadedBST treecopy(tree);
+  treecopy.inorder();
+}
+
 int main() {
-  test1();
-  test2();
-  removetest();
+  // test1();
+  // test2();
+  // removetest();
   threadtest();
   cout << endl << "Done." << endl;
   return 0;
