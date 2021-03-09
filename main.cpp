@@ -16,6 +16,8 @@ using namespace std;
 // Testing constructor, add, and contains methods.
 void test1() {
   ThreadedBST tree1(20);
+  tree1.thread();
+  tree1.inorder();
   assert(!tree1.contains(21));
   tree1.add(21);
   assert(tree1.contains(20));
@@ -63,6 +65,8 @@ void threadtest() {
   tree1.add(9);
   tree1.add(13);
   tree1.thread();
+  cout << endl;
+  tree1.inorder();
 }
 
 void officialtest() {

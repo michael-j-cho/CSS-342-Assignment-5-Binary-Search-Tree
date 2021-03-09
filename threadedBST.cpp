@@ -410,7 +410,17 @@ void ThreadedBST::threadRecurLeft(TreeNode *threadTarget, TreeNode *threader) {
 /** In Order: ************
 Precondition: ************
 Postcondition: *************/
-void ThreadedBST::inorder() const {}
+void ThreadedBST::inorder() const {
+  TreeNode *curr = root;
+  while(curr->left != nullptr) {
+    curr = curr->left;
+  }
+  cout << curr->data << " ";
+  while(curr->right != nullptr) {
+    curr = curr->right;
+    cout << curr->data << " ";
+  }
+}
 
 /** Get Height: Calls the height helper method and returns the height
 Precondition:ThreadedBST tree object must exist
