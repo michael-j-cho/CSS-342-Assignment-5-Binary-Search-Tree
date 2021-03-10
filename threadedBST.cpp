@@ -468,6 +468,7 @@ Postcondition: *************/
 void ThreadedBST::inorder() const {
   vector<int> vect;
   TreeNode *curr = root;
+  int temp;
 
   while(curr->left != nullptr) {
     curr = curr->left;
@@ -484,19 +485,14 @@ void ThreadedBST::inorder() const {
     }
   }
 
-  while(curr->right != nullptr && !curr->rightThread) {
-    curr = curr->right;
-  }
-  cout << curr->data << " ";
-  cout << "Right Thread "<< curr->rightThread << endl;
-  curr = curr->left;
-  cout << curr->data << " ";
-  cout << "Right Thread "<< curr->rightThread << endl;
-  while(curr != root) {
-    curr = curr->left;
-    cout << curr->data << " ";
-    cout << "Right Thread "<< curr->rightThread << endl;
-  }
+  // while(curr->right != nullptr) {
+  //   curr = curr->right;
+  // }
+  // cout << curr->data << " ";
+  // curr = curr->left;
+  // if(curr->left->data == curr->data - 1) {
+
+  // }
 }
 
 /** Get Height: Calls the height helper method and returns the height
