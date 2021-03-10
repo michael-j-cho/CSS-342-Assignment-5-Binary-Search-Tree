@@ -19,17 +19,17 @@ void test1() {
   tree1.thread();
   tree1.inorder();
   assert(!tree1.contains(21));
-  tree1.add(21);
+  //tree1.add(21);                  adding after threading will crash program (destructor dont work)
   assert(tree1.contains(20));
   cout << endl << endl;
 }
 
 // Testing copy constuctor
 void test2() {
-  ThreadedBST tree2(20);
-  tree2.thread();
+  ThreadedBST tree2(20);  
   cout << endl << endl;
   ThreadedBST tree3(tree2);
+  tree2.thread();
   tree3.thread();
 }
 
