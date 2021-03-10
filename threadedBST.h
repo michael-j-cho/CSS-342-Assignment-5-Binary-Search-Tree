@@ -14,6 +14,9 @@ private:
         TreeNode* right;
         int data;
 
+        bool leftThread = false;
+        bool rightThread = false;
+
     };
     TreeNode* root;
     int count = 0;
