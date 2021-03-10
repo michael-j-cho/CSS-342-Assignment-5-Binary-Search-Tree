@@ -412,6 +412,7 @@ void ThreadedBST::threadLeftSideRecur(TreeNode *threadTarget, TreeNode *threader
     }
     threadTarget = threadTarget->right;
   }
+}
 
 void ThreadedBST::threadRightSideRecur(TreeNode *threadTarget, TreeNode *threader, TreeNode *prevThreader) {
     while (threadTarget != nullptr) // Same logic for threadRightSideRecur, but
@@ -465,14 +466,36 @@ void ThreadedBST::threadRightSideRecur(TreeNode *threadTarget, TreeNode *threade
 Precondition: ************
 Postcondition: *************/
 void ThreadedBST::inorder() const {
+  vector<int> vect;
   TreeNode *curr = root;
+
   while(curr->left != nullptr) {
     curr = curr->left;
   }
   cout << curr->data << " ";
   while(curr->right != nullptr) {
     curr = curr->right;
+    if(curr->left != nullptr && curr->left->leftThread) {
+      cout << curr->left->data << " ";
+    }
     cout << curr->data << " ";
+    if(curr == root) {
+      break;
+    }
+  }
+
+  while(curr->right != nullptr && !curr->rightThread) {
+    curr = curr->right;
+  }
+  cout << curr->data << " ";
+  cout << "Right Thread "<< curr->rightThread << endl;
+  curr = curr->left;
+  cout << curr->data << " ";
+  cout << "Right Thread "<< curr->rightThread << endl;
+  while(curr != root) {
+    curr = curr->left;
+    cout << curr->data << " ";
+    cout << "Right Thread "<< curr->rightThread << endl;
   }
 }
 
