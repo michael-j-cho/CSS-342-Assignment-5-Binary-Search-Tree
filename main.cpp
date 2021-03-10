@@ -52,7 +52,7 @@ void removetest() {
    tree1.remove(7);
    assert(!tree1.contains(7));*/
   tree1.remove(10);
-  tree1.thread;
+  tree1.thread();
 }
 
 void threadtest() {
