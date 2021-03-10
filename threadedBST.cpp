@@ -415,51 +415,51 @@ void ThreadedBST::threadLeftSideRecur(TreeNode *threadTarget, TreeNode *threader
 }
 
 void ThreadedBST::threadRightSideRecur(TreeNode *threadTarget, TreeNode *threader, TreeNode *prevThreader) {
-    while (threadTarget != nullptr) // Same logic for threadRightSideRecur, but
-                                    // inverted, traversing
-    {
-      if (threadTarget->data < root->data)
+  while (
+      threadTarget !=
+      nullptr) // Same logic for threadRightSideRecur, but inverted, traversing
+  {
+    if (threadTarget->data < root->data)
+      break;
+    if (threadTarget->right != nullptr && threadTarget->rightThread == false)
+      threader = threadTarget->right;
+    else {
+      threadTarget = threadTarget->left;
+      continue;
+    }
+
+    if (threader->right != nullptr &&
+        threader->rightThread == false) // Checking right before moving left
+      threadRightSideRecur(threadTarget->right, threader, prevThreader);
+
+    TreeNode *starterThreader = threader; // Threading
+    prevThreader = threader;
+    while (threader != nullptr) {
+
+      if (threader->left == nullptr) {
+        threader->left = threadTarget;
+        threader->leftThread = true;
         break;
-      if (threadTarget->right != nullptr)
-        threader = threadTarget->right;
-      else {
-        threadTarget = threadTarget->left;
+      }
+      threader = threader->left;
+
+      if (threader->right == nullptr) {
+        threader->right = prevThreader;
+        threader->rightThread = true;
+        prevThreader = threader;
         continue;
       }
-
-      if (threader->right != nullptr) // Checking right before moving left
-        threadRightSideRecur(threadTarget->right, threader, prevThreader);
-
-      TreeNode *starterThreader = threader; // Threading
-      prevThreader = threader;
-      while (threader != nullptr) {
-
-        if (threader->left == nullptr) {
-          threader->left = threadTarget;
-          threader->leftThread = true;
-          break;
-        }
-        threader = threader->left;
-
-        if (threader->right != nullptr) {
-          TreeNode *parent = threader;
-          while (threader->right != nullptr)
-            threader = threader->right;
-          threader->right = starterThreader;
-          threader->rightThread = true;
-          threader = parent;
-          prevThreader = threader;
-        }
-
-        if (threader->right == nullptr) {
-          threader->right = prevThreader;
-          threader->rightThread = true;
-          prevThreader = threader;
-          continue;
-        }
-      }
-      threadTarget = threadTarget->left;
     }
+    if (threadTarget->left != nullptr) {
+      if (threadTarget->left->rightThread == false) {
+        threader = threadTarget->left;
+        while (threader->right != nullptr)
+          threader = threader->right;
+        threader->right = threadTarget;
+        threader->rightThread = true;
+      }
+    }
+    threadTarget = threadTarget->left;
   }
 
 /** In Order: ************
