@@ -27,8 +27,10 @@ void test1() {
 // Testing copy constuctor
 void test2() {
   ThreadedBST tree2(20);
+  tree2.thread();
   cout << endl << endl;
   ThreadedBST tree3(tree2);
+  tree3.thread();
 }
 
 void removetest() {
@@ -50,6 +52,7 @@ void removetest() {
    tree1.remove(7);
    assert(!tree1.contains(7));*/
   tree1.remove(10);
+  tree1.thread;
 }
 
 void threadtest() {
@@ -84,10 +87,10 @@ void officialtest() {
 }
 
 int main() {
-  // test1();
+  test1();
   // test2();
   // removetest();
-  threadtest();
+  //threadtest();
   cout << endl << "Done." << endl;
   return 0;
 }
