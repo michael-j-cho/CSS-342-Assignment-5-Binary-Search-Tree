@@ -20,8 +20,8 @@ private:
 
     void removeOneChild(TreeNode* prevPtr, TreeNode* delPtr);
     void removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNode* delPtr, TreeNode* prevInorderPointer);
-    void threadRecurRight(TreeNode* threadTarget, TreeNode* threader);
-    void threadRecurLeft(TreeNode* threadTarget, TreeNode* threader);
+    void threadLeftSideRecur(TreeNode *threadTarget, TreeNode *threader, TreeNode *prevThreader);
+    void threadRightSideRecur(TreeNode* threadTarget, TreeNode* threader), TreeNode *prevThreader);
 
 public:
     explicit ThreadedBST();
