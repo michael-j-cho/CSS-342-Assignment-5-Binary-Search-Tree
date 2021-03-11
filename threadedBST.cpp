@@ -61,6 +61,7 @@ ThreadedBST::ThreadedBST(const ThreadedBST &tree) : root{nullptr}, count{0} {
     root = nullptr;
   } else {
     copy(tree.root);
+    thread();
   }
 }
 

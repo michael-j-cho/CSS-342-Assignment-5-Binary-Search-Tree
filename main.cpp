@@ -13,14 +13,12 @@
 
 using namespace std;
 
-// Testing constructor, add, and contains methods.
+// Testing copy constuctor.
 void test1() {
   ThreadedBST tree1(20);
-  tree1.inorder();
-  assert(!tree1.contains(21));
-  // tree1.add(21);
-
-  assert(tree1.contains(20));
+  cout << endl << endl << "Copying: " ;
+  ThreadedBST tree2(tree1);
+  // tree2.removeEven();
   cout << endl << endl;
 }
 
@@ -71,9 +69,9 @@ void officialtest() {
 }
 
 int main() {
-  // test1();
+  test1();
   // test2();
-  removetest();
+  // removetest();
   // threadtest();
   cout << endl << "Done." << endl;
   return 0;
