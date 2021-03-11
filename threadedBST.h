@@ -45,7 +45,7 @@ public:
     bool retrieve(const TreeNode& node1, TreeNode node2);
     void clear();
     bool contains(int target);
-    void inorder() const;
+    void inorderPrint() const;
     int getHeight();
     int heightHelper(TreeNode* node) const;
     int getCount() const;
