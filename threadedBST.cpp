@@ -50,6 +50,7 @@ ThreadedBST::ThreadedBST(int n) : root{nullptr}, count{0} {
   }
   balancedAdd(vect1);
   balancedAdd(vect2);
+  thread();
 }
 
 /** Constructor: Constructor copy
@@ -181,28 +182,51 @@ bool ThreadedBST::remove(int data) {
     }
   }
 
-  if (delPtr->left == nullptr && delPtr->right == nullptr) {
-    if (delPtr->data < prevPtr->data)
-      prevPtr->left = nullptr;
-    else
-      prevPtr->right = nullptr;
+  if (delPtr->leftThread == true && delPtr->rightThread == true) // Removing node with no real connections
+  {
+
+    removeZeroChild(delPtr, prevPtr);
+  }
+
+  else if (delPtr->left == nullptr) // Removing left edge
+  {
+    prevPtr->left = delPtr->right;
+    delPtr->right->left = nullptr;
+    delPtr->right->leftThread = false;
+
     delete delPtr;
     delPtr = nullptr;
-  } else if (delPtr->left != nullptr && delPtr->right != nullptr) {
-    TreeNode *inorderPointer = delPtr->right;
-    TreeNode *prevInorderPointer = nullptr;
-    while (inorderPointer->left != nullptr) {
-      prevInorderPointer = inorderPointer;
-      inorderPointer = inorderPointer->left;
-    }
+  }
 
-    removeTwoChild(prevPtr, inorderPointer, delPtr, prevInorderPointer);
-  } else {
+  else if (delPtr->right == nullptr) // Removing Right Edge
+  {
+    prevPtr->right = delPtr->left;
+    delPtr->left->right = nullptr;
+    delPtr->left->rightThread = false;
+
+    delete delPtr;
+    delPtr = nullptr;
+  }
+
+  else if (delPtr->leftThread == false && delPtr->rightThread == false) // Removing node with two real connections
+  {
+    TreeNode *inorderPtr = delPtr->right;
+    TreeNode *leftInorderThreader = delPtr->left;
+    TreeNode *prevInorderPtr = nullptr;
+
+    removeTwoChild(delPtr, prevPtr, inorderPtr, prevInorderPtr,
+                   leftInorderThreader);
+
+  }
+
+  else if (delPtr->leftThread == false || delPtr->rightThread == false) { // Removing node with one real connection
     removeOneChild(prevPtr, delPtr);
   }
+
   count--;
   return true;
 }
+
 
 /** Copy: ************
 Precondition: ThreadedBST tree object must exist
@@ -240,24 +264,49 @@ void ThreadedBST::removeEvenHelper(TreeNode *node) {
   }
 }
 
+void ThreadedBST::removeZeroChild(TreeNode *delPtr, TreeNode *prevPtr) {
+  if (prevPtr->leftThread == true || prevPtr->rightThread ==true) // Checks if previous has a thread for threading reasons
+  {
+    if (delPtr->data > prevPtr->data) {
+      prevPtr->right = delPtr->right;
+      prevPtr->rightThread = true;
+    }
+    if (delPtr->data < prevPtr->data) {
+      prevPtr->left = delPtr->left;
+      prevPtr->leftThread = true;
+    }
+    delete delPtr;
+    delPtr = nullptr;
+  }
+
+  if (prevPtr->leftThread == false && prevPtr->rightThread ==
+          false) // Checks if it does not have a thread for threading reasons
+  {
+    if (prevPtr->right == delPtr) {
+      prevPtr->right = delPtr->right;
+      prevPtr->rightThread = true;
+    } else if (prevPtr->left == delPtr) {
+      prevPtr->left = delPtr->left;
+      prevPtr->leftThread = true;
+    }
+
+    delete delPtr;
+    delPtr = nullptr;
+  }
+}
+
 /** Remove One Child: ************
 Precondition: ************
 Postcondition: *************/
 void ThreadedBST::removeOneChild(TreeNode *prevPtr, TreeNode *delPtr) {
-  if (prevPtr->data < delPtr->data) {
-    if (delPtr->left != nullptr)
-      prevPtr->right = delPtr->left;
-
-    else if (delPtr->right != nullptr)
-      prevPtr->right = delPtr->right;
-  } else if (prevPtr->data > delPtr->data) {
-    if (delPtr->left != nullptr)
-      prevPtr->left = delPtr->left;
-
-    else if (delPtr->right != nullptr)
-      prevPtr->left = delPtr->right;
+  if (delPtr->data > prevPtr->data) {
+    prevPtr->right = delPtr->right;
+    delPtr->right->left = prevPtr;
   }
-
+  if (delPtr->data < prevPtr->data) {
+    prevPtr->left = delPtr->left;
+    delPtr->left->right = prevPtr;
+  }
   delete delPtr;
   delPtr = nullptr;
 }
@@ -265,54 +314,65 @@ void ThreadedBST::removeOneChild(TreeNode *prevPtr, TreeNode *delPtr) {
 /** Remove Two Child: ************
 Precondition: ************
 Postcondition: *************/
-void ThreadedBST::removeTwoChild(TreeNode *prevPtr, TreeNode *inorderPtr,
-                                 TreeNode *delPtr,
-                                 TreeNode *prevInorderPointer) {
-  if (prevInorderPointer ==
-      nullptr) // Used for if there is no pointer left after moving right once
-               // (right once is inorder)
+void ThreadedBST::removeTwoChild(TreeNode *delPtr, TreeNode *prevPtr,
+                                 TreeNode *inorderPtr, TreeNode *prevInorderPtr,
+                                 TreeNode *leftInorderThreader) {
+  if (delPtr == root) // Removing root
   {
+    while (inorderPtr->leftThread == false) {
+      prevInorderPtr = inorderPtr;
+      inorderPtr = inorderPtr->left;
+    }
+
+    while (leftInorderThreader->rightThread == false)
+      leftInorderThreader = leftInorderThreader->right;
+
+    if (prevInorderPtr != nullptr) {
+      prevInorderPtr->left = inorderPtr;
+      prevInorderPtr->leftThread = true;
+    }
+    if (inorderPtr->rightThread == false && prevInorderPtr != nullptr) {
+      prevInorderPtr->left = inorderPtr->right;
+      prevInorderPtr->leftThread = false;
+    }
+
     inorderPtr->left = delPtr->left;
-
-    if (inorderPtr->data < prevPtr->data)
-      prevPtr->left = inorderPtr;
-
-    else if (inorderPtr->data > prevPtr->data)
-      prevPtr->right = inorderPtr;
-
-    delete delPtr;
-    delPtr = nullptr;
-  }
-
-  else if (delPtr == root) {
-    if (inorderPtr->right != nullptr)
-      prevInorderPointer->left = inorderPtr->right;
-    else
-      prevInorderPointer->left = nullptr;
-
-    inorderPtr->left = delPtr->left;
+    inorderPtr->leftThread = false;
     inorderPtr->right = delPtr->right;
+    inorderPtr->rightThread = false;
+    leftInorderThreader->right = inorderPtr;
 
     delete delPtr;
     delPtr = nullptr;
 
     root = inorderPtr;
-
   }
 
   else {
-    if (inorderPtr->right != nullptr)
-      prevInorderPointer->left = inorderPtr->right;
-    else
-      prevInorderPointer->left = nullptr;
+
+    while (inorderPtr->leftThread == false) {
+      prevInorderPtr = inorderPtr;
+      inorderPtr = inorderPtr->left;
+    }
+
+    while (leftInorderThreader->rightThread == false)
+      leftInorderThreader = leftInorderThreader->right;
 
     inorderPtr->left = delPtr->left;
-    inorderPtr->right = delPtr->right;
-
+    inorderPtr->leftThread = false;
+    leftInorderThreader->right = inorderPtr;
+    inorderPtr->rightThread = false;
+    if (prevInorderPtr != nullptr) {
+      prevInorderPtr->left = inorderPtr;
+      prevInorderPtr->leftThread = true;
+    }
+    if (inorderPtr->rightThread == false && prevInorderPtr != nullptr) {
+      prevInorderPtr->left = inorderPtr->right;
+      prevInorderPtr->leftThread = false;
+    }
     if (inorderPtr->data < prevPtr->data)
       prevPtr->left = inorderPtr;
-
-    else if (inorderPtr->data > prevPtr->data)
+    else
       prevPtr->right = inorderPtr;
 
     delete delPtr;
