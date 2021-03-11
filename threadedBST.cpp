@@ -361,6 +361,9 @@ void ThreadedBST::removeTwoChild(TreeNode *delPtr, TreeNode *prevPtr,
 
     inorderPtr->left = delPtr->left;
     inorderPtr->leftThread = false;
+    if (prevInorderPtr == nullptr)
+      inorderPtr->rightThread = true;
+
     leftInorderThreader->right = inorderPtr;
     inorderPtr->rightThread = false;
     if (prevInorderPtr != nullptr) {
