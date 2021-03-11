@@ -301,15 +301,35 @@ Precondition: ************
 Postcondition: *************/
 void ThreadedBST::removeOneChild(TreeNode *prevPtr, TreeNode *delPtr) {
   if (delPtr->data > prevPtr->data) {
-    prevPtr->right = delPtr->right;
-    delPtr->right->left = prevPtr;
+    if (delPtr->rightThread == false) {
+      prevPtr->right = delPtr->right;
+      delPtr->right->left = prevPtr;
+
+      delete delPtr;
+      delPtr = nullptr;
+    } else {
+      prevPtr->right = delPtr->left;
+      delPtr->left->right = delPtr->right;
+
+      delete delPtr;
+      delPtr = nullptr;
+    }
+
+  } else if (delPtr->data < prevPtr->data) {
+    if (delPtr->leftThread == false) {
+      prevPtr->left = delPtr->left;
+      delPtr->left->right = prevPtr;
+
+      delete delPtr;
+      delPtr = nullptr;
+    } else {
+      prevPtr->left = delPtr->right;
+      delPtr->right->left = delPtr->left;
+
+      delete delPtr;
+      delPtr = nullptr;
+    }
   }
-  if (delPtr->data < prevPtr->data) {
-    prevPtr->left = delPtr->left;
-    delPtr->left->right = prevPtr;
-  }
-  delete delPtr;
-  delPtr = nullptr;
 }
 
 /** Remove Two Child: ************
