@@ -16,17 +16,17 @@ using namespace std;
 // Testing constructor, add, and contains methods.
 void test1() {
   ThreadedBST tree1(20);
-  tree1.thread();
   tree1.inorder();
-  // assert(!tree1.contains(21));
-  // //tree1.add(21);                  adding after threading will crash program (destructor dont work)
-  // assert(tree1.contains(20));
-  // cout << endl << endl;
+  assert(!tree1.contains(21));
+  // tree1.add(21);
+
+  assert(tree1.contains(20));
+  cout << endl << endl;
 }
 
 // Testing copy constuctor
 void test2() {
-  ThreadedBST tree2(20);  
+  ThreadedBST tree2(20);
   cout << endl << endl;
   ThreadedBST tree3(tree2);
   tree2.thread();
@@ -34,25 +34,11 @@ void test2() {
 }
 
 void removetest() {
-  ThreadedBST tree1;
-  tree1.add(10);
-  tree1.add(15);
-  tree1.add(5);
-  tree1.add(3);
-  tree1.add(7);
-  tree1.add(12);
-  tree1.add(9);
-  tree1.add(6);
-  tree1.add(8);
-  tree1.add(11);
-  /* tree1.remove(8);
-   assert(!tree1.contains(8));
-   tree1.remove(12);
-   assert(!tree1.contains(12));
-   tree1.remove(7);
-   assert(!tree1.contains(7));*/
+
+  ThreadedBST tree1(20);
+  tree1.remove(5);
+  tree1.remove(14);
   tree1.remove(10);
-  tree1.thread()2;
 }
 
 void threadtest() {
@@ -68,8 +54,6 @@ void threadtest() {
   tree1.add(9);
   tree1.add(13);
   tree1.thread();
-  cout << endl;
-  tree1.inorder();
 }
 
 void officialtest() {
@@ -87,10 +71,10 @@ void officialtest() {
 }
 
 int main() {
-  test1();
+  // test1();
   // test2();
-  // removetest();
-  //threadtest();
+  removetest();
+  // threadtest();
   cout << endl << "Done." << endl;
   return 0;
 }
