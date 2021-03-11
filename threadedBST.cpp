@@ -62,7 +62,6 @@ ThreadedBST::ThreadedBST(const ThreadedBST &tree) : root{nullptr}, count{0} {
   } else {
     copy(tree.root);
     thread();
-    removeEven();
   }
 }
 
@@ -590,3 +589,8 @@ int ThreadedBST::heightHelper(TreeNode *node) const {
 Precondition:ThreadedBST tree object must exist
 Postcondition: Returns int count*/
 int ThreadedBST::getCount() const { return count; }
+
+ThreadedBST& ThreadedBST::operator=(const ThreadedBST& tree) {
+  ThreadedBST *treeCopy = new ThreadedBST(tree);
+  return *treeCopy;
+}

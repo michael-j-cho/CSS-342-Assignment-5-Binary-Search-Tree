@@ -18,6 +18,8 @@ void test1() {
   ThreadedBST tree1(20);
   cout << endl << endl << "Copying: " ;
   ThreadedBST tree2(tree1);
+  ThreadedBST tree3;
+  tree3 = tree2;
   // tree2.removeEven();
   cout << endl << endl;
 }
@@ -63,9 +65,9 @@ void officialtest() {
     cin >> n;
   }
   ThreadedBST tree(n);
-  tree.inorder();
+  // tree.inorder();
   ThreadedBST treecopy(tree);
-  treecopy.inorder();
+  // treecopy.inorder();
 }
 
 int main() {
