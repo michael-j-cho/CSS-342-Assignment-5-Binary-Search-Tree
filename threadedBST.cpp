@@ -227,15 +227,6 @@ bool ThreadedBST::remove(int data) {
   return true;
 }
 
-void ThreadedBST::copy(TreeNode *node) {
-  add(node->data);
-  if (node->left != nullptr) {
-    copy(node->left);
-  }
-  if (node->right != nullptr) {
-    copy(node->right);
-  }
-}
 
 /** Copy: ************
 Precondition: ThreadedBST tree object must exist
