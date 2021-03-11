@@ -21,8 +21,9 @@ private:
     TreeNode* root;
     int count = 0;
 
-    void removeOneChild(TreeNode* prevPtr, TreeNode* delPtr);
-    void removeTwoChild(TreeNode* prevPtr, TreeNode* inorderPtr, TreeNode* delPtr, TreeNode* prevInorderPointer);
+    void removeZeroChild(TreeNode *delPtr, TreeNode *prevPtr);
+    void removeOneChild(TreeNode *prevPtr, TreeNode *delPtr);
+    void removeTwoChild(TreeNode *delPtr, TreeNode *prevPtr, TreeNode *inorderPtr, TreeNode *prevInorderPtr, TreeNode *leftInorderThreader);
     void threadLeftSideRecur(TreeNode *threadTarget, TreeNode *threader, TreeNode *prevThreader);
     void threadRightSideRecur(TreeNode* threadTarget, TreeNode* threader, TreeNode *prevThreader);
 
