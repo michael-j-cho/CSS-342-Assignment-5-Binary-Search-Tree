@@ -450,7 +450,7 @@ void ThreadedBST::threadRightSideRecur(TreeNode *threadTarget, TreeNode *threade
         continue;
       }
     }
-    if (threadTarget->left != nullptr) {
+    if (threadTarget->left != nullptr && threadTarget != root) {
       if (threadTarget->left->rightThread == false) {
         threader = threadTarget->left;
         while (threader->right != nullptr)
@@ -460,6 +460,7 @@ void ThreadedBST::threadRightSideRecur(TreeNode *threadTarget, TreeNode *threade
       }
     }
     threadTarget = threadTarget->left;
+  }
   }
 
 /** In Order: ************
