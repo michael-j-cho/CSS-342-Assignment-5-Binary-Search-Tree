@@ -62,6 +62,7 @@ ThreadedBST::ThreadedBST(const ThreadedBST &tree) : root{nullptr}, count{0} {
   } else {
     copy(tree.root);
     thread();
+    removeEven();
   }
 }
 
@@ -253,15 +254,15 @@ void ThreadedBST::removeEven() {
 Precondition: ThreadedBST tree object must exist
 Postcondition: *************/
 void ThreadedBST::removeEvenHelper(TreeNode *node) {
-  if (!node->leftThread && node->left != nullptr) {
+  if (node->leftThread == false && node->left != nullptr) {
     removeEvenHelper(node->left);
   }
-  if (!node->rightThread && node->right != nullptr) {
+  if (node->rightThread == false && node->right != nullptr) {
     removeEvenHelper(node->right);
   }
+
   if (node->data % 2 == 0) {
     remove(node->data);
-    cerr << endl << "Deleting " << node->data;
   }
 }
 
@@ -530,39 +531,43 @@ void ThreadedBST::threadRightSideRecur(TreeNode *threadTarget, TreeNode *threade
 /** In Order: ************
 Precondition: ************
 Postcondition: *************/
-void ThreadedBST::inorder() const {
-  vector<int> vect;
-  TreeNode *curr = root;
-  int temp;
+void ThreadedBST::inorderPrint() const {
+    TreeNode *curr = root;
+    while (curr->left != nullptr) {
+      curr = curr->left;
+    }
 
-  while(curr->left != nullptr) {
-    curr = curr->left;
+    while (curr != nullptr) {
+      while (curr->rightThread == false) {
+        if (curr->leftThread == false && curr->left != nullptr) {
+          curr = curr->left;
+          continue;
+        }
+
+        cout << curr->data << ", ";
+        curr = curr->right;
+      }
+      if (curr != nullptr) {
+        if (curr->right == nullptr) {
+          cout << curr->data;
+          curr = curr->right;
+        } else {
+          cout << curr->data << ", ";
+          curr = curr->right;
+        }
+      }
+
+      if (curr != nullptr) {
+        if (curr->right == nullptr) {
+          cout << curr->data;
+          curr = curr->right;
+        } else {
+          cout << curr->data << ", ";
+          curr = curr->right;
+        }
+      }
+    }
   }
-  cout << curr->data << " ";
-  while(curr->right != nullptr) {
-    curr = curr->right;
-    if(curr->left != nullptr && curr->left->leftThread) {
-      cout << curr->left->data << " ";
-    }
-    cout << curr->data << " ";
-    if(curr == root) {
-      break;
-    }
-  }
-  
-   while(curr->right != nullptr) {
-     curr = curr->right;
-   }
-   cout << curr->data << " ";
-   while(curr != root) {
-    if(curr->left->data - 1 == curr->data){
-     curr = curr->left;
-    }
-
-     
-   }
-
-}
 
 /** Get Height: Calls the height helper method and returns the height
 Precondition:ThreadedBST tree object must exist
