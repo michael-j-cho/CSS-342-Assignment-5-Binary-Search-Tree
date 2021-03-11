@@ -49,6 +49,7 @@ public:
     int heightHelper(TreeNode* node) const;
     int getCount() const;
 
+    ThreadedBST& operator=(const ThreadedBST& tree);
 };
 
 #endif

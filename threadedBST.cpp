@@ -135,7 +135,7 @@ bool ThreadedBST::add(int data) {
     insert(root, newNode);
   }
   count++;
-  cout << data << ", ";
+  cerr << data << ", ";
   return true;
 }
 
@@ -209,10 +209,10 @@ Precondition: ThreadedBST tree object must exist
 Postcondition: *************/
 void ThreadedBST::copy(TreeNode *node) {
   add(node->data);
-  if (node->left != nullptr) {
+  if (!node->leftThread && node->left != nullptr) {
     copy(node->left);
   }
-  if (node->right != nullptr) {
+  if (!node->rightThread && node->right != nullptr) {
     copy(node->right);
   }
 }
@@ -228,16 +228,15 @@ void ThreadedBST::removeEven() {
 Precondition: ThreadedBST tree object must exist
 Postcondition: *************/
 void ThreadedBST::removeEvenHelper(TreeNode *node) {
-  if (node->left != nullptr) {
+  if (!node->leftThread && node->left != nullptr) {
     removeEvenHelper(node->left);
   }
-  if (node->right != nullptr) {
+  if (!node->rightThread && node->right != nullptr) {
     removeEvenHelper(node->right);
   }
-
   if (node->data % 2 == 0) {
     remove(node->data);
-    cout << endl << "Deleting " << node->data;
+    cerr << endl << "Deleting " << node->data;
   }
 }
 
@@ -485,15 +484,19 @@ void ThreadedBST::inorder() const {
       break;
     }
   }
+  
+   while(curr->right != nullptr) {
+     curr = curr->right;
+   }
+   cout << curr->data << " ";
+   while(curr != root) {
+    if(curr->left->data - 1 == curr->data){
+     curr = curr->left;
+    }
 
-  // while(curr->right != nullptr) {
-  //   curr = curr->right;
-  // }
-  // cout << curr->data << " ";
-  // curr = curr->left;
-  // if(curr->left->data == curr->data - 1) {
+     
+   }
 
-  // }
 }
 
 /** Get Height: Calls the height helper method and returns the height

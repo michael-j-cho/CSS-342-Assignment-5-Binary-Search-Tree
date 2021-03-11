@@ -17,6 +17,9 @@ using namespace std;
 void test1() {
   ThreadedBST tree1(20);
   tree1.thread();
+  // tree1.removeEven();
+  // cout << endl << "Copying: ";
+  // ThreadedBST tree2(tree1);
   tree1.inorder();
   // assert(!tree1.contains(21));
   // //tree1.add(21);                  adding after threading will crash program (destructor dont work)
@@ -52,7 +55,7 @@ void removetest() {
    tree1.remove(7);
    assert(!tree1.contains(7));*/
   tree1.remove(10);
-  tree1.thread()2;
+  tree1.thread();
 }
 
 void threadtest() {
