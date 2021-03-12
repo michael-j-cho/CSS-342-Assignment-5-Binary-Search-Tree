@@ -63,7 +63,6 @@ ThreadedBST::ThreadedBST(const ThreadedBST &tree) : root{nullptr}, count{0} {
   } else {
     copy(tree.root);
     thread();
-    removeEven();
   }
 }
 
@@ -669,7 +668,12 @@ Precondition:ThreadedBST tree object must exist
 Postcondition: Returns int count*/
 int ThreadedBST::getCount() const { return count; }
 
-ThreadedBST& ThreadedBST::operator=(const ThreadedBST& tree) {
-  ThreadedBST *treeCopy = new ThreadedBST(tree);
-  return *treeCopy;
+ThreadedBST& ThreadedBST::operator=(const ThreadedBST &tree) {
+    if (tree.root == nullptr) {
+    this->root = nullptr;
+  } else {
+    copy(tree.root);
+    thread();
+  }
+  return *this;
 }

@@ -15,12 +15,28 @@ using namespace std;
 
 // Testing copy constuctor.
 void test1() {
+  cout << "\n****Begin Tests for Constuctor****\n";
+  cout << "\nCreating ThreadedBST tree1 (n = 20):\n";
   ThreadedBST tree1(20);
-  cout << endl << endl << "Copying: " ;
+  tree1.inorderPrint();
+
+  cout << "\n\n****Testing Copy Constructor****\n" ;
+  cout << "\nCopying tree1 into tree2:\n";
   ThreadedBST tree2(tree1);
+  tree2.inorderPrint();
+  cout << "\n\nDeleting even nodes:\n";
+  tree2.removeEven();
+  tree2.inorderPrint();
+
+  cout << "\n\n****Testing Overloaded = Operator****\n";
   ThreadedBST tree3;
-  tree3 = tree2;
-  cout << endl << endl;
+  cerr << endl << "Copying tree1 into tree3:\n";
+  tree3 = tree1;
+  tree3.inorderPrint();
+  cout << "\n\nDeleting even nodes:\n";
+  tree1.removeEven();
+  tree1.inorderPrint();
+  cout << endl;
 }
 
 // Testing copy constuctor
