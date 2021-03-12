@@ -121,16 +121,6 @@ else
   echo "WARNING: valgrind not available"
 fi
 
-echo "====================================================="
-echo "7. Tests have full code coverage"
-echo "====================================================="
-
-if [ -f "check-code-coverage.sh" ]; then
-  ./check-code-coverage.sh
-else
-  echo "WARNING: check-code-coverage.sh script is missing"
-fi
-
 
 # Remove the executable
 rm -rf ./a.out* 2>/dev/null

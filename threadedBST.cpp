@@ -3,7 +3,8 @@
  * Tim D
  *
  * CSS342
- * **************ADD DESCRIPTION***********
+ *
+ * 
  * */
 
 #include "threadedBST.h"
@@ -295,7 +296,7 @@ void ThreadedBST::removeEven() { removeEvenHelper(this->root); }
 the tree. Stops when the end of a branch is reached (end of branch is
 has nullptr or is a left or right thread).
 Precondition: ThreadedBST tree object must exist
-Postcondition: *************/
+Postcondition: Removes even nodes*/
 void ThreadedBST::removeEvenHelper(TreeNode *node) {
   if (!node->leftThread && node->left != nullptr) {
     removeEvenHelper(node->left);
@@ -308,10 +309,10 @@ void ThreadedBST::removeEvenHelper(TreeNode *node) {
     remove(node->data);
   }
 }
+
 /** Remove One Child: Helper function that used for cases with zero children
 Precondition: Must be called in remove when it has zero children
 Postcondition: Reconnects other nodes to proper place, and deletes node*/
-
 void ThreadedBST::removeZeroChild(TreeNode *delPtr, TreeNode *prevPtr) {
   if (prevPtr->leftThread == true ||
       prevPtr->rightThread ==
@@ -556,6 +557,9 @@ void ThreadedBST::threadLeftSideRecur(TreeNode *threadTarget,
   }
 }
 
+/** Thread Recursion: Helper methods for threading each side from root
+Precondition: thread must be called somewhere else
+Postcondition: Threads each side of the tree from root*/
 void ThreadedBST::threadRightSideRecur(TreeNode *threadTarget,
                                        TreeNode *threader,
                                        TreeNode *prevThreader) {
