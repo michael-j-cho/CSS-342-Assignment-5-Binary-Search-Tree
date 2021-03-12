@@ -66,36 +66,6 @@ ThreadedBST::ThreadedBST(const ThreadedBST &tree) : root{nullptr}, count{0} {
   }
 }
 
-/** Operator=: Overloaded operator used for
-easily creating copy constructors
-Precondition: A tree must already exist for this to work
-Postcondition: Create a new tree with same structure as original*/
-ThreadedBST &ThreadedBST::operator=(const ThreadedBST &tree) {
-  if (tree.root == nullptr) {
-    this->root = nullptr;
-  } else {
-    copy(tree.root);
-    thread();
-  }
-  return *this;
-}
-
-/** Copy: Copies a tree object to current tree. Adds first node
-which is root. Then, recursively adds each left and right node
-until the bottom each branch is reached (end of branch is has
-nullptr or is a left or right thread).
-Precondition: ThreadedBST tree object must exist
-Postcondition: Tree copied to current tree.*/
-void ThreadedBST::copy(TreeNode *node) {
-  add(node->data);
-  if (!node->leftThread && node->left != nullptr) {
-    copy(node->left);
-  }
-  if (!node->rightThread && node->right != nullptr) {
-    copy(node->right);
-  }
-}
-
 /** Destructor: Calls the clear method
 Precondition: ThreadedBST tree object must exist
 Postcondition: Deletes the ThreadedBST tree object with the clear method*/
@@ -299,6 +269,22 @@ bool ThreadedBST::remove(int data) {
   return true;
 }
 
+/** Copy: Copies a tree object to current tree. Adds first node
+which is root. Then, recursively adds each left and right node
+until the bottom each branch is reached (end of branch is has
+nullptr or is a left or right thread).
+Precondition: ThreadedBST tree object must exist
+Postcondition: Tree copied to current tree.*/
+void ThreadedBST::copy(TreeNode *node) {
+  add(node->data);
+  if (!node->leftThread && node->left != nullptr) {
+    copy(node->left);
+  }
+  if (!node->rightThread && node->right != nullptr) {
+    copy(node->right);
+  }
+}
+
 /** Remove Even: Calls the removeEvenHelper method with the root
 node of current tree.
 Precondition: ThreadedBST tree object must exist
@@ -343,9 +329,9 @@ void ThreadedBST::removeZeroChild(TreeNode *delPtr, TreeNode *prevPtr) {
     delPtr = nullptr;
   }
 
-  if (prevPtr->leftThread == false &&
-      prevPtr->rightThread ==
-          false) // Checks if it does not have a thread for threading reasons
+  else if (prevPtr->leftThread == false &&
+           prevPtr->rightThread == false) // Checks if it does not have a thread
+                                          // for threading reasons
   {
     if (prevPtr->right == delPtr) {
       prevPtr->right = delPtr->right;
@@ -707,3 +693,16 @@ int ThreadedBST::heightHelper(TreeNode *node) const {
 Precondition:ThreadedBST tree object must exist
 Postcondition: Returns int count*/
 int ThreadedBST::getCount() const { return count; }
+
+/** Operator=: Overloaded operator used for
+easily creating copy constructors
+Precondition: A tree must already exist for this to work*/
+ThreadedBST &ThreadedBST::operator=(const ThreadedBST &tree) {
+  if (tree.root == nullptr) {
+    this->root = nullptr;
+  } else {
+    copy(tree.root);
+    thread();
+  }
+  return *this;
+}

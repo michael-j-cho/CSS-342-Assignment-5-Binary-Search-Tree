@@ -20,15 +20,10 @@ private:
   TreeNode *root;
   int count = 0;
 
-  void removeZeroChild(TreeNode *delPtr, TreeNode *prevPtr);
-  void removeOneChild(TreeNode *prevPtr, TreeNode *delPtr);
-  void removeTwoChild(TreeNode *delPtr, TreeNode *prevPtr, TreeNode *inorderPtr,
-                      TreeNode *prevInorderPtr, TreeNode *leftInorderThreader);
   void threadLeftSideRecur(TreeNode *threadTarget, TreeNode *threader,
                            TreeNode *prevThreader);
   void threadRightSideRecur(TreeNode *threadTarget, TreeNode *threader,
                             TreeNode *prevThreader);
-  void removeEvenHelper(TreeNode *node);
 
 public:
   explicit ThreadedBST();
@@ -43,6 +38,11 @@ public:
   void balancedAdd(vector<int> vect);
   bool remove(int data);
   void removeEven();
+  void removeEvenHelper(TreeNode *node);
+  void removeZeroChild(TreeNode *delPtr, TreeNode *prevPtr);
+  void removeOneChild(TreeNode *prevPtr, TreeNode *delPtr);
+  void removeTwoChild(TreeNode *delPtr, TreeNode *prevPtr, TreeNode *inorderPtr,
+                      TreeNode *prevInorderPtr, TreeNode *leftInorderThreader);
   bool retrieve(const TreeNode &node1, TreeNode node2);
   bool contains(int target);
   void thread();
