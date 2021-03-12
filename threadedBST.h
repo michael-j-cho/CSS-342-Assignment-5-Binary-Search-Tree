@@ -8,49 +8,50 @@ using namespace std;
 class ThreadedBST {
 
 private:
-    struct TreeNode {
-        explicit TreeNode(int data) : left(nullptr), right(nullptr), data(data) {};
-        TreeNode* left;
-        TreeNode* right;
-        int data;
+  struct TreeNode {
+    explicit TreeNode(int data) : left(nullptr), right(nullptr), data(data){};
+    TreeNode *left;
+    TreeNode *right;
+    int data;
 
-        bool leftThread = false;
-        bool rightThread = false;
+    bool leftThread = false;
+    bool rightThread = false;
+  };
+  TreeNode *root;
+  int count = 0;
 
-    };
-    TreeNode* root;
-    int count = 0;
-
-    void removeZeroChild(TreeNode *delPtr, TreeNode *prevPtr);
-    void removeOneChild(TreeNode *prevPtr, TreeNode *delPtr);
-    void removeTwoChild(TreeNode *delPtr, TreeNode *prevPtr, TreeNode *inorderPtr, TreeNode *prevInorderPtr, TreeNode *leftInorderThreader);
-    void threadLeftSideRecur(TreeNode *threadTarget, TreeNode *threader, TreeNode *prevThreader);
-    void threadRightSideRecur(TreeNode* threadTarget, TreeNode* threader, TreeNode *prevThreader);
+  void removeZeroChild(TreeNode *delPtr, TreeNode *prevPtr);
+  void removeOneChild(TreeNode *prevPtr, TreeNode *delPtr);
+  void removeTwoChild(TreeNode *delPtr, TreeNode *prevPtr, TreeNode *inorderPtr,
+                      TreeNode *prevInorderPtr, TreeNode *leftInorderThreader);
+  void threadLeftSideRecur(TreeNode *threadTarget, TreeNode *threader,
+                           TreeNode *prevThreader);
+  void threadRightSideRecur(TreeNode *threadTarget, TreeNode *threader,
+                            TreeNode *prevThreader);
 
 public:
-    explicit ThreadedBST();
-    explicit ThreadedBST(int n);
-    explicit ThreadedBST(const ThreadedBST& tree);
-    ~ThreadedBST();
+  explicit ThreadedBST();
+  explicit ThreadedBST(int n);
+  explicit ThreadedBST(const ThreadedBST &tree);
+  ~ThreadedBST();
 
-    void insert(TreeNode* node, TreeNode* newNode);
-    bool add(int data);
-    void balancedAdd(vector<int> vect);
-    bool remove(int data);
-    void copy(TreeNode* node);
-    void removeEven();
-    void removeEvenHelper(TreeNode *node);
-    void thread();
+  void insert(TreeNode *node, TreeNode *newNode);
+  bool add(int data);
+  void balancedAdd(vector<int> vect);
+  bool remove(int data);
+  void copy(TreeNode *node);
+  void removeEven();
+  void removeEvenHelper(TreeNode *node);
+  void thread();
+  bool retrieve(const TreeNode &node1, TreeNode node2);
+  void clear();
+  bool contains(int target);
+  void inorderPrint() const;
+  int getHeight();
+  int heightHelper(TreeNode *node) const;
+  int getCount() const;
 
-    bool retrieve(const TreeNode& node1, TreeNode node2);
-    void clear();
-    bool contains(int target);
-    void inorderPrint() const;
-    int getHeight();
-    int heightHelper(TreeNode* node) const;
-    int getCount() const;
-
-    ThreadedBST& operator=(const ThreadedBST& tree);
+  ThreadedBST &operator=(const ThreadedBST &tree);
 };
 
 #endif

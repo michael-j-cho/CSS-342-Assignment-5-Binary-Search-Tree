@@ -24,37 +24,24 @@ void test1() {
   cout << "\nCopying tree1 into tree2:\n";
   ThreadedBST tree2(tree1);
   tree2.inorderPrint();
-  cout << "\n\nDeleting even nodes:\n";
+  cout << "\n\nDeleting tree2 even nodes:\n";
   tree2.removeEven();
   tree2.inorderPrint();
 
   cout << "\n\n****Testing Overloaded = Operator****\n";
   ThreadedBST tree3;
-  cerr << endl << "Copying tree1 into tree3:\n";
+  cout << endl << "Copying tree1 into tree3:\n";
   tree3 = tree1;
   tree3.inorderPrint();
-  cout << "\n\nDeleting even nodes:\n";
-  tree1.removeEven();
-  tree1.inorderPrint();
+  cout << "\n\nDeleting tree3 even nodes:\n";
+  tree3.removeEven();
+  tree3.inorderPrint();
   cout << endl;
 }
 
-// Testing copy constuctor
+// Testing methods contains, add, and remove.
 void test2() {
-  ThreadedBST tree2(20);
-  cout << endl << endl;
-  ThreadedBST tree3(tree2);
-}
-
-void removetest() {
-
-  ThreadedBST tree1(20);
-  tree1.remove(5);
-  tree1.remove(14);
-  tree1.remove(10);
-}
-
-void threadtest() {
+  // Creating tree
   ThreadedBST tree1;
   tree1.add(6);
   tree1.add(3);
@@ -65,29 +52,49 @@ void threadtest() {
   tree1.add(7);
   tree1.add(11);
   tree1.add(9);
-  tree1.add(13);
+
+  // Tree does not contain 13
+  assert(!tree1.contains(13));
+
+  // Adding node 13
+  assert(tree1.add(13));
+  assert(tree1.contains(13));
   tree1.thread();
+  
+  // Testing removal of node 13
+  assert(tree1.remove(13));
+  assert(!tree1.contains(13));
+
+  // Printing current tree
+  cout << "\nPrinting tree from test2:\n";
+  tree1.inorderPrint();
 }
 
+// User test. Creates a tree with a user specified number of nodes.
+// Then, copies the tree and deletes the even nodes from the copied
+// tree.
 void officialtest() {
-  cout << "Input number of nodes from 1-n to put into a BST";
+  cout << "\n\n****Begin User Test****\n\n";
+  cout << "Please enter number of tree nodes: ";
   int n;
   cin >> n;
   while (n <= 0) {
     cout << "Not a valid number, please input a number greater than 0";
     cin >> n;
   }
+  cout << "\nCreating ThreadedBST tree with " << n << " nodes:\n";
   ThreadedBST tree(n);
-  // tree.inorder();
+  tree.inorderPrint();
+  cout << endl << "\nMaking copy of tree and deleting even nodes:\n";
   ThreadedBST treecopy(tree);
-  // treecopy.inorder();
+  treecopy.removeEven();
+  treecopy.inorderPrint();
 }
 
 int main() {
   test1();
-  // test2();
-  // removetest();
-  // threadtest();
-  cout << endl << "Done." << endl;
+  test2();
+  officialtest();
+  cout << endl << endl << "Done." << endl;
   return 0;
 }
