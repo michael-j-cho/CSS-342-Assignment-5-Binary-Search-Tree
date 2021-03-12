@@ -60,7 +60,7 @@ void test2() {
   assert(tree1.add(13));
   assert(tree1.contains(13));
   tree1.thread();
-  
+
   // Testing removal of node 13
   assert(tree1.remove(13));
   assert(!tree1.contains(13));
