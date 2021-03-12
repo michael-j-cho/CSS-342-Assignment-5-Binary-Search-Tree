@@ -696,7 +696,7 @@ int ThreadedBST::getCount() const { return count; }
 
 /** Operator=: Overloaded operator used for
 easily creating copy constructors
-Precondition: A tree must already exist for this to work*/
+Precondition: A tree must already exist for this to*/
 ThreadedBST &ThreadedBST::operator=(const ThreadedBST &tree) {
   if (tree.root == nullptr) {
     this->root = nullptr;
