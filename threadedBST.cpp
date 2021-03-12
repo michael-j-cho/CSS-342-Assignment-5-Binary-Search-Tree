@@ -17,7 +17,6 @@
 #include "threadedBST.h"
 #include <algorithm>
 #include <iostream>
-#include <stack>
 #include <vector>
 
 using namespace std;
@@ -631,7 +630,7 @@ void ThreadedBST::inorderPrint() const {
   while (curr->left != nullptr) {
     curr = curr->left;
   }
-  stack<int> reversetraversal; // Used for when traversing left side of tree
+  vector<int> reversetraversal; // Used for when traversing left side of tree
                                // with threads
 
   while (curr != root) {
@@ -660,7 +659,7 @@ void ThreadedBST::inorderPrint() const {
 
   while (curr != root) {
     if (curr->leftThread == false) {
-      reversetraversal.push(
+      reversetraversal.push_back(
           curr->data); // Pushing to stack for printing in reverse
       curr = curr->left;
       if (curr->rightThread == false) {
@@ -671,15 +670,15 @@ void ThreadedBST::inorderPrint() const {
     }
 
     if (curr->leftThread == true) {
-      reversetraversal.push(curr->data);
+      reversetraversal.push_back(curr->data);
       curr = curr->left;
       continue;
     }
   }
 
   while (!reversetraversal.empty()) {
-    cout << reversetraversal.top() << ", ";
-    reversetraversal.pop();
+    cout << reversetraversal.front() << ", ";
+    reversetraversal.erase(reversetraversal.begin());
   }
 }
 
