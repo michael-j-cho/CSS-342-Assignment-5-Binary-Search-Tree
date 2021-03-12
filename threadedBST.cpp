@@ -5,13 +5,13 @@
  * CSS342
  *
  * Threaded Binary Search Tree Implementation File
- * 
+ *
  * This file contains methods to properly implemtnt a threaded
  * binary search tree. The tree is self balancing and leaf nodes
  * thread to the next and previous inorder node. Implementation
  * takes advantage of previously wasted nullptrs and uses them
  * to thread without increasing space complexity. Inorder print
- * is non-recursive. 
+ * is non-recursive.
  * */
 
 #include "threadedBST.h"
@@ -631,12 +631,12 @@ void ThreadedBST::inorderPrint() const {
     curr = curr->left;
   }
   vector<int> reversetraversal; // Used for when traversing left side of tree
-                               // with threads
+                                // with threads
 
   while (curr != root) {
     if (curr->rightThread == false) { // Will prioritize non-threaded links
                                       // first
-      cout << curr->data << ", ";
+      cout << curr->data << " ";
       curr = curr->right;
       if (curr->leftThread ==
           false) { // Used for next inorder value if it has one
@@ -647,20 +647,19 @@ void ThreadedBST::inorderPrint() const {
     }
 
     if (curr->rightThread == true) { // Threaded links secondary priority
-      cout << curr->data << ", ";
+      cout << curr->data << " ";
       curr = curr->right;
       continue;
     }
   }
-  cout << curr->data << ", ";
+  cout << curr->data << " ";
 
   while (curr->right != nullptr)
     curr = curr->right;
 
   while (curr != root) {
     if (curr->leftThread == false) {
-      reversetraversal.push_back(
-          curr->data); 
+      reversetraversal.push_back(curr->data);
       curr = curr->left;
       if (curr->rightThread == false) {
         while (curr->rightThread == false)
@@ -677,8 +676,8 @@ void ThreadedBST::inorderPrint() const {
   }
 
   while (!reversetraversal.empty()) {
-    cout << reversetraversal.front() << ", ";
-    reversetraversal.erase(reversetraversal.begin());
+    cout << reversetraversal.back() << " ";
+    reversetraversal.pop_back();
   }
 }
 
