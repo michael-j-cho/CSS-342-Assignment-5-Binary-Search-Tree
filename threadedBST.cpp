@@ -660,7 +660,7 @@ void ThreadedBST::inorderPrint() const {
   while (curr != root) {
     if (curr->leftThread == false) {
       reversetraversal.push_back(
-          curr->data); // Pushing to stack for printing in reverse
+          curr->data); 
       curr = curr->left;
       if (curr->rightThread == false) {
         while (curr->rightThread == false)
