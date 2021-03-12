@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <iostream>
 #include <vector>
+#include <stack>
 
 using namespace std;
 
@@ -62,6 +63,7 @@ ThreadedBST::ThreadedBST(const ThreadedBST &tree) : root{nullptr}, count{0} {
   } else {
     copy(tree.root);
     thread();
+    removeEven();
   }
 }
 
@@ -78,32 +80,63 @@ void ThreadedBST::clear() {
   TreeNode *curPtr = root;
   TreeNode *delPtr;
 
-  while (curPtr->left != nullptr)
+ while (curPtr->left != nullptr) {
     curPtr = curPtr->left;
-  delPtr = curPtr;
-
+  }
+ delPtr = curPtr;
   while (curPtr != root) {
-    curPtr = curPtr->right;
-    delete delPtr;
-    delPtr = nullptr;
-    delPtr = curPtr;
+    if (curPtr->rightThread == false) 
+    {
+      curPtr = curPtr->right;
+      delete delPtr;
+      delPtr = nullptr;
+      
+      if (curPtr->leftThread == false) {
+        while (curPtr->leftThread == false)
+          curPtr = curPtr->left;
+      }
+      delPtr = curPtr;
+      continue;
+    }
+
+    if (curPtr->rightThread == true) {     
+      curPtr = curPtr->right;
+      delete delPtr;
+      delPtr = nullptr;
+      delPtr = curPtr;
+      continue;
+    }
   }
 
-  while (curPtr->right != nullptr)
+  while (curPtr->right != nullptr) {
     curPtr = curPtr->right;
+  }
   delPtr = curPtr;
-
   while (curPtr != root) {
-    curPtr = curPtr->left;
-    delete delPtr;
-    delPtr = nullptr;
-    delPtr = curPtr;
+    if (curPtr->leftThread == false) {
+      curPtr = curPtr->left;
+      delete delPtr;
+      delPtr = nullptr;
+
+      if (curPtr->rightThread == false) {
+        while (curPtr->rightThread == false)
+          curPtr = curPtr->right;
+      }
+      delPtr = curPtr;
+      continue;
+    }
+
+    if (curPtr->leftThread == true) {
+      curPtr = curPtr->left;
+      delete delPtr;
+      delPtr = nullptr;
+      delPtr = curPtr;
+      continue;
+    }
   }
 
   delete delPtr;
   delPtr = nullptr;
-  curPtr = nullptr;
-}
 
 /** Insert: ************
 Precondition: ThreadedBST tree object must exist
@@ -457,18 +490,24 @@ void ThreadedBST::threadLeftSideRecur(TreeNode *threadTarget, TreeNode *threader
   {
     if (threadTarget->data > root->data) // Base case to end traversing left
       break;
-    if (threadTarget->left != nullptr) // Checks to see if left side has something to thread, will do for each node
-                 
+    if (threadTarget->left != nullptr &&
+        threadTarget->leftThread ==
+            false) // Checks to see if left side has something to thread, will
+                   // do for each node
       threader = threadTarget->left;
     else {
-      threadTarget = threadTarget->right; // Moves to the right when finished with left-most side
+      threadTarget =
+          threadTarget
+              ->right; // Moves to the right when finished with left-most side
       continue;
     }
 
-    if (threader->left != nullptr) // will thread the left side of the target before going right
+    if (threader->left != nullptr &&
+        threader->leftThread ==
+            false) // will thread the left side of the target before going right
       threadLeftSideRecur(threadTarget->left, threader, prevThreader);
 
-    TreeNode *starterThreader = threader; // Threading, used to keep track of what inorder node should thread to
+    
     prevThreader = threader;
     while (threader != nullptr) {
 
@@ -479,16 +518,6 @@ void ThreadedBST::threadLeftSideRecur(TreeNode *threadTarget, TreeNode *threader
       }
       threader = threader->right; // Traversing to next inorder spot
 
-      if (threader->left != nullptr) {
-        TreeNode *parent = threader; // Used to bring threader back after threading inorder to the left
-        while (threader->left != nullptr)
-          threader = threader->left;
-        threader->left = starterThreader; // Threading left
-        threader->leftThread = true;      // Lets computer know left is a thread
-        threader = parent; // Brings threader back to keep traversing
-        prevThreader = threader;
-      }
-
       if (threader->left == nullptr) {
         threader->left = prevThreader; // Threads left as it traverses right
         threader->leftThread = true;
@@ -496,41 +525,57 @@ void ThreadedBST::threadLeftSideRecur(TreeNode *threadTarget, TreeNode *threader
         continue;
       }
     }
+    if (threadTarget->right != nullptr && threadTarget != root) {
+      if (threadTarget->right->leftThread == false) {
+        threader = threadTarget->right;
+        while (threader->left != nullptr)
+          threader = threader->left;
+        threader->left = threadTarget;
+        threader->leftThread = true;
+      }
+    }
+
     threadTarget = threadTarget->right;
   }
 }
 
 void ThreadedBST::threadRightSideRecur(TreeNode *threadTarget, TreeNode *threader, TreeNode *prevThreader) {
-  while (
-      threadTarget !=
-      nullptr) // Same logic for threadRightSideRecur, but inverted, traversing
+  while (threadTarget != nullptr) // Traversing
   {
-    if (threadTarget->data < root->data)
+    if (threadTarget->data < root->data) // Base case to end traversing left
       break;
-    if (threadTarget->right != nullptr && threadTarget->rightThread == false)
+    if (threadTarget->right != nullptr &&
+        threadTarget->rightThread ==
+            false) // Checks to see if left side has something to thread, will
+                   // do for each node
       threader = threadTarget->right;
     else {
-      threadTarget = threadTarget->left;
+      threadTarget =
+          threadTarget
+              ->left; // Moves to the right when finished with left-most side
       continue;
     }
 
     if (threader->right != nullptr &&
-        threader->rightThread == false) // Checking right before moving left
+        threader->rightThread ==
+            false) // will thread the left side of the target before going right
       threadRightSideRecur(threadTarget->right, threader, prevThreader);
 
-    TreeNode *starterThreader = threader; // Threading
+    TreeNode *starterThreader = threader;
+    TreeNode *secondStarterThreader; // Threading, used to keep track of what
+                                     // inorder node should thread to
     prevThreader = threader;
     while (threader != nullptr) {
 
       if (threader->left == nullptr) {
-        threader->left = threadTarget;
-        threader->leftThread = true;
+        threader->left = threadTarget; // Threads right
+        threader->leftThread = true;   // Lets computer know right is a thread
         break;
       }
-      threader = threader->left;
+      threader = threader->left; // Traversing to next inorder spot
 
       if (threader->right == nullptr) {
-        threader->right = prevThreader;
+        threader->right = prevThreader; // Threads left as it traverses right
         threader->rightThread = true;
         prevThreader = threader;
         continue;
@@ -545,6 +590,7 @@ void ThreadedBST::threadRightSideRecur(TreeNode *threadTarget, TreeNode *threade
         threader->rightThread = true;
       }
     }
+
     threadTarget = threadTarget->left;
   }
   }
@@ -554,39 +600,55 @@ Precondition: ************
 Postcondition: *************/
 void ThreadedBST::inorderPrint() const {
     TreeNode *curr = root;
+
     while (curr->left != nullptr) {
       curr = curr->left;
     }
+    stack<int> reversetraversal;
 
-    while (curr != nullptr) {
-      while (curr->rightThread == false) {
-        if (curr->leftThread == false && curr->left != nullptr) {
-          curr = curr->left;
-          continue;
-        }
-
+    while (curr != root) {
+      if (curr->rightThread == false) {
         cout << curr->data << ", ";
         curr = curr->right;
-      }
-      if (curr != nullptr) {
-        if (curr->right == nullptr) {
-          cout << curr->data;
-          curr = curr->right;
-        } else {
-          cout << curr->data << ", ";
-          curr = curr->right;
+        if (curr->leftThread == false) {
+          while (curr->leftThread == false)
+            curr = curr->left;
         }
+        continue;
       }
 
-      if (curr != nullptr) {
-        if (curr->right == nullptr) {
-          cout << curr->data;
-          curr = curr->right;
-        } else {
-          cout << curr->data << ", ";
-          curr = curr->right;
-        }
+      if (curr->rightThread == true) {
+        cout << curr->data << ", ";
+        curr = curr->right;
+        continue;
       }
+    }
+    cout << curr->data << ", ";
+
+    while (curr->right != nullptr) // Moving right
+      curr = curr->right;
+
+    while (curr != root) {
+      if (curr->leftThread == false) {
+        reversetraversal.push(curr->data);
+        curr = curr->left;
+        if (curr->rightThread == false) {
+          while (curr->rightThread == false)
+            curr = curr->right;
+        }
+        continue;
+      }
+
+      if (curr->leftThread == true) {
+        reversetraversal.push(curr->data);
+        curr = curr->left;
+        continue;
+      }
+    }
+
+    while (!reversetraversal.empty()) {
+      cout << reversetraversal.top() << ", ";
+      reversetraversal.pop();
     }
   }
 
