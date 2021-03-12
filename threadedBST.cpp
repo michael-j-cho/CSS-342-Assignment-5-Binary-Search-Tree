@@ -488,9 +488,8 @@ bool ThreadedBST::contains(int target) {
 Precondition: ************
 Postcondition: *************/
 void ThreadedBST::thread() {
-  TreeNode *threadTarget = root;
   TreeNode *threader = nullptr;
-  TreeNode *prevThreader;
+  TreeNode *prevThreader = nullptr;
   threadLeftSideRecur(root, threader, prevThreader);
   threadRightSideRecur(root, threader, prevThreader);
 }
