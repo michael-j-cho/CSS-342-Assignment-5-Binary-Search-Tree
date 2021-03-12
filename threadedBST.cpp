@@ -66,6 +66,36 @@ ThreadedBST::ThreadedBST(const ThreadedBST &tree) : root{nullptr}, count{0} {
   }
 }
 
+/** Operator=: Overloaded operator used for
+easily creating copy constructors
+Precondition: A tree must already exist for this to work
+Postcondition: Create a new tree with same structure as original*/
+ThreadedBST &ThreadedBST::operator=(const ThreadedBST &tree) {
+  if (tree.root == nullptr) {
+    this->root = nullptr;
+  } else {
+    copy(tree.root);
+    thread();
+  }
+  return *this;
+}
+
+/** Copy: Copies a tree object to current tree. Adds first node
+which is root. Then, recursively adds each left and right node
+until the bottom each branch is reached (end of branch is has
+nullptr or is a left or right thread).
+Precondition: ThreadedBST tree object must exist
+Postcondition: Tree copied to current tree.*/
+void ThreadedBST::copy(TreeNode *node) {
+  add(node->data);
+  if (!node->leftThread && node->left != nullptr) {
+    copy(node->left);
+  }
+  if (!node->rightThread && node->right != nullptr) {
+    copy(node->right);
+  }
+}
+
 /** Destructor: Calls the clear method
 Precondition: ThreadedBST tree object must exist
 Postcondition: Deletes the ThreadedBST tree object with the clear method*/
@@ -193,7 +223,7 @@ void ThreadedBST::balancedAdd(vector<int> vect) {
   }
 }
 
-/** Remove: ************
+/** Remove: Remove function that deletes nodes and rethreads based on cases
 Precondition: ThreadedBST tree object must exist
 Postcondition: Returns true removed successfully*/
 bool ThreadedBST::remove(int data) {
@@ -269,45 +299,9 @@ bool ThreadedBST::remove(int data) {
   return true;
 }
 
-/** Copy: Copies a tree object to current tree. Adds first node
-which is root. Then, recursively adds each left and right node
-until the bottom each branch is reached (end of branch is has
-nullptr or is a left or right thread).
-Precondition: ThreadedBST tree object must exist
-Postcondition: Tree copied to current tree.*/
-void ThreadedBST::copy(TreeNode *node) {
-  add(node->data);
-  if (!node->leftThread && node->left != nullptr) {
-    copy(node->left);
-  }
-  if (!node->rightThread && node->right != nullptr) {
-    copy(node->right);
-  }
-}
-
-/** Remove Even: Calls the removeEvenHelper method with the root
-node of current tree.
-Precondition: ThreadedBST tree object must exist
-Postcondition: Calls removeEvenHelper*/
-void ThreadedBST::removeEven() { removeEvenHelper(this->root); }
-
-/** Remove Even Helper: Recursive method that removes even nodes in
-the tree. Stops when the end of a branch is reached (end of branch is
-has nullptr or is a left or right thread).
-Precondition: ThreadedBST tree object must exist
-Postcondition: *************/
-void ThreadedBST::removeEvenHelper(TreeNode *node) {
-  if (!node->leftThread && node->left != nullptr) {
-    removeEvenHelper(node->left);
-  }
-  if (!node->rightThread && node->right != nullptr) {
-    removeEvenHelper(node->right);
-  }
-
-  if (node->data % 2 == 0) {
-    remove(node->data);
-  }
-}
+/** Remove One Child: Helper function that used for cases with zero children
+Precondition: Must be called in remove when it has zero children
+Postcondition: Reconnects other nodes to proper place, and deletes node*/
 
 void ThreadedBST::removeZeroChild(TreeNode *delPtr, TreeNode *prevPtr) {
   if (prevPtr->leftThread == true ||
@@ -343,9 +337,9 @@ void ThreadedBST::removeZeroChild(TreeNode *delPtr, TreeNode *prevPtr) {
   }
 }
 
-/** Remove One Child: ************
-Precondition: ************
-Postcondition: *************/
+/** Remove One Child: Helper function that used for cases with one child
+Precondition: Must be called in remove when it has one child
+Postcondition: Reconnects other nodes to proper place, and deletes node*/
 void ThreadedBST::removeOneChild(TreeNode *prevPtr, TreeNode *delPtr) {
   if (delPtr->data > prevPtr->data) {
     if (delPtr->rightThread == false) {
@@ -379,9 +373,9 @@ void ThreadedBST::removeOneChild(TreeNode *prevPtr, TreeNode *delPtr) {
   }
 }
 
-/** Remove Two Child: ************
-Precondition: ************
-Postcondition: *************/
+/** Remove One Child: Helper function that used for cases with two children
+Precondition: Must be called in remove when it has two children
+Postcondition: Reconnects other nodes to proper place, and deletes node*/
 void ThreadedBST::removeTwoChild(TreeNode *delPtr, TreeNode *prevPtr,
                                  TreeNode *inorderPtr, TreeNode *prevInorderPtr,
                                  TreeNode *leftInorderThreader) {
@@ -454,6 +448,30 @@ void ThreadedBST::removeTwoChild(TreeNode *delPtr, TreeNode *prevPtr,
   }
 }
 
+/** Remove Even: Calls the removeEvenHelper method with the root
+node of current tree.
+Precondition: ThreadedBST tree object must exist
+Postcondition: Calls removeEvenHelper*/
+void ThreadedBST::removeEven() { removeEvenHelper(this->root); }
+
+/** Remove Even Helper: Recursive method that removes even nodes in
+the tree. Stops when the end of a branch is reached (end of branch is
+has nullptr or is a left or right thread).
+Precondition: ThreadedBST tree object must exist
+Postcondition: *************/
+void ThreadedBST::removeEvenHelper(TreeNode *node) {
+  if (!node->leftThread && node->left != nullptr) {
+    removeEvenHelper(node->left);
+  }
+  if (!node->rightThread && node->right != nullptr) {
+    removeEvenHelper(node->right);
+  }
+
+  if (node->data % 2 == 0) {
+    remove(node->data);
+  }
+}
+
 /** Contains: Boolean method that checks whether a particular value exists
 within the ThreadedBST tree.
 Precondition: ThreadedBST tree object must exist
@@ -484,9 +502,9 @@ bool ThreadedBST::contains(int target) {
   return true;
 }
 
-/** Thread: ************
-Precondition: ************
-Postcondition: *************/
+/** Thread: Main method for threading, calling on helpers for each side
+Precondition: Tree must be fully created, as cannot be rethreaded with this
+method Postcondition: returns a fully threaded BST*/
 void ThreadedBST::thread() {
   TreeNode *threader = nullptr;
   TreeNode *prevThreader = nullptr;
@@ -494,9 +512,9 @@ void ThreadedBST::thread() {
   threadRightSideRecur(root, threader, prevThreader);
 }
 
-/** Thread Recursion: ************
-Precondition: ************
-Postcondition: *************/
+/** Thread Recursion: Helper methods for threading each side from root
+Precondition: thread must be called somewhere else
+Postcondition: Threads each side of the tree from root*/
 void ThreadedBST::threadLeftSideRecur(TreeNode *threadTarget,
                                       TreeNode *threader,
                                       TreeNode *prevThreader) {
@@ -608,29 +626,32 @@ void ThreadedBST::threadRightSideRecur(TreeNode *threadTarget,
   }
 }
 
-/** In Order: ************
-Precondition: ************
-Postcondition: *************/
+/** In Order: Iterator that uses threads to print out values of a threaded BST
+Precondition: Tree must be threaded for this to work
+Postcondition: Prints out values in console */
 void ThreadedBST::inorderPrint() const {
   TreeNode *curr = root;
 
   while (curr->left != nullptr) {
     curr = curr->left;
   }
-  stack<int> reversetraversal;
+  stack<int> reversetraversal; // Used for when traversing left side of tree
+                               // with threads
 
   while (curr != root) {
-    if (curr->rightThread == false) {
+    if (curr->rightThread == false) { // Will prioritize non-threaded links
+                                      // first
       cout << curr->data << ", ";
       curr = curr->right;
-      if (curr->leftThread == false) {
+      if (curr->leftThread ==
+          false) { // Used for next inorder value if it has one
         while (curr->leftThread == false)
           curr = curr->left;
       }
       continue;
     }
 
-    if (curr->rightThread == true) {
+    if (curr->rightThread == true) { // Threaded links secondary priority
       cout << curr->data << ", ";
       curr = curr->right;
       continue;
@@ -638,12 +659,13 @@ void ThreadedBST::inorderPrint() const {
   }
   cout << curr->data << ", ";
 
-  while (curr->right != nullptr) // Moving right
+  while (curr->right != nullptr)
     curr = curr->right;
 
   while (curr != root) {
     if (curr->leftThread == false) {
-      reversetraversal.push(curr->data);
+      reversetraversal.push(
+          curr->data); // Pushing to stack for printing in reverse
       curr = curr->left;
       if (curr->rightThread == false) {
         while (curr->rightThread == false)
@@ -686,13 +708,3 @@ int ThreadedBST::heightHelper(TreeNode *node) const {
 Precondition:ThreadedBST tree object must exist
 Postcondition: Returns int count*/
 int ThreadedBST::getCount() const { return count; }
-
-ThreadedBST &ThreadedBST::operator=(const ThreadedBST &tree) {
-  if (tree.root == nullptr) {
-    this->root = nullptr;
-  } else {
-    copy(tree.root);
-    thread();
-  }
-  return *this;
-}
