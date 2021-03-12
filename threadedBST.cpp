@@ -299,6 +299,29 @@ bool ThreadedBST::remove(int data) {
   return true;
 }
 
+/** Remove Even: Calls the removeEvenHelper method with the root
+node of current tree.
+Precondition: ThreadedBST tree object must exist
+Postcondition: Calls removeEvenHelper*/
+void ThreadedBST::removeEven() { removeEvenHelper(this->root); }
+
+/** Remove Even Helper: Recursive method that removes even nodes in
+the tree. Stops when the end of a branch is reached (end of branch is
+has nullptr or is a left or right thread).
+Precondition: ThreadedBST tree object must exist
+Postcondition: *************/
+void ThreadedBST::removeEvenHelper(TreeNode *node) {
+  if (!node->leftThread && node->left != nullptr) {
+    removeEvenHelper(node->left);
+  }
+  if (!node->rightThread && node->right != nullptr) {
+    removeEvenHelper(node->right);
+  }
+
+  if (node->data % 2 == 0) {
+    remove(node->data);
+  }
+}
 /** Remove One Child: Helper function that used for cases with zero children
 Precondition: Must be called in remove when it has zero children
 Postcondition: Reconnects other nodes to proper place, and deletes node*/
@@ -320,7 +343,9 @@ void ThreadedBST::removeZeroChild(TreeNode *delPtr, TreeNode *prevPtr) {
     delPtr = nullptr;
   }
 
-  if (prevPtr->leftThread == false && prevPtr->rightThread == false) // Checks if it does not have a thread for threading reasons
+  if (prevPtr->leftThread == false &&
+      prevPtr->rightThread ==
+          false) // Checks if it does not have a thread for threading reasons
   {
     if (prevPtr->right == delPtr) {
       prevPtr->right = delPtr->right;
@@ -443,30 +468,6 @@ void ThreadedBST::removeTwoChild(TreeNode *delPtr, TreeNode *prevPtr,
 
     delete delPtr;
     delPtr = nullptr;
-  }
-}
-
-/** Remove Even: Calls the removeEvenHelper method with the root
-node of current tree.
-Precondition: ThreadedBST tree object must exist
-Postcondition: Calls removeEvenHelper*/
-void ThreadedBST::removeEven() { removeEvenHelper(this->root); }
-
-/** Remove Even Helper: Recursive method that removes even nodes in
-the tree. Stops when the end of a branch is reached (end of branch is
-has nullptr or is a left or right thread).
-Precondition: ThreadedBST tree object must exist
-Postcondition: *************/
-void ThreadedBST::removeEvenHelper(TreeNode *node) {
-  if (!node->leftThread && node->left != nullptr) {
-    removeEvenHelper(node->left);
-  }
-  if (!node->rightThread && node->right != nullptr) {
-    removeEvenHelper(node->right);
-  }
-
-  if (node->data % 2 == 0) {
-    remove(node->data);
   }
 }
 
