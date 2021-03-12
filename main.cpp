@@ -20,7 +20,6 @@ void test1() {
   ThreadedBST tree2(tree1);
   ThreadedBST tree3;
   tree3 = tree2;
-  // tree2.removeEven();
   cout << endl << endl;
 }
 
