@@ -169,7 +169,6 @@ bool ThreadedBST::add(int data) {
     insert(root, newNode);
   }
   count++;
-  cerr << data << ", ";
   return true;
 }
 
@@ -560,9 +559,6 @@ void ThreadedBST::threadRightSideRecur(TreeNode *threadTarget, TreeNode *threade
             false) // will thread the left side of the target before going right
       threadRightSideRecur(threadTarget->right, threader, prevThreader);
 
-    TreeNode *starterThreader = threader;
-    TreeNode *secondStarterThreader; // Threading, used to keep track of what
-                                     // inorder node should thread to
     prevThreader = threader;
     while (threader != nullptr) {
 
