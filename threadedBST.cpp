@@ -9,18 +9,18 @@
 #include "threadedBST.h"
 #include <algorithm>
 #include <iostream>
-#include <vector>
 #include <stack>
+#include <vector>
 
 using namespace std;
 
-/** Constructor: Default constructor
+/** Constructor: Default constructor.
 Precondition: None
 Postcondition: Creates an empty ThreadedBST tree obj*/
 ThreadedBST::ThreadedBST() : root{nullptr}, count{0} {}
 
 /** Constructor: Constructor that takes an integer n as input and
-creates a tree with n nodes
+creates a tree with n nodes.
 Precondition: None
 Postcondition: Creates a ThreadedBST tree obj with n nodes*/
 ThreadedBST::ThreadedBST(int n) : root{nullptr}, count{0} {
@@ -136,9 +136,10 @@ void ThreadedBST::clear() {
   delete delPtr;
   delPtr = nullptr;
 }
-/** Insert: ************
+/** Insert: Inserts nodes according to the rules of a Binary
+search tree.
 Precondition: ThreadedBST tree object must exist
-Postcondition:*********** */
+Postcondition: Places node in tree*/
 void ThreadedBST::insert(TreeNode *node, TreeNode *newNode) {
   if (newNode->data < node->data && node->left != nullptr) {
     insert(node->left, newNode);
@@ -154,9 +155,11 @@ void ThreadedBST::insert(TreeNode *node, TreeNode *newNode) {
   }
 }
 
-/** Add: ************
+/** Add: Adds a specific integer into the tree. Checks for
+duplicates using contains. Calls insert to place nodes into
+tree.
 Precondition: ThreadedBST tree object must exist
-Postcondition: Returns true add is successful*/
+Postcondition: Returns true if add is successful*/
 bool ThreadedBST::add(int data) {
   if (contains(data)) {
     return false;
@@ -171,9 +174,12 @@ bool ThreadedBST::add(int data) {
   return true;
 }
 
-/** Balanced Add: ************
+/** Balanced Add: Used in conjunction with the constructor.
+Upon initializtion of a new ThreadedBST tree, balances the nodes
+inserted throughout the tree by recursively adding the middle of
+each vector one at a time. Base case when vector is empty.
 Precondition: ThreadedBST tree object must exist
-Postcondition: *************/
+Postcondition: ThreadedBST tree with balanced nodes*/
 void ThreadedBST::balancedAdd(vector<int> vect) {
   if (vect.size() > 0) {
     add(vect.at(vect.size() / 2));
@@ -213,7 +219,8 @@ bool ThreadedBST::remove(int data) {
     }
   }
 
-  if (delPtr->leftThread == true && delPtr->rightThread == true) // Removing node with no real connections
+  if (delPtr->leftThread == true &&
+      delPtr->rightThread == true) // Removing node with no real connections
   {
 
     removeZeroChild(delPtr, prevPtr);
@@ -239,7 +246,9 @@ bool ThreadedBST::remove(int data) {
     delPtr = nullptr;
   }
 
-  else if (delPtr->leftThread == false && delPtr->rightThread == false) // Removing node with two real connections
+  else if (delPtr->leftThread == false &&
+           delPtr->rightThread ==
+               false) // Removing node with two real connections
   {
     TreeNode *inorderPtr = delPtr->right;
     TreeNode *leftInorderThreader = delPtr->left;
@@ -250,7 +259,9 @@ bool ThreadedBST::remove(int data) {
 
   }
 
-  else if (delPtr->leftThread == false || delPtr->rightThread == false) { // Removing node with one real connection
+  else if (delPtr->leftThread == false ||
+           delPtr->rightThread ==
+               false) { // Removing node with one real connection
     removeOneChild(prevPtr, delPtr);
   }
 
@@ -258,10 +269,12 @@ bool ThreadedBST::remove(int data) {
   return true;
 }
 
-
-/** Copy: ************
+/** Copy: Copies a tree object to current tree. Adds first node
+which is root. Then, recursively adds each left and right node
+until the bottom each branch is reached (end of branch is has
+nullptr or is a left or right thread).
 Precondition: ThreadedBST tree object must exist
-Postcondition: *************/
+Postcondition: Tree copied to current tree.*/
 void ThreadedBST::copy(TreeNode *node) {
   add(node->data);
   if (!node->leftThread && node->left != nullptr) {
@@ -272,21 +285,22 @@ void ThreadedBST::copy(TreeNode *node) {
   }
 }
 
-/** Remove Even: ************
+/** Remove Even: Calls the removeEvenHelper method with the root
+node of current tree.
 Precondition: ThreadedBST tree object must exist
-Postcondition: *************/
-void ThreadedBST::removeEven() {
-    removeEvenHelper(this->root);
-}
+Postcondition: Calls removeEvenHelper*/
+void ThreadedBST::removeEven() { removeEvenHelper(this->root); }
 
-/** Remove Even Helper: ************
+/** Remove Even Helper: Recursive method that removes even nodes in
+the tree. Stops when the end of a branch is reached (end of branch is
+has nullptr or is a left or right thread).
 Precondition: ThreadedBST tree object must exist
 Postcondition: *************/
 void ThreadedBST::removeEvenHelper(TreeNode *node) {
-  if (node->leftThread == false && node->left != nullptr) {
+  if (!node->leftThread && node->left != nullptr) {
     removeEvenHelper(node->left);
   }
-  if (node->rightThread == false && node->right != nullptr) {
+  if (!node->rightThread && node->right != nullptr) {
     removeEvenHelper(node->right);
   }
 
@@ -296,7 +310,9 @@ void ThreadedBST::removeEvenHelper(TreeNode *node) {
 }
 
 void ThreadedBST::removeZeroChild(TreeNode *delPtr, TreeNode *prevPtr) {
-  if (prevPtr->leftThread == true || prevPtr->rightThread ==true) // Checks if previous has a thread for threading reasons
+  if (prevPtr->leftThread == true ||
+      prevPtr->rightThread ==
+          true) // Checks if previous has a thread for threading reasons
   {
     if (delPtr->data > prevPtr->data) {
       prevPtr->right = delPtr->right;
@@ -310,7 +326,8 @@ void ThreadedBST::removeZeroChild(TreeNode *delPtr, TreeNode *prevPtr) {
     delPtr = nullptr;
   }
 
-  if (prevPtr->leftThread == false && prevPtr->rightThread ==
+  if (prevPtr->leftThread == false &&
+      prevPtr->rightThread ==
           false) // Checks if it does not have a thread for threading reasons
   {
     if (prevPtr->right == delPtr) {
@@ -438,7 +455,7 @@ void ThreadedBST::removeTwoChild(TreeNode *delPtr, TreeNode *prevPtr,
 }
 
 /** Contains: Boolean method that checks whether a particular value exists
-within the ThreadedBST tree
+within the ThreadedBST tree.
 Precondition: ThreadedBST tree object must exist
 Postcondition: Returns true if the value is found*/
 bool ThreadedBST::contains(int target) {
@@ -481,9 +498,11 @@ void ThreadedBST::thread() {
 /** Thread Recursion: ************
 Precondition: ************
 Postcondition: *************/
-void ThreadedBST::threadLeftSideRecur(TreeNode *threadTarget, TreeNode *threader, TreeNode *prevThreader) {
+void ThreadedBST::threadLeftSideRecur(TreeNode *threadTarget,
+                                      TreeNode *threader,
+                                      TreeNode *prevThreader) {
 
- while (threadTarget != nullptr) // Traversing
+  while (threadTarget != nullptr) // Traversing
   {
     if (threadTarget->data > root->data) // Base case to end traversing left
       break;
@@ -504,7 +523,6 @@ void ThreadedBST::threadLeftSideRecur(TreeNode *threadTarget, TreeNode *threader
             false) // will thread the left side of the target before going right
       threadLeftSideRecur(threadTarget->left, threader, prevThreader);
 
-    
     prevThreader = threader;
     while (threader != nullptr) {
 
@@ -536,7 +554,9 @@ void ThreadedBST::threadLeftSideRecur(TreeNode *threadTarget, TreeNode *threader
   }
 }
 
-void ThreadedBST::threadRightSideRecur(TreeNode *threadTarget, TreeNode *threader, TreeNode *prevThreader) {
+void ThreadedBST::threadRightSideRecur(TreeNode *threadTarget,
+                                       TreeNode *threader,
+                                       TreeNode *prevThreader) {
   while (threadTarget != nullptr) // Traversing
   {
     if (threadTarget->data < root->data) // Base case to end traversing left
@@ -587,72 +607,72 @@ void ThreadedBST::threadRightSideRecur(TreeNode *threadTarget, TreeNode *threade
 
     threadTarget = threadTarget->left;
   }
-  }
+}
 
 /** In Order: ************
 Precondition: ************
 Postcondition: *************/
 void ThreadedBST::inorderPrint() const {
-    TreeNode *curr = root;
+  TreeNode *curr = root;
 
-    while (curr->left != nullptr) {
-      curr = curr->left;
-    }
-    stack<int> reversetraversal;
+  while (curr->left != nullptr) {
+    curr = curr->left;
+  }
+  stack<int> reversetraversal;
 
-    while (curr != root) {
-      if (curr->rightThread == false) {
-        cout << curr->data << ", ";
-        curr = curr->right;
-        if (curr->leftThread == false) {
-          while (curr->leftThread == false)
-            curr = curr->left;
-        }
-        continue;
-      }
-
-      if (curr->rightThread == true) {
-        cout << curr->data << ", ";
-        curr = curr->right;
-        continue;
-      }
-    }
-    cout << curr->data << ", ";
-
-    while (curr->right != nullptr) // Moving right
+  while (curr != root) {
+    if (curr->rightThread == false) {
+      cout << curr->data << ", ";
       curr = curr->right;
-
-    while (curr != root) {
       if (curr->leftThread == false) {
-        reversetraversal.push(curr->data);
-        curr = curr->left;
-        if (curr->rightThread == false) {
-          while (curr->rightThread == false)
-            curr = curr->right;
-        }
-        continue;
+        while (curr->leftThread == false)
+          curr = curr->left;
       }
-
-      if (curr->leftThread == true) {
-        reversetraversal.push(curr->data);
-        curr = curr->left;
-        continue;
-      }
+      continue;
     }
 
-    while (!reversetraversal.empty()) {
-      cout << reversetraversal.top() << ", ";
-      reversetraversal.pop();
+    if (curr->rightThread == true) {
+      cout << curr->data << ", ";
+      curr = curr->right;
+      continue;
+    }
+  }
+  cout << curr->data << ", ";
+
+  while (curr->right != nullptr) // Moving right
+    curr = curr->right;
+
+  while (curr != root) {
+    if (curr->leftThread == false) {
+      reversetraversal.push(curr->data);
+      curr = curr->left;
+      if (curr->rightThread == false) {
+        while (curr->rightThread == false)
+          curr = curr->right;
+      }
+      continue;
+    }
+
+    if (curr->leftThread == true) {
+      reversetraversal.push(curr->data);
+      curr = curr->left;
+      continue;
     }
   }
 
+  while (!reversetraversal.empty()) {
+    cout << reversetraversal.top() << ", ";
+    reversetraversal.pop();
+  }
+}
+
 /** Get Height: Calls the height helper method and returns the height
-Precondition:ThreadedBST tree object must exist
+Precondition:ThreadedBST tree object must exist.
 Postcondition: Returns the height of the tree*/
 int ThreadedBST::getHeight() { return heightHelper(root); }
 
 /** Height Helper: Recursive method that traverses through the tree and
-tallys up the height of the tree
+tallys up the height of the tree.
 Precondition:ThreadedBST tree object must exist
 Postcondition: Returns the height of the tree*/
 int ThreadedBST::heightHelper(TreeNode *node) const {
@@ -668,8 +688,8 @@ Precondition:ThreadedBST tree object must exist
 Postcondition: Returns int count*/
 int ThreadedBST::getCount() const { return count; }
 
-ThreadedBST& ThreadedBST::operator=(const ThreadedBST &tree) {
-    if (tree.root == nullptr) {
+ThreadedBST &ThreadedBST::operator=(const ThreadedBST &tree) {
+  if (tree.root == nullptr) {
     this->root = nullptr;
   } else {
     copy(tree.root);

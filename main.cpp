@@ -13,14 +13,14 @@
 
 using namespace std;
 
-// Testing copy constuctor.
+// Testing constuctors, inorderPrint, and removeEven.
 void test1() {
   cout << "\n****Begin Tests for Constuctor****\n";
   cout << "\nCreating ThreadedBST tree1 (n = 20):\n";
   ThreadedBST tree1(20);
   tree1.inorderPrint();
 
-  cout << "\n\n****Testing Copy Constructor****\n" ;
+  cout << "\n\n****Testing Copy Constructor****\n";
   cout << "\nCopying tree1 into tree2:\n";
   ThreadedBST tree2(tree1);
   tree2.inorderPrint();
