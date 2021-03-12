@@ -311,7 +311,8 @@ void ThreadedBST::removeZeroChild(TreeNode *delPtr, TreeNode *prevPtr) {
     if (delPtr->data > prevPtr->data) {
       prevPtr->right = delPtr->right;
       prevPtr->rightThread = true;
-    } else if (delPtr->data < prevPtr->data) {
+    }
+    if (delPtr->data < prevPtr->data) {
       prevPtr->left = delPtr->left;
       prevPtr->leftThread = true;
     }
@@ -319,9 +320,7 @@ void ThreadedBST::removeZeroChild(TreeNode *delPtr, TreeNode *prevPtr) {
     delPtr = nullptr;
   }
 
-  else if (prevPtr->leftThread == false &&
-           prevPtr->rightThread == false) // Checks if it does not have a thread
-                                          // for threading reasons
+  if (prevPtr->leftThread == false && prevPtr->rightThread == false) // Checks if it does not have a thread for threading reasons
   {
     if (prevPtr->right == delPtr) {
       prevPtr->right = delPtr->right;
