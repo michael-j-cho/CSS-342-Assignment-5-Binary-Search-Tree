@@ -80,17 +80,16 @@ void ThreadedBST::clear() {
   TreeNode *curPtr = root;
   TreeNode *delPtr;
 
- while (curPtr->left != nullptr) {
+  while (curPtr->left != nullptr) {
     curPtr = curPtr->left;
   }
- delPtr = curPtr;
+  delPtr = curPtr;
   while (curPtr != root) {
-    if (curPtr->rightThread == false) 
-    {
+    if (curPtr->rightThread == false) {
       curPtr = curPtr->right;
       delete delPtr;
       delPtr = nullptr;
-      
+
       if (curPtr->leftThread == false) {
         while (curPtr->leftThread == false)
           curPtr = curPtr->left;
@@ -99,7 +98,7 @@ void ThreadedBST::clear() {
       continue;
     }
 
-    if (curPtr->rightThread == true) {     
+    if (curPtr->rightThread == true) {
       curPtr = curPtr->right;
       delete delPtr;
       delPtr = nullptr;
@@ -137,7 +136,7 @@ void ThreadedBST::clear() {
 
   delete delPtr;
   delPtr = nullptr;
-
+}
 /** Insert: ************
 Precondition: ThreadedBST tree object must exist
 Postcondition:*********** */
