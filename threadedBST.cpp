@@ -6,7 +6,7 @@
  *
  * Threaded Binary Search Tree Implementation File
  *
- * This file contains methods to properly implemtnt a threaded
+ * This file contains methods to properly implement a threaded
  * binary search tree. The tree is self balancing and leaf nodes
  * thread to the next and previous inorder node. Implementation
  * takes advantage of previously wasted nullptrs and uses them
